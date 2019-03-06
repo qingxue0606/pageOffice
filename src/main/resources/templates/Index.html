@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Index</title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="pageoffice.js" id="po_js_main"></script>
+
+</head>
+`
+<body>
+<h1 th:inline="text">PageOffice 集成效果演示</h1>
+
+<!--<a href="javascript:POBrowser.openWindowModeless('/word','width=1200px;height=800px;');">打开文件 </a>-->
+<!--<a href="javascript:POBrowser.openWindowModeless('/word','fullscreen=yes;');">打开文件11 </a>-->
+<a href="javascript:POBrowser.openWindowModeless('/word6?userid=1','fullscreen=yes;');">1打开文件word </a><br>
+<a href="javascript:POBrowser.openWindowModeless('/word6?userid=2','fullscreen=yes;');">2打开文件word </a><br>
+<a href="javascript:POBrowser.openWindowModeless('/word17','fullscreen=yes;');">打开文件word </a><br>
+
+
+
+
+<div>演示使用FileMaker对象动态生成文件的效果。虽然还是在客户端生成文件后保存到服务器上的，但是不在客户端显式的打开文件</div>
+<a href="javascript:POBrowser.openWindowModeless('/word28','fullscreen=yes;');">打开文件word28 </a><br>
+
+<div>使用只读模式在线打开Word文件，禁止编辑、拷贝、打印、另存。</div>
+<a href="javascript:POBrowser.openWindowModeless('/word18','fullscreen=yes;');">打开文件word18 </a><br>
+
+<div>数据库读</div>
+<a href="javascript:POBrowser.openWindowModeless('/word20','fullscreen=yes;');">打开文件word20 </a><br>
+
+<div>保存为pdf</div>
+<a href="javascript:POBrowser.openWindowModeless('/word22','fullscreen=yes;');">打开文件word22 </a><br>
+<div>插入其它的word</div>
+<a href="javascript:POBrowser.openWindowModeless('/word23','fullscreen=yes;');">打开文件word22 </a><br>
+<div>加水印</div>
+<a href="javascript:POBrowser.openWindowModeless('/word24','fullscreen=yes;');">打开文件word24 </a><br>
+
+<div>编辑格式</div>
+<a href="javascript:POBrowser.openWindowModeless('/word25','fullscreen=yes;');">打开文件word25 </a><br>
+<div>演示使用CreateDataRegion方法动态添加数据区域的功能。动态添加数据区域，可以在生成Word文件的时候更灵活，甚至可以从空白的Word文件生成一个图文并茂的文件</div>
+<a href="javascript:POBrowser.openWindowModeless('/word26','fullscreen=yes;');">打开文件word26 </a><br>
+
+
+
+<div>使用PageOffice的RunMacro方法可以运行Office文档本身包含的宏命令</div>
+<a href="javascript:POBrowser.openWindowModeless('/word27','fullscreen=yes;');">打开文件word27 </a><br>
+
+
+
+<div>列表</div>
+<a href="/wordlists">打开文件wordlist </a><br>
+
+
+
+<!--<a href="javascript:POBrowser.openWindowModeless('/excel','fullscreen=yes;');">打开文件11 </a>-->
+<a href="javascript:POBrowser.openWindowModeless('/excel5','fullscreen=yes;');">打开文件excel </a>
+
+
+
+<div>pdf演示使用POPDF组件在线打开PDF文件的效果，标题栏、菜单栏、工具栏和自定义工具条都可以分别隐藏，同时自定义工具条上的按钮的数量和功能均可编程控制</div>
+<a href="javascript:POBrowser.openWindowModeless('/pdf1','fullscreen=yes;');">打开文件pdf </a><br>
+
+
+<!--<a href="javascript:POBrowser.openWindowModeless('/ppt','fullscreen=yes;');">打开文件11 </a>-->
+</body>
+</html>
