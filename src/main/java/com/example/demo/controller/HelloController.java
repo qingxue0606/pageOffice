@@ -28,6 +28,8 @@ import java.util.Map;
 
 @Controller
 public class HelloController {
+    @Value("${testPath}")
+    private String dir;
 
     @Value("${posyspath}")
     private String poSysPath;
@@ -88,7 +90,7 @@ public class HelloController {
         poCtrl.addCustomToolButton("盖章","AddSeal",2); //添加自定义盖章按钮
 
 
-        poCtrl.webOpen("d:\\test\\test.ppt", OpenModeType.pptNormalEdit,"张三");
+        poCtrl.webOpen(dir+"test.ppt", OpenModeType.pptNormalEdit,"张三");
 //        poCtrl.setCaption("项");
 //        poCtrl.setTitlebar(false); //隐藏标题栏
 //        poCtrl.setMenubar(false); //隐藏菜单栏
@@ -103,9 +105,6 @@ public class HelloController {
         ModelAndView mv = new ModelAndView("Word");
         return mv;
     }
-
-
-
 
 
 

@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Doc;
 import com.zhuozhengsoft.pageoffice.OpenModeType;
 import com.zhuozhengsoft.pageoffice.PageOfficeCtrl;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,11 +20,15 @@ import java.util.Map;
 @Controller
 public class WordListController {
 
+    @Value("${testPath}")
+    private String dir;
+
+
 
     @RequestMapping(value="/wordlists", method= RequestMethod.GET)
     public ModelAndView showWord20(HttpServletRequest request, Map<String,Object> map) throws ClassNotFoundException, SQLException, ParseException {
         Class.forName("org.sqlite.JDBC");
-        String strUrl = "jdbc:sqlite:D:\\test\\demodata\\CreateWord.db";
+        String strUrl = "jdbc:sqlite:"+dir+"demodata\\CreateWord.db";
 
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();

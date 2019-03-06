@@ -6,6 +6,7 @@ import com.zhuozhengsoft.pageoffice.excelwriter.Cell;
 import com.zhuozhengsoft.pageoffice.excelwriter.Sheet;
 import com.zhuozhengsoft.pageoffice.excelwriter.Table;
 import com.zhuozhengsoft.pageoffice.excelwriter.Workbook;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,8 @@ import java.util.Map;
 
 @Controller
 public class ExcelController {
+    @Value("${testPath}")
+    private String dir;
     @RequestMapping(value="/excel", method= RequestMethod.GET)
     public ModelAndView showExcel(HttpServletRequest request, Map<String,Object> map){
         //--- PageOffice的调用代码 开始 -----
@@ -52,7 +55,7 @@ public class ExcelController {
 
         poCtrl.setSaveFilePage("/save");//设置保存的action
         poCtrl.addCustomToolButton("盖章","AddSeal",2); //添加自定义盖章按钮
-        poCtrl.webOpen("d:\\test\\test.xls", OpenModeType.xlsNormalEdit,"张三");
+        poCtrl.webOpen(dir+"test.xls", OpenModeType.xlsNormalEdit,"张三");
         map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("Word");
@@ -80,7 +83,7 @@ public class ExcelController {
         poCtrl.setSaveDataPage("/save/exl2");
 
         poCtrl.addCustomToolButton("盖章","AddSeal",2); //添加自定义盖章按钮
-        poCtrl.webOpen("d:\\test\\test2.xls", OpenModeType.xlsSubmitForm,"张三");
+        poCtrl.webOpen(dir+"test2.xls", OpenModeType.xlsSubmitForm,"张三");
         map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("Word");
@@ -115,7 +118,7 @@ public class ExcelController {
         poCtrl.setMenubar(false);
         //隐藏工具栏
         poCtrl.setCustomToolbar(false);
-        poCtrl.webOpen("d:\\test\\test3.xls", OpenModeType.xlsSubmitForm,"张三");
+        poCtrl.webOpen(dir+"test3.xls", OpenModeType.xlsSubmitForm,"张三");
         map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("Word");
@@ -152,7 +155,7 @@ public class ExcelController {
 //workBoook.setDisableSheetSelection(true);//禁止在当前工作表中选择内容
         poCtrl.setWriter(workBoook);
 
-        poCtrl.webOpen("d:\\test\\test3.xls", OpenModeType.xlsSubmitForm,"张三");
+        poCtrl.webOpen(dir+"test3.xls", OpenModeType.xlsSubmitForm,"张三");
         map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("Word");

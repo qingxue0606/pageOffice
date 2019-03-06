@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Controller
 public class OpenFileController {
-    @Value("d:\\test\\")
+    @Value("${testPath}")
     private String dir;
 
     @RequestMapping(value="/openWord", method= RequestMethod.GET)
@@ -30,7 +30,7 @@ public class OpenFileController {
         }
         Class.forName("org.sqlite.JDBC");
 
-        String strUrl = "jdbc:sqlite:D:\\test\\demodata\\DataBase.db";
+        String strUrl = "jdbc:sqlite:"+dir+"demodata\\DataBase.db";
 
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
@@ -67,7 +67,8 @@ public class OpenFileController {
         String fileName="";
 
         Class.forName("org.sqlite.JDBC");
-        String strUrl = "jdbc:sqlite:D:\\test\\demodata\\CreateWord.db";
+
+        String strUrl = "jdbc:sqlite:"+dir+"demodata\\CreateWord.db";
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
         String id=request.getParameter("id");

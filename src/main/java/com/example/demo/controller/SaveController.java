@@ -26,13 +26,13 @@ import java.util.Map;
 
 @Controller
 public class SaveController {
-    @Value("d:\\test\\")
+    @Value("${testPath}")
     private String dir;
 
     @RequestMapping("/save")
     public void saveFile(HttpServletRequest request, HttpServletResponse response){
         FileSaver fs = new FileSaver(request, response);
-        fs.saveToFile("d:\\test\\" + fs.getFileName());
+        fs.saveToFile(dir + fs.getFileName());
         int age=0;
         //获取通过隐藏域传递过来的值
         if (fs.getFormField("age") != null
@@ -48,7 +48,7 @@ public class SaveController {
     @RequestMapping("/save/doc7")
     public void saveDoc7(HttpServletRequest request, HttpServletResponse response){
         FileSaver fs=new FileSaver(request,response);
-        fs.saveToFile("d:\\test\\" + fs.getFileName());
+        fs.saveToFile(dir + fs.getFileName());
         fs.close();
 
     }
@@ -56,7 +56,7 @@ public class SaveController {
     @RequestMapping("/save/doc8")
     public void saveDoc8(HttpServletRequest request, HttpServletResponse response){
         FileSaver fs=new FileSaver(request,response);
-        fs.saveToFile("d:\\test\\" + fs.getFileName());
+        fs.saveToFile(dir + fs.getFileName());
         fs.close();
 
     }
@@ -228,7 +228,7 @@ public class SaveController {
         FileSaver fs = new FileSaver(request, response);
 
         Class.forName("org.sqlite.JDBC");
-        String strUrl = "jdbc:sqlite:D:\\test\\demodata\\CreateWord.db";
+        String strUrl = "jdbc:sqlite:"+dir+"demodata\\CreateWord.db";
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("select Max(ID) from word");
@@ -259,7 +259,7 @@ public class SaveController {
         conn.close();
 
         //保存文件
-        fs.saveToFile("d:\\test\\" + fs.getFileName());
+        fs.saveToFile(dir + fs.getFileName());
         //设置保存结果
         fs.setCustomSaveResult("ok");
         //fs.showPage(300,300);
@@ -368,8 +368,6 @@ public class SaveController {
         return"/resp";
 
     }
-
-
 
 
 

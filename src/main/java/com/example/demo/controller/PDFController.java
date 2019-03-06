@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Controller
 public class PDFController {
-    @Value("d:\\test\\")
+    @Value("${testPath}")
     private String dir;
     @RequestMapping(value="/pdf1", method= RequestMethod.GET)
     public ModelAndView showWord(HttpServletRequest request, Map<String,Object> map){

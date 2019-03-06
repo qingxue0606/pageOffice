@@ -17,15 +17,12 @@ import java.util.Map;
 @Controller
 public class CreatController {
 
-    @RequestMapping(value="/creatWord", method= RequestMethod.GET)
-    public ModelAndView creatWord(HttpServletRequest request, HttpServletResponse response, Map<String,Object> map) throws SQLException, ClassNotFoundException, IOException {
-
-
-
+    @RequestMapping(value = "/creatWord", method = RequestMethod.GET)
+    public ModelAndView creatWord(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) throws SQLException, ClassNotFoundException, IOException {
 
 
         //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = new PageOfficeCtrl(request);
         poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
 
         //隐藏菜单栏
@@ -42,7 +39,7 @@ public class CreatController {
         poCtrl.webCreateNew("张佚名", DocumentVersion.Word2003);
 
 
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("Word21");
