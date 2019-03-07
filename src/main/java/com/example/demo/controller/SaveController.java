@@ -9,6 +9,8 @@ import com.zhuozhengsoft.pageoffice.excelreader.Workbook;
 import com.zhuozhengsoft.pageoffice.wordreader.DataRegion;
 import com.zhuozhengsoft.pageoffice.wordreader.WordDocument;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -28,6 +34,15 @@ import java.util.Map;
 public class SaveController {
     @Value("${testPath}")
     private String dir;
+
+    @RequestMapping("/save/common")
+    public void saveCommon(HttpServletRequest request, HttpServletResponse response){
+        FileSaver fs=new FileSaver(request,response);
+        fs.saveToFile(dir + fs.getFileName());
+        fs.close();
+
+    }
+
 
     @RequestMapping("/save")
     public void saveFile(HttpServletRequest request, HttpServletResponse response){
@@ -311,13 +326,68 @@ public class SaveController {
 
     @RequestMapping("/save/doc/data17")
     public void saveDocData17(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
-        System.out.println(2);
+
         FileSaver fs = new FileSaver(request, response);
         String fileName = "maker" + fs.getFileExtName();
         fs.saveToFile(dir+ fileName);
         fs.close();
 
+    }
 
+    @RequestMapping("/save/doc/data18")
+    public void saveDocData18(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+
+        WordDocument doc = new WordDocument(request,response);
+        DataRegion dataReg = doc.openDataRegion("PO_table");
+        com.zhuozhengsoft.pageoffice.wordreader.Table table = dataReg.openTable(1);
+        //输出提交的table中的数据
+
+        StringBuilder dataStr = new StringBuilder();
+        for (int i = 1; i <= table.getRowsCount(); i++)
+        {
+
+            for (int j = 1; j <= table.getColumnsCount(); j++)
+            {
+                byte[] ascii =table.openCellRC(i, j).getValue().getBytes("utf-8");
+                //乱码
+                String out=new String(ascii,"gb2312");
+                System.out.println(out);
+
+
+                dataStr.append("<div>"+table.openCellRC(i,j).getValue()+"</div>");
+            }
+        }
+
+        System.out.println();
+
+
+        doc.close();
+
+    }
+
+    @RequestMapping("/save/doc/data19")
+    public void saveDocData19(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        WordDocument doc = new WordDocument(request,response);
+        byte[] bytes = null;
+        String filePath = "";
+        if (request.getParameter("userName") != null && request.getParameter("userName").trim().equalsIgnoreCase("zhangsan")) {
+            bytes = doc.openDataRegion("PO_com1").getFileBytes();
+            filePath = "content1.doc";
+        } else {
+            bytes = doc.openDataRegion("PO_com2").getFileBytes();
+            filePath = "content2.doc";
+        }
+        doc.close();
+
+        Resource resource = new ClassPathResource("static/word/"+filePath);
+        File file = resource.getFile();
+
+        //filePath = request.getSession().getServletContext().getRealPath("SetDrByUserWord2/doc/") + "/" + filePath;
+        FileOutputStream outputStream = new FileOutputStream(file);
+        outputStream.write(bytes);
+        outputStream.flush();
+        outputStream.close();
 
     }
 

@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Controller
 public class WordController {
-    @Value("d:\\test\\")
+    @Value("${testPath}")
     private String dir;
 
     @RequestMapping(value="/word", method= RequestMethod.GET)
