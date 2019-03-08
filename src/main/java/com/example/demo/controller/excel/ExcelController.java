@@ -53,7 +53,7 @@ public class ExcelController {
 
         poCtrl.setSaveFilePage("/save");//设置保存的action
         poCtrl.addCustomToolButton("盖章","AddSeal",2); //添加自定义盖章按钮
-        poCtrl.webOpen(dir+"test.xls", OpenModeType.xlsNormalEdit,"张三");
+        poCtrl.webOpen(dir+"test2.xls", OpenModeType.xlsNormalEdit,"张三");
         map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("Word");

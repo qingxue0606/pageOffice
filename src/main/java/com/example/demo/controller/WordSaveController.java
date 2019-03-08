@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.util.URIEncoder;
 import com.zhuozhengsoft.pageoffice.DocumentOpenType;
 import com.zhuozhengsoft.pageoffice.FileMakerCtrl;
 import com.zhuozhengsoft.pageoffice.FileSaver;
@@ -288,6 +289,7 @@ public class WordSaveController {
         FileSaver fs = new FileSaver(request, response);
         String fileName = "maker" + fs.getFileExtName();
         fs.saveToFile(dir+ fileName);
+
         fs.close();
 
     }
@@ -367,7 +369,11 @@ public class WordSaveController {
         byte[] bWord;
 
         DataRegion dr1=doc.openDataRegion("PO_test1");
+
+
+
         bWord=dr1.getFileBytes();
+
         FileOutputStream fos1=new FileOutputStream(filePath+"new1.doc");
         fos1.write(bWord);
         fos1.flush();
@@ -416,6 +422,87 @@ public class WordSaveController {
         doc.close();
 
     }
+
+
+
+    @RequestMapping("/save/doc/data24")
+    public ModelAndView saveDocData24(HttpServletRequest request, HttpServletResponse response,Map<String,Object> map) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
+
+        //定义保存对象
+        FileMakerCtrl fmCtrl = new FileMakerCtrl(request);
+        fmCtrl.setServerPage("/poserver.zz");
+
+        String id = request.getParameter("id");
+
+        if (id != null && id.length() > 0) {
+            com.zhuozhengsoft.pageoffice.wordwriter.WordDocument doc = new com.zhuozhengsoft.pageoffice.wordwriter.WordDocument();
+            //禁用右击事件
+            doc.setDisableWindowRightClick(true);
+            //给数据区域赋值，即把数据填充到模板中相应的位置
+            doc.openDataRegion("PO_company").setValue("学生  " + id);
+            fmCtrl.setSaveFilePage("/save/doc/data25?id=" + URIEncoder.encodeURIComponent(id));
+            fmCtrl.setWriter(doc);
+            fmCtrl.setJsFunction_OnProgressComplete("OnProgressComplete()");
+            fmCtrl.setFileTitle("newfilename.doc");
+            fmCtrl.fillDocument(dir+"test63.doc", DocumentOpenType.Word);
+        }
+
+        System.out.println(1);
+
+        map.put("pageoffice",fmCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("/word/Word64");
+
+
+        return mv;
+
+
+    }
+
+
+    @RequestMapping("/save/doc/data25")
+    public void saveDocData25(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
+
+        FileSaver fs = new FileSaver(request, response);
+        String id = request.getParameter("id");
+        String err = "";
+        if (id != null && id.length() > 0) {
+            String fileName = "student" + id + fs.getFileExtName();
+            fs.saveToFile(dir+"test63\\"+ fileName);
+        } else {
+            err = "<script>alert('未获得文件名称');</script>";
+        }
+        fs.close();
+
+    }
+
+
+    @RequestMapping("/save/doc/data26")
+    public void saveDocData26(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        FileSaver fs = new FileSaver(request, response);
+        //获取通过隐藏域传递过来的值
+        String fileName="";
+        if (fs.getFormField("fileName") != null
+                && fs.getFormField("fileName").trim().length() > 0) {
+            fileName = fs.getFormField("fileName");
+        }
+        System.out.println(fileName);
+
+        byte[] bWord;
+        String filePath=dir+"other\\";
+
+        bWord=fs.getFileBytes();
+
+        FileOutputStream fos1=new FileOutputStream(filePath+fileName+fs.getFileExtName());
+        fos1.write(bWord);
+        fos1.flush();
+        fos1.close();
+
+        fs.close();
+
+    }
+
 
 
 

@@ -224,6 +224,33 @@ public class WordController4 {
         return mv;
     }
 
+    @RequestMapping(value="/word63", method= RequestMethod.GET)
+    public ModelAndView showWord63(HttpServletRequest request, Map<String,Object> map){
+
+        ModelAndView mv = new ModelAndView("/word/Word63");
+        return mv;
+    }
+    @RequestMapping(value="/word65", method= RequestMethod.GET)
+    public ModelAndView showWord65(HttpServletRequest request, Map<String,Object> map){
+        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        poCtrl.addCustomToolButton("保存","Save",1);
+        poCtrl.addCustomToolButton("打印设置","PrintSet",0);
+        poCtrl.addCustomToolButton("打印","PrintFile",6);
+        poCtrl.addCustomToolButton("全屏/还原", "IsFullScreen", 4);
+        poCtrl.addCustomToolButton("-", "", 0);
+        poCtrl.addCustomToolButton("关闭","Close",21);
+
+        poCtrl.setSaveFilePage("/save/doc/data26");
+
+        poCtrl.webOpen(dir+"test65.doc", OpenModeType.docNormalEdit,"zhangsan");
+        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+
+        ModelAndView mv = new ModelAndView("/word/Word65");
+        return mv;
+    }
+
+
 
 
 

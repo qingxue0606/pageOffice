@@ -1,0 +1,5 @@
+欢迎使用 PageOffice 产品
+PageOffice 注册信息：注册码：I7TGD-71VV-FYD8-4NMYP<br>版本：Enterprise 4
+<br>此产品是<span style="color:Red;">试用版</span>，试用结束时间是 2019-06-05 09:23:14.
+<p>License文件位置：d:/lic/license.lic</p>
+PageOffice 运行信息：没有日志信息。
