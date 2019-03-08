@@ -61,8 +61,11 @@ public class WordController4 {
         DataRegion mydr1 = doc.createDataRegion("PO_first", DataRegionInsertType.After, "[end]");
         mydr1.selectEnd();
         doc.insertPageBreak();//插入分页符
+
+
         DataRegion mydr2 = doc.createDataRegion("PO_second", DataRegionInsertType.After, "[end]");
         mydr2.setValue("[word]word/test2.doc[/word]");
+
 
         poCtrl.addCustomToolButton("保存", "Save()", 1);
         poCtrl.setWriter(doc);
@@ -248,6 +251,40 @@ public class WordController4 {
 
         ModelAndView mv = new ModelAndView("/word/Word65");
         return mv;
+    }
+
+    @RequestMapping(value="/word66", method= RequestMethod.GET)
+    public ModelAndView showWord66(HttpServletRequest request, Map<String,Object> map){
+        //--- PageOffice的调用代码 开始 -----
+        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        WordDocument doc = new WordDocument();
+
+        DataRegion mydr2 = doc.createDataRegion("PO_second", DataRegionInsertType.After, "[end]");
+        mydr2.setValue("[word]word/63.doc[/word]");
+
+
+
+
+
+
+
+
+        doc.insertPageBreak();//插入分页符
+        DataRegion mydr3 = doc.createDataRegion("PO_second2", DataRegionInsertType.After, "[end]");
+        mydr3.setValue("[word]word/63.doc[/word]");
+
+
+        poCtrl.addCustomToolButton("保存", "Save()", 1);
+        poCtrl.setWriter(doc);
+//设置保存页面
+        //poCtrl.setSaveFilePage("SaveFile.jsp");
+
+
+        poCtrl.webOpen(dir+"test66.doc", OpenModeType.docNormalEdit,"zhangsan");
+        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("/word/Word66");
+        return  mv;
     }
 
 
