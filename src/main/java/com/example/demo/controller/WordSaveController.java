@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.Map;
 
 @Controller
-public class SaveController {
+public class WordSaveController {
     @Value("${testPath}")
     private String dir;
 
@@ -359,6 +359,63 @@ public class SaveController {
         fs.close();
 
     }
+    @RequestMapping("/save/doc/data21")
+    public void saveDocData21(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String filePath=dir+"test50\\";
+        WordDocument doc=new WordDocument(request,response);
+        byte[] bWord;
+
+        DataRegion dr1=doc.openDataRegion("PO_test1");
+        bWord=dr1.getFileBytes();
+        FileOutputStream fos1=new FileOutputStream(filePath+"new1.doc");
+        fos1.write(bWord);
+        fos1.flush();
+        fos1.close();
+
+        DataRegion dr2=doc.openDataRegion("PO_test2");
+        bWord=dr2.getFileBytes();
+        FileOutputStream fos2=new FileOutputStream(filePath+"new2.doc");
+        fos2.write(bWord);
+        fos2.flush();
+        fos2.close();
+
+        DataRegion dr3=doc.openDataRegion("PO_test3");
+        bWord=dr3.getFileBytes();
+        FileOutputStream fos3=new FileOutputStream(filePath+"new3.doc");
+        fos3.write(bWord);
+        fos3.flush();
+        fos3.close();
+
+//doc.showPage(500,400);
+        doc.close();
+
+    }
+    @RequestMapping("/save/doc/data22")
+    public void saveDocData22(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        FileSaver fs = new FileSaver(request, response);
+        //String aa=fs.getFileExtName();
+        if (fs.getFileExtName().equals(".jpg")) {
+            fs.saveToFile(dir+fs.getFileName());
+        } else {
+            fs.saveToFile(dir+fs.getFileName());
+        }
+        fs.setCustomSaveResult("ok");
+        fs.close();
+
+    }
+    @RequestMapping("/save/doc/data23")
+    public void saveDocData23(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        WordDocument doc=new WordDocument(request,response);
+        DataRegion dr=doc.openDataRegion("PO_image");
+        //将提取的图片保存到服务器上，图片的名称为:a.jpg
+        dr.openShape(1).saveAsJPG(dir+("test61\\")+"a.jpg");
+        doc.setCustomSaveResult("保存成功,文件保存到："+request.getSession().getServletContext().getRealPath("ExtractImage/doc/")+"\\a.jpg");
+        doc.close();
+
+    }
 
 
 
@@ -367,13 +424,6 @@ public class SaveController {
 
 
 
-
-    /*@RequestMapping("/helloHtml")
-    public String helloHtml(Map<String,Object> map){
-
-        map.put("hello","from TemplateController.helloHtml");
-        return"/helloHtml";
-    }*/
 
 
 }
