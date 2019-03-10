@@ -25,8 +25,8 @@ public class WordController {
     @RequestMapping(value="/word", method= RequestMethod.GET)
     public ModelAndView showWord(HttpServletRequest request, Map<String,Object> map){
         //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
-        poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
+        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+
         poCtrl.addCustomToolButton("保存","Save",1); //添加自定义按钮
         poCtrl.setSaveFilePage("/save");//设置保存的action
         poCtrl.addCustomToolButton("盖章","AddSeal",2); //添加自定义盖章按钮
@@ -527,8 +527,7 @@ public class WordController {
     @RequestMapping(value="/word22", method= RequestMethod.GET)
     public ModelAndView showWord21(HttpServletRequest request, Map<String,Object> map){
         //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
-        poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
 
         //添加自定义按钮
         poCtrl.addCustomToolButton("保存", "Save()", 1);
@@ -549,9 +548,11 @@ public class WordController {
         return mv;
     }
 
-
-
-
+    private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {
+        PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
+        poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
+        return poCtrl;
+    }
 
 
 }
