@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
+import java.io.File;
 import java.util.Map;
 
 @Controller
@@ -18,45 +19,46 @@ public class WordController4 {
     private String dir;
 
 
-   @RequestMapping(value="/word56", method= RequestMethod.GET)
-    public ModelAndView showWord56(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/word56", method = RequestMethod.GET)
+    public ModelAndView showWord56(HttpServletRequest request, Map<String, Object> map) {
 //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
-       poCtrl.addCustomToolButton("保存", "Save()", 1);
-       poCtrl.addCustomToolButton("保存首页为图片", "SaveFirstAsImg()", 1);
-       poCtrl.setSaveFilePage("/save/doc/data22");
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
+        poCtrl.addCustomToolButton("保存", "Save()", 1);
+        poCtrl.addCustomToolButton("保存首页为图片", "SaveFirstAsImg()", 1);
+        poCtrl.setSaveFilePage("/save/doc/data22");
 
 
-        poCtrl.webOpen(dir+"test56.doc", OpenModeType.docNormalEdit,"zhangsan");
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        poCtrl.webOpen(dir + "test56.doc", OpenModeType.docNormalEdit, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word56");
         return mv;
     }
-    @RequestMapping(value="/word57", method= RequestMethod.GET)
-    public ModelAndView showWord57(HttpServletRequest request, Map<String,Object> map){
+
+    @RequestMapping(value = "/word57", method = RequestMethod.GET)
+    public ModelAndView showWord57(HttpServletRequest request, Map<String, Object> map) {
 //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         WordDocument doc = new WordDocument();
         Table table1 = doc.openDataRegion("PO_table").openTable(1);
-        Cell  cell=table1.openCellRC(2,1);
+        Cell cell = table1.openCellRC(2, 1);
         //删除坐标为(2,1)的单元格所在行
         table1.removeRowAt(cell);
         poCtrl.setCustomToolbar(false);
         poCtrl.setWriter(doc);
 
 
-        poCtrl.webOpen(dir+"test57.doc", OpenModeType.docNormalEdit,"zhangsan");
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        poCtrl.webOpen(dir + "test57.doc", OpenModeType.docNormalEdit, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word57");
         return mv;
     }
 
-    @RequestMapping(value="/word58", method= RequestMethod.GET)
-    public ModelAndView showWord58(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/word58", method = RequestMethod.GET)
+    public ModelAndView showWord58(HttpServletRequest request, Map<String, Object> map) {
 //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         WordDocument doc = new WordDocument();
         DataRegion mydr1 = doc.createDataRegion("PO_first", DataRegionInsertType.After, "[end]");
         mydr1.selectEnd();
@@ -73,32 +75,30 @@ public class WordController4 {
         //poCtrl.setSaveFilePage("SaveFile.jsp");
 
 
-        poCtrl.webOpen(dir+"test58.doc", OpenModeType.docNormalEdit,"zhangsan");
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        poCtrl.webOpen(dir + "test58.doc", OpenModeType.docNormalEdit, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word57");
         return mv;
     }
 
-    @RequestMapping(value="/word59", method= RequestMethod.GET)
-    public ModelAndView showWord59(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/word59", method = RequestMethod.GET)
+    public ModelAndView showWord59(HttpServletRequest request, Map<String, Object> map) {
 //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         WordDocument doc = new WordDocument();
         Table table1 = doc.openDataRegion("PO_T001").openTable(1);
 
-        table1.openCellRC(1,1).setValue("[image]images/logo.jpg[/image]");
+        table1.openCellRC(1, 1).setValue("[image]images/logo.jpg[/image]");
         int dataRowCount = 5;//需要插入数据的行数
         int oldRowCount = 3;//表格中原有的行数
         // 扩充表格
-        for (int j = 0; j < dataRowCount - oldRowCount; j++)
-        {
+        for (int j = 0; j < dataRowCount - oldRowCount; j++) {
             table1.insertRowAfter(table1.openCellRC(2, 5));  //在第2行的最后一个单元格下插入新行
         }
         // 填充数据
         int i = 1;
-        while (i <= dataRowCount)
-        {
+        while (i <= dataRowCount) {
             table1.openCellRC(i, 2).setValue("AA" + String.valueOf(i));
             table1.openCellRC(i, 3).setValue("BB" + String.valueOf(i));
             table1.openCellRC(i, 4).setValue("CC" + String.valueOf(i));
@@ -108,18 +108,17 @@ public class WordController4 {
         poCtrl.setWriter(doc);
 
 
-
-        poCtrl.webOpen(dir+"test59.doc", OpenModeType.docNormalEdit,"zhangsan");
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        poCtrl.webOpen(dir + "test59.doc", OpenModeType.docNormalEdit, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word57");
         return mv;
     }
 
-    @RequestMapping(value="/word60", method= RequestMethod.GET)
-    public ModelAndView showWord60(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/word60", method = RequestMethod.GET)
+    public ModelAndView showWord60(HttpServletRequest request, Map<String, Object> map) {
 //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         WordDocument doc = new WordDocument();
         //打开数据区域
         DataRegion dataRegion = doc.openDataRegion("PO_regTable");
@@ -142,18 +141,18 @@ public class WordController4 {
         table.setRowsHeight(30.5f);
 
         //设置表格的边框
-        Border border=table.getBorder();
+        Border border = table.getBorder();
         // 设置边框的类型
         border.setBorderType(WdBorderType.wdFullGrid);//包含内边框
         //设置边框的颜色
         border.setLineColor(Color.red);
         //设置边框的线条样式
-        border.setLineStyle(WdLineStyle.wdLineStyleDot );
+        border.setLineStyle(WdLineStyle.wdLineStyleDot);
         //设置边框的粗细
         border.setLineWidth(WdLineWidth.wdLineWidth150pt);
 
         //设置表格内字体样式
-        com.zhuozhengsoft.pageoffice.wordwriter.Font font=dataRegion.getFont();
+        com.zhuozhengsoft.pageoffice.wordwriter.Font font = dataRegion.getFont();
         //设置字体的是否加粗
         font.setBold(true);
         //设置字体的颜色
@@ -172,18 +171,17 @@ public class WordController4 {
         poCtrl.setCustomToolbar(false);
 
 
-
-        poCtrl.webOpen(dir+"test60.doc", OpenModeType.docNormalEdit,"zhangsan");
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        poCtrl.webOpen(dir + "test60.doc", OpenModeType.docNormalEdit, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word57");
         return mv;
     }
 
-    @RequestMapping(value="/word61", method= RequestMethod.GET)
-    public ModelAndView showWord61(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/word61", method = RequestMethod.GET)
+    public ModelAndView showWord61(HttpServletRequest request, Map<String, Object> map) {
 //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         poCtrl.addCustomToolButton("保存图片", "Save", 1);
         WordDocument wordDoc = new WordDocument();
         //打开数据区域，openDataRegion方法的参数代表Word文档中的书签名称
@@ -194,25 +192,24 @@ public class WordController4 {
         poCtrl.setSaveDataPage("/save/doc/data23");
 
 
-
-        poCtrl.webOpen(dir+"test61.doc", OpenModeType.docSubmitForm,"zhangsan");
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        poCtrl.webOpen(dir + "test61.doc", OpenModeType.docSubmitForm, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word61");
         return mv;
     }
 
-    @RequestMapping(value="/word62", method= RequestMethod.GET)
-    public ModelAndView showWord62(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/word62", method = RequestMethod.GET)
+    public ModelAndView showWord62(HttpServletRequest request, Map<String, Object> map) {
 //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         //添加自定义按钮
-        poCtrl.addCustomToolButton("保存","Save",1);
-        poCtrl.addCustomToolButton("打印设置","PrintSet",0);
-        poCtrl.addCustomToolButton("打印","PrintFile",6);
+        poCtrl.addCustomToolButton("保存", "Save", 1);
+        poCtrl.addCustomToolButton("打印设置", "PrintSet", 0);
+        poCtrl.addCustomToolButton("打印", "PrintFile", 6);
         poCtrl.addCustomToolButton("全屏/还原", "IsFullScreen", 4);
         poCtrl.addCustomToolButton("-", "", 0);
-        poCtrl.addCustomToolButton("关闭","Close",21);
+        poCtrl.addCustomToolButton("关闭", "Close", 21);
 //设置保存页面
         poCtrl.setSaveFilePage("/save/common");
 
@@ -220,89 +217,141 @@ public class WordController4 {
         poCtrl.setDisableCopyOnly(true);
 
 
-        poCtrl.webOpen(dir+"test62.doc", OpenModeType.docSubmitForm,"zhangsan");
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        poCtrl.webOpen(dir + "test62.doc", OpenModeType.docSubmitForm, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word62");
         return mv;
     }
 
-    @RequestMapping(value="/word63", method= RequestMethod.GET)
-    public ModelAndView showWord63(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/word63", method = RequestMethod.GET)
+    public ModelAndView showWord63(HttpServletRequest request, Map<String, Object> map) {
 
         ModelAndView mv = new ModelAndView("/word/Word63");
         return mv;
     }
-    @RequestMapping(value="/word65", method= RequestMethod.GET)
-    public ModelAndView showWord65(HttpServletRequest request, Map<String,Object> map){
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
-        poCtrl.addCustomToolButton("保存","Save",1);
-        poCtrl.addCustomToolButton("打印设置","PrintSet",0);
-        poCtrl.addCustomToolButton("打印","PrintFile",6);
+
+    @RequestMapping(value = "/word65", method = RequestMethod.GET)
+    public ModelAndView showWord65(HttpServletRequest request, Map<String, Object> map) {
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
+        poCtrl.addCustomToolButton("保存", "Save", 1);
+        poCtrl.addCustomToolButton("打印设置", "PrintSet", 0);
+        poCtrl.addCustomToolButton("打印", "PrintFile", 6);
         poCtrl.addCustomToolButton("全屏/还原", "IsFullScreen", 4);
         poCtrl.addCustomToolButton("-", "", 0);
-        poCtrl.addCustomToolButton("关闭","Close",21);
+        poCtrl.addCustomToolButton("关闭", "Close", 21);
 
         poCtrl.setSaveFilePage("/save/doc/data26");
 
-        poCtrl.webOpen(dir+"test65.doc", OpenModeType.docNormalEdit,"zhangsan");
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        poCtrl.webOpen(dir + "test65.doc", OpenModeType.docNormalEdit, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
 
         ModelAndView mv = new ModelAndView("/word/Word65");
         return mv;
     }
 
-    @RequestMapping(value="/word66", method= RequestMethod.GET)
-    public ModelAndView showWord66(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/word66", method = RequestMethod.GET)
+    public ModelAndView showWord66(HttpServletRequest request, Map<String, Object> map) {
         //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         WordDocument doc = new WordDocument();
+        String[] names=new String[]{"zhangsan","lisi","wangwu"};
 
-        DataRegion mydr2 = doc.createDataRegion("PO_second", DataRegionInsertType.After, "[end]");
-        mydr2.setValue("[word]word/63.doc[/word]");
+        File file=new File(dir+"test63");
+        File[] files=new File[]{};
+
+        if(file.isDirectory()){
+            files=file.listFiles();
+            for (int i = 0; i < files.length; i++) {
+
+
+                if (files[i].isDirectory()) {
+
+                    System.out.println("目录：" + files[i].getPath());
+
+
+
+                } else {
+
+                    System.out.println("文件：" + files[i].getName());
+
+                }
+            }
+
+
+        }
+
+
+
+
+        for(int i=0;i<files.length;i++){
+            DataRegion mydr2 = doc.createDataRegion("PO_second"+i, DataRegionInsertType.Before, "[end]");
+            mydr2.setValue("考生："+names[i]);
+            mydr2.setValue("[word]F:\\idea\\pageOffice\\test\\test63\\"+files[i].getName()+"[/word]");
+
+            doc.insertPageBreak();//插入分页符
+        }
+
+
+
+        //DataRegion mydr2 = doc.createDataRegion("PO_second", DataRegionInsertType.Before, "[end]");
+        //mydr2.createTable(3,3,WdAutoFitBehavior.wdAutoFitContent).openCellRC(1,1).setValue("22");
 
 
 
 
 
+        //mydr2.setValue("考生："+"xiang1");
+        //mydr2.setValue("[word]word/test63.doc[/word]");
+        //mydr2=doc.openDataRegion("PO_company");
+        //mydr2.setValue("{StudentName1}");
+        //doc.openDataTag("StudentName1").setValue("xiang1");
+        //mydr2.setEditing(true);
+
+
+        //mydr2.setValue("xiang");
 
 
 
-        doc.insertPageBreak();//插入分页符
-        DataRegion mydr3 = doc.createDataRegion("PO_second2", DataRegionInsertType.After, "[end]");
-        mydr3.setValue("[word]word/63.doc[/word]");
+       // doc.insertPageBreak();//插入分页符
+
+        //DataRegion mydr3 = doc.createDataRegion("PO_second2", DataRegionInsertType.Before, "[end]");
+
+        //mydr3.setValue("考生："+"xiang2");
+
+        //mydr3=doc.openDataRegion("PO_company");
+        //mydr3.setValue("{StudentName2}");
+        //doc.openDataTag("StudentName2").setValue("xiang2");
+        //doc.openDataTag("StudentName1").setValue("xiang1");
+        //mydr3=doc.openDataRegion("PO_company");
+        //mydr3.setValue("xiang2");
+
+
+
+        //doc.insertPageBreak();//插入分页符
+        //doc.insertPageBreak();//插入分页符
+
 
 
         poCtrl.addCustomToolButton("保存", "Save()", 1);
         poCtrl.setWriter(doc);
-//设置保存页面
-        //poCtrl.setSaveFilePage("SaveFile.jsp");
 
 
-        poCtrl.webOpen(dir+"test66.doc", OpenModeType.docNormalEdit,"zhangsan");
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+
+        poCtrl.webOpen(dir + "test66.doc", OpenModeType.docNormalEdit, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word66");
-        return  mv;
+        return mv;
     }
 
 
-
-
-
-
-    private  PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request){
-        PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
+    private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {
+        PageOfficeCtrl poCtrl = new PageOfficeCtrl(request);
         poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
         return poCtrl;
     }
-
-
-
-
-
-
 
 
 }

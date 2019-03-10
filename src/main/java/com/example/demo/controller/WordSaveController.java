@@ -461,7 +461,7 @@ public class WordSaveController {
 
 
     @RequestMapping("/save/doc/data25")
-    public void saveDocData25(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
+    public void saveDocData25(HttpServletRequest request, HttpServletResponse response)  {
 
         FileSaver fs = new FileSaver(request, response);
         String id = request.getParameter("id");
