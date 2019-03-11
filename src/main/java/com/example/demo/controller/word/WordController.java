@@ -30,7 +30,7 @@ public class WordController {
         poCtrl.addCustomToolButton("保存","Save",1); //添加自定义按钮
         poCtrl.setSaveFilePage("/save");//设置保存的action
         poCtrl.addCustomToolButton("盖章","AddSeal",2); //添加自定义盖章按钮
-
+        //新建一个WordDocument用来操作数据
         WordDocument doc = new WordDocument();
 
         //打开数据区域

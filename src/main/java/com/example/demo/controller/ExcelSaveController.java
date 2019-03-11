@@ -69,6 +69,7 @@ public class ExcelSaveController {
             table.nextRow();
         }
         table.close();
+        System.out.println(content);
         workBook.showPage(500, 400);
         workBook.close();
         return"/resp";

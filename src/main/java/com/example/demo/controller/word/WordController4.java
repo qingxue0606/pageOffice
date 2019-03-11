@@ -269,17 +269,10 @@ public class WordController4 {
                 if (files[i].isDirectory()) {
 
                     System.out.println("目录：" + files[i].getPath());
-
-
-
                 } else {
-
                     System.out.println("文件：" + files[i].getName());
-
                 }
             }
-
-
         }
 
 
@@ -288,55 +281,15 @@ public class WordController4 {
         for(int i=0;i<files.length;i++){
             DataRegion mydr2 = doc.createDataRegion("PO_second"+i, DataRegionInsertType.Before, "[end]");
             mydr2.setValue("考生："+names[i]);
-            mydr2.setValue("[word]F:\\idea\\pageOffice\\test\\test63\\"+files[i].getName()+"[/word]");
+            mydr2.setValue("[word]"+dir+"test63\\"+files[i].getName()+"[/word]");
 
             doc.insertPageBreak();//插入分页符
         }
 
 
 
-        //DataRegion mydr2 = doc.createDataRegion("PO_second", DataRegionInsertType.Before, "[end]");
-        //mydr2.createTable(3,3,WdAutoFitBehavior.wdAutoFitContent).openCellRC(1,1).setValue("22");
-
-
-
-
-
-        //mydr2.setValue("考生："+"xiang1");
-        //mydr2.setValue("[word]word/test63.doc[/word]");
-        //mydr2=doc.openDataRegion("PO_company");
-        //mydr2.setValue("{StudentName1}");
-        //doc.openDataTag("StudentName1").setValue("xiang1");
-        //mydr2.setEditing(true);
-
-
-        //mydr2.setValue("xiang");
-
-
-
-       // doc.insertPageBreak();//插入分页符
-
-        //DataRegion mydr3 = doc.createDataRegion("PO_second2", DataRegionInsertType.Before, "[end]");
-
-        //mydr3.setValue("考生："+"xiang2");
-
-        //mydr3=doc.openDataRegion("PO_company");
-        //mydr3.setValue("{StudentName2}");
-        //doc.openDataTag("StudentName2").setValue("xiang2");
-        //doc.openDataTag("StudentName1").setValue("xiang1");
-        //mydr3=doc.openDataRegion("PO_company");
-        //mydr3.setValue("xiang2");
-
-
-
-        //doc.insertPageBreak();//插入分页符
-        //doc.insertPageBreak();//插入分页符
-
-
-
         poCtrl.addCustomToolButton("保存", "Save()", 1);
         poCtrl.setWriter(doc);
-
 
 
         poCtrl.webOpen(dir + "test66.doc", OpenModeType.docNormalEdit, "zhangsan");

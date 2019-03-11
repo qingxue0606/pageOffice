@@ -37,8 +37,8 @@ public class WordSaveController {
     private String dir;
 
     @RequestMapping("/save/common")
-    public void saveCommon(HttpServletRequest request, HttpServletResponse response){
-        FileSaver fs=new FileSaver(request,response);
+    public void saveCommon(HttpServletRequest request, HttpServletResponse response) {
+        FileSaver fs = new FileSaver(request, response);
         fs.saveToFile(dir + fs.getFileName());
         fs.close();
 
@@ -46,10 +46,10 @@ public class WordSaveController {
 
 
     @RequestMapping("/save")
-    public void saveFile(HttpServletRequest request, HttpServletResponse response){
+    public void saveFile(HttpServletRequest request, HttpServletResponse response) {
         FileSaver fs = new FileSaver(request, response);
         fs.saveToFile(dir + fs.getFileName());
-        int age=0;
+        int age = 0;
         //获取通过隐藏域传递过来的值
         if (fs.getFormField("age") != null
                 && fs.getFormField("age").trim().length() > 0) {
@@ -62,16 +62,16 @@ public class WordSaveController {
     }
 
     @RequestMapping("/save/doc7")
-    public void saveDoc7(HttpServletRequest request, HttpServletResponse response){
-        FileSaver fs=new FileSaver(request,response);
+    public void saveDoc7(HttpServletRequest request, HttpServletResponse response) {
+        FileSaver fs = new FileSaver(request, response);
         fs.saveToFile(dir + fs.getFileName());
         fs.close();
 
     }
 
     @RequestMapping("/save/doc8")
-    public void saveDoc8(HttpServletRequest request, HttpServletResponse response){
-        FileSaver fs=new FileSaver(request,response);
+    public void saveDoc8(HttpServletRequest request, HttpServletResponse response) {
+        FileSaver fs = new FileSaver(request, response);
         fs.saveToFile(dir + fs.getFileName());
         fs.close();
 
@@ -79,7 +79,7 @@ public class WordSaveController {
 
 
     @RequestMapping("/save/doc2")
-    public String saveDoc2(HttpServletRequest request, HttpServletResponse response){
+    public String saveDoc2(HttpServletRequest request, HttpServletResponse response) {
         WordDocument doc = new WordDocument(request, response);
         //获取提交的数值
         DataRegion dataUserName = doc.openDataRegion("PO_userName");
@@ -92,28 +92,27 @@ public class WordSaveController {
 
         doc.showPage(500, 400);
         doc.close();
-        return"/resp";
+        return "/resp";
 
     }
 
 
-
     @RequestMapping("/save/doc/data")
-    public String saveDocData(HttpServletRequest request, HttpServletResponse response){
+    public String saveDocData(HttpServletRequest request, HttpServletResponse response) {
         WordDocument doc = new WordDocument(request, response);
         //获取提交的数值
         String dataUserName = doc.openDataRegion("PO_userName").getValue();
         String dataDeptName = doc.openDataRegion("PO_deptName").getValue();
-        String companyName= doc.getFormField("txtCompany");
+        String companyName = doc.getFormField("txtCompany");
 
 
         doc.close();
-        return"/resp";
+        return "/resp";
 
     }
 
     @RequestMapping("/save/doc/data12")
-    public String saveDocData12(HttpServletRequest request, HttpServletResponse response){
+    public String saveDocData12(HttpServletRequest request, HttpServletResponse response) {
         String ErrorMsg = "";
         String BaseUrl = "";
         //-----------  PageOffice 服务器端编程开始  -------------------//
@@ -145,17 +144,17 @@ public class WordSaveController {
                 ErrorMsg = ErrorMsg + "<li>请假天数</li>";
             }
         } catch (Exception Ex) {
-            ErrorMsg = ErrorMsg	+ "<li><font color=red>注意：</font>请假天数必须是数字</li>";
+            ErrorMsg = ErrorMsg + "<li><font color=red>注意：</font>请假天数必须是数字</li>";
         }
 
         if (ErrorMsg == "") {
             // 您可以在此编程，保存这些数据到数据库中。
             System.out.println("提交的数据为：<br/>");
-            System.out.println("姓名："+sName+"<br/>");
-            System.out.println("部门："+sDept+"<br/>");
-            System.out.println("原因："+sCause+"<br/>");
-            System.out.println("天数："+sNum+"<br/>");
-            System.out.println("日期："+sDate+"<br/>");
+            System.out.println("姓名：" + sName + "<br/>");
+            System.out.println("部门：" + sDept + "<br/>");
+            System.out.println("原因：" + sCause + "<br/>");
+            System.out.println("天数：" + sNum + "<br/>");
+            System.out.println("日期：" + sDate + "<br/>");
             doc.showPage(578, 380);
         } else {
             ErrorMsg = "<div style='color:#FF0000;'>请修改以下信息：</div> "
@@ -163,7 +162,7 @@ public class WordSaveController {
             doc.showPage(578, 380);
         }
         doc.close();
-        return"/resp";
+        return "/resp";
 
     }
 
@@ -180,7 +179,7 @@ public class WordSaveController {
             String sql = "UPDATE  Stream SET Word=?  where ID=" + id;
             PreparedStatement pstmt = null;
             pstmt = conn.prepareStatement(sql);
-            pstmt.setBytes(1,fs.getFileBytes());
+            pstmt.setBytes(1, fs.getFileBytes());
             //pstmt.setBinaryStream(1, fs.getFileStream(),fs.getFileSize());
             pstmt.executeUpdate();
             pstmt.close();
@@ -195,14 +194,13 @@ public class WordSaveController {
     }
 
 
-
     @RequestMapping("/save/doc/data14")
     public void saveDocData14(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
         //定义保存对象
         FileSaver fs = new FileSaver(request, response);
 
         Class.forName("org.sqlite.JDBC");
-        String strUrl = "jdbc:sqlite:"+dir+"demodata\\CreateWord.db";
+        String strUrl = "jdbc:sqlite:" + dir + "demodata\\CreateWord.db";
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("select Max(ID) from word");
@@ -246,15 +244,14 @@ public class WordSaveController {
         //定义保存对象
         FileSaver fs = new FileSaver(request, response);
         //保存文件到本地磁盘
-        fs.saveToFile(dir+fs.getFileName());
+        fs.saveToFile(dir + fs.getFileName());
         fs.close();
-
 
 
     }
 
     @RequestMapping("/save/doc/data16")
-    public ModelAndView saveDocData16(HttpServletRequest request, HttpServletResponse response,Map<String,Object> map) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
+    public ModelAndView saveDocData16(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
 
         //定义保存对象
         FileMakerCtrl fmCtrl = new FileMakerCtrl(request);
@@ -271,10 +268,10 @@ public class WordSaveController {
         fmCtrl.setWriter(doc);
         fmCtrl.setJsFunction_OnProgressComplete("OnProgressComplete()");
         fmCtrl.setFileTitle("newfilename.doc");
-        fmCtrl.fillDocument(dir+"test28.doc", DocumentOpenType.Word);
+        fmCtrl.fillDocument(dir + "test28.doc", DocumentOpenType.Word);
         System.out.println(1);
 
-        map.put("pageoffice",fmCtrl.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", fmCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word29");
         return mv;
@@ -288,7 +285,7 @@ public class WordSaveController {
 
         FileSaver fs = new FileSaver(request, response);
         String fileName = "maker" + fs.getFileExtName();
-        fs.saveToFile(dir+ fileName);
+        fs.saveToFile(dir + fileName);
 
         fs.close();
 
@@ -297,24 +294,22 @@ public class WordSaveController {
     @RequestMapping("/save/doc/data18")
     public void saveDocData18(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
-        WordDocument doc = new WordDocument(request,response);
+        WordDocument doc = new WordDocument(request, response);
         DataRegion dataReg = doc.openDataRegion("PO_table");
         com.zhuozhengsoft.pageoffice.wordreader.Table table = dataReg.openTable(1);
         //输出提交的table中的数据
 
         StringBuilder dataStr = new StringBuilder();
-        for (int i = 1; i <= table.getRowsCount(); i++)
-        {
+        for (int i = 1; i <= table.getRowsCount(); i++) {
 
-            for (int j = 1; j <= table.getColumnsCount(); j++)
-            {
-                byte[] ascii =table.openCellRC(i, j).getValue().getBytes("utf-8");
+            for (int j = 1; j <= table.getColumnsCount(); j++) {
+                byte[] ascii = table.openCellRC(i, j).getValue().getBytes("utf-8");
                 //乱码
-                String out=new String(ascii,"gb2312");
+                String out = new String(ascii, "gb2312");
                 System.out.println(out);
 
 
-                dataStr.append("<div>"+table.openCellRC(i,j).getValue()+"</div>");
+                dataStr.append("<div>" + table.openCellRC(i, j).getValue() + "</div>");
             }
         }
 
@@ -328,7 +323,7 @@ public class WordSaveController {
     @RequestMapping("/save/doc/data19")
     public void saveDocData19(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        WordDocument doc = new WordDocument(request,response);
+        WordDocument doc = new WordDocument(request, response);
         byte[] bytes = null;
         String filePath = "";
         if (request.getParameter("userName") != null && request.getParameter("userName").trim().equalsIgnoreCase("zhangsan")) {
@@ -340,7 +335,7 @@ public class WordSaveController {
         }
         doc.close();
 
-        Resource resource = new ClassPathResource("static/word/"+filePath);
+        Resource resource = new ClassPathResource("static/word/" + filePath);
         File file = resource.getFile();
 
         //filePath = request.getSession().getServletContext().getRealPath("SetDrByUserWord2/doc/") + "/" + filePath;
@@ -357,38 +352,38 @@ public class WordSaveController {
 
         FileSaver fs = new FileSaver(request, response);
         String fileName = "testpfd" + fs.getFileExtName();
-        fs.saveToFile(dir+ fileName);
+        fs.saveToFile(dir + fileName);
         fs.close();
 
     }
+
     @RequestMapping("/save/doc/data21")
     public void saveDocData21(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String filePath=dir+"test50\\";
-        WordDocument doc=new WordDocument(request,response);
+        String filePath = dir + "test50\\";
+        WordDocument doc = new WordDocument(request, response);
         byte[] bWord;
 
-        DataRegion dr1=doc.openDataRegion("PO_test1");
+        DataRegion dr1 = doc.openDataRegion("PO_test1");
 
 
+        bWord = dr1.getFileBytes();
 
-        bWord=dr1.getFileBytes();
-
-        FileOutputStream fos1=new FileOutputStream(filePath+"new1.doc");
+        FileOutputStream fos1 = new FileOutputStream(filePath + "new1.doc");
         fos1.write(bWord);
         fos1.flush();
         fos1.close();
 
-        DataRegion dr2=doc.openDataRegion("PO_test2");
-        bWord=dr2.getFileBytes();
-        FileOutputStream fos2=new FileOutputStream(filePath+"new2.doc");
+        DataRegion dr2 = doc.openDataRegion("PO_test2");
+        bWord = dr2.getFileBytes();
+        FileOutputStream fos2 = new FileOutputStream(filePath + "new2.doc");
         fos2.write(bWord);
         fos2.flush();
         fos2.close();
 
-        DataRegion dr3=doc.openDataRegion("PO_test3");
-        bWord=dr3.getFileBytes();
-        FileOutputStream fos3=new FileOutputStream(filePath+"new3.doc");
+        DataRegion dr3 = doc.openDataRegion("PO_test3");
+        bWord = dr3.getFileBytes();
+        FileOutputStream fos3 = new FileOutputStream(filePath + "new3.doc");
         fos3.write(bWord);
         fos3.flush();
         fos3.close();
@@ -397,36 +392,37 @@ public class WordSaveController {
         doc.close();
 
     }
+
     @RequestMapping("/save/doc/data22")
     public void saveDocData22(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         FileSaver fs = new FileSaver(request, response);
         //String aa=fs.getFileExtName();
         if (fs.getFileExtName().equals(".jpg")) {
-            fs.saveToFile(dir+fs.getFileName());
+            fs.saveToFile(dir + fs.getFileName());
         } else {
-            fs.saveToFile(dir+fs.getFileName());
+            fs.saveToFile(dir + fs.getFileName());
         }
         fs.setCustomSaveResult("ok");
         fs.close();
 
     }
+
     @RequestMapping("/save/doc/data23")
     public void saveDocData23(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        WordDocument doc=new WordDocument(request,response);
-        DataRegion dr=doc.openDataRegion("PO_image");
+        WordDocument doc = new WordDocument(request, response);
+        DataRegion dr = doc.openDataRegion("PO_image");
         //将提取的图片保存到服务器上，图片的名称为:a.jpg
-        dr.openShape(1).saveAsJPG(dir+("test61\\")+"a.jpg");
-        doc.setCustomSaveResult("保存成功,文件保存到："+request.getSession().getServletContext().getRealPath("ExtractImage/doc/")+"\\a.jpg");
+        dr.openShape(1).saveAsJPG(dir + ("test61\\") + "a.jpg");
+        doc.setCustomSaveResult("保存成功,文件保存到：" + request.getSession().getServletContext().getRealPath("ExtractImage/doc/") + "\\a.jpg");
         doc.close();
 
     }
 
 
-
     @RequestMapping("/save/doc/data24")
-    public ModelAndView saveDocData24(HttpServletRequest request, HttpServletResponse response,Map<String,Object> map) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
+    public ModelAndView saveDocData24(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
 
         //定义保存对象
         FileMakerCtrl fmCtrl = new FileMakerCtrl(request);
@@ -444,12 +440,12 @@ public class WordSaveController {
             fmCtrl.setWriter(doc);
             fmCtrl.setJsFunction_OnProgressComplete("OnProgressComplete()");
             fmCtrl.setFileTitle("newfilename.doc");
-            fmCtrl.fillDocument(dir+"test63.doc", DocumentOpenType.Word);
+            fmCtrl.fillDocument(dir + "test63.doc", DocumentOpenType.Word);
         }
 
         System.out.println(1);
 
-        map.put("pageoffice",fmCtrl.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", fmCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word64");
 
@@ -461,14 +457,14 @@ public class WordSaveController {
 
 
     @RequestMapping("/save/doc/data25")
-    public void saveDocData25(HttpServletRequest request, HttpServletResponse response)  {
+    public void saveDocData25(HttpServletRequest request, HttpServletResponse response) {
 
         FileSaver fs = new FileSaver(request, response);
         String id = request.getParameter("id");
         String err = "";
         if (id != null && id.length() > 0) {
             String fileName = "student" + id + fs.getFileExtName();
-            fs.saveToFile(dir+"test63\\"+ fileName);
+            fs.saveToFile(dir + "test63\\" + fileName);
         } else {
             err = "<script>alert('未获得文件名称');</script>";
         }
@@ -482,7 +478,7 @@ public class WordSaveController {
 
         FileSaver fs = new FileSaver(request, response);
         //获取通过隐藏域传递过来的值
-        String fileName="";
+        String fileName = "";
         if (fs.getFormField("fileName") != null
                 && fs.getFormField("fileName").trim().length() > 0) {
             fileName = fs.getFormField("fileName");
@@ -490,11 +486,11 @@ public class WordSaveController {
         System.out.println(fileName);
 
         byte[] bWord;
-        String filePath=dir+"other\\";
+        String filePath = dir + "other\\";
 
-        bWord=fs.getFileBytes();
+        bWord = fs.getFileBytes();
 
-        FileOutputStream fos1=new FileOutputStream(filePath+fileName+fs.getFileExtName());
+        FileOutputStream fos1 = new FileOutputStream(filePath + fileName + fs.getFileExtName());
         fos1.write(bWord);
         fos1.flush();
         fos1.close();
@@ -502,15 +498,6 @@ public class WordSaveController {
         fs.close();
 
     }
-
-
-
-
-
-
-
-
-
 
 
 }
