@@ -65,32 +65,31 @@ public class HelloController {
     }
 
 
-
     @RequestMapping("/helloHtml")
-    public String helloHtml(Map<String,Object> map){
+    public String helloHtml(Map<String, Object> map) {
 
-        map.put("hello","from TemplateController.helloHtml");
-        return"/helloHtml";
+        map.put("hello", "from TemplateController.helloHtml");
+        return "/helloHtml";
     }
 
-    @RequestMapping(value="/index", method=RequestMethod.GET)
-    public ModelAndView showIndex(){
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public ModelAndView showIndex() {
         ModelAndView mv = new ModelAndView("Index");
         return mv;
     }
 
 
-    @RequestMapping(value="/ppt", method= RequestMethod.GET)
-    public ModelAndView showPpt(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/ppt", method = RequestMethod.GET)
+    public ModelAndView showPpt(HttpServletRequest request, Map<String, Object> map) {
         //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = new PageOfficeCtrl(request);
         poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
-        poCtrl.addCustomToolButton("保存","Save",1); //添加自定义按钮
+        poCtrl.addCustomToolButton("保存", "Save", 1); //添加自定义按钮
         poCtrl.setSaveFilePage("/save");//设置保存的action
-        poCtrl.addCustomToolButton("盖章","AddSeal",2); //添加自定义盖章按钮
+        poCtrl.addCustomToolButton("盖章", "AddSeal", 2); //添加自定义盖章按钮
 
 
-        poCtrl.webOpen(dir+"test.ppt", OpenModeType.pptNormalEdit,"张三");
+        poCtrl.webOpen(dir + "test.ppt", OpenModeType.pptNormalEdit, "张三");
 //        poCtrl.setCaption("项");
 //        poCtrl.setTitlebar(false); //隐藏标题栏
 //        poCtrl.setMenubar(false); //隐藏菜单栏
@@ -100,14 +99,11 @@ public class HelloController {
         //poCtrl.setTheme(ThemeType.Office2007);
 
 
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("Word");
         return mv;
     }
-
-
-
 
 
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="~{common/layout}">
+
+
+
+
+<head>
+    <title>My JSP 'FileMaker.jsp' starting page</title>
+    <script type="text/javascript">
+        //标识盖章是否成功
+        var isAddSealSuc = false;
+        function AfterDocumentOpened() {
+            try {
+                //先定位到印章位置,再在印章位置上盖章
+                document.getElementById("PageOfficeCtrl1").ZoomSeal.LocateSealPosition("Seal1");
+                isAddSealSuc = document.getElementById("PageOfficeCtrl1").ZoomSeal.AddSealByName("测试公章", null, "Seal1"); //位置名称不区分大小写
+            } catch(e) {};
+
+        }
+
+        function OnProgressComplete() {
+            window.parent.convert(isAddSealSuc); //调用父页面的js函数
+        }
+    </script>
+</head>
+
+
+
+
+<th:block layout:fragment="content" >
+    <div th:replace="/common/common::office" ></div>
+
+
+
+
+</th:block>
+
+</html>

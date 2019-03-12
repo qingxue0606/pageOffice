@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="common/layout">
+
+
+<th:block layout:fragment="header" >
+
+    <title>4.编辑模版 - 在模版中添加盖章位置</title>
+
+</th:block>
+
+
+<th:block layout:fragment="content" >
+
+    <script type="text/javascript">
+        function Save() {
+            document.getElementById("PageOfficeCtrl1").WebSave();
+
+        }
+
+        function InsertSealPos() {
+            try {
+                document.getElementById("PageOfficeCtrl1").ZoomSeal.AddSealPosition();
+            } catch(e) {};
+        }
+    </script>
+
+    <div th:replace="/common/common::office" ></div>
+
+
+
+
+</th:block>
+
+</html>
