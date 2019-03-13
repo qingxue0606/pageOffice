@@ -250,6 +250,114 @@ public class SealController {
         ModelAndView mv = new ModelAndView("seal/word/Word11");
         return mv;
     }
+    @RequestMapping(value="/seal/word13", method= RequestMethod.GET)
+    public ModelAndView addSealWord13(HttpServletRequest request, Map<String,Object> map){
+        //--- PageOffice的调用代码 开始 -----
+        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+
+        //添加自定义按钮
+        poCtrl.addCustomToolButton("保存", "Save", 1);
+        poCtrl.addCustomToolButton("签字", "InsertHandSign()",3);
+        poCtrl.addCustomToolButton("验证印章", "VerifySeal()", 5);
+        poCtrl.addCustomToolButton("修改密码", "ChangePsw()", 0);
+
+
+
+        poCtrl.setSaveFilePage("/save/seal/word1");
+
+
+
+        poCtrl.webOpen(dir+"seal\\"+"test13.doc", OpenModeType.docNormalEdit,"张三");
+        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("seal/word/Word13");
+        return mv;
+    }
+    @RequestMapping(value="/seal/word14", method= RequestMethod.GET)
+    public ModelAndView addSealWord14(HttpServletRequest request, Map<String,Object> map){
+        //--- PageOffice的调用代码 开始 -----
+        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+
+        //添加自定义按钮
+        poCtrl.addCustomToolButton("保存", "Save", 1);
+        poCtrl.addCustomToolButton("签字", "InsertHandSign()", 2);
+        poCtrl.addCustomToolButton("修改密码", "ChangePsw()", 0);
+
+
+
+        poCtrl.setSaveFilePage("/save/seal/word1");
+
+
+
+        poCtrl.webOpen(dir+"seal\\"+"test14.doc", OpenModeType.docNormalEdit,"张三");
+        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("seal/word/Word14");
+        return mv;
+    }
+    @RequestMapping(value="/seal/word15", method= RequestMethod.GET)
+    public ModelAndView addSealWord15(HttpServletRequest request, Map<String,Object> map){
+        //--- PageOffice的调用代码 开始 -----
+        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+
+        //添加自定义按钮
+        poCtrl.addCustomToolButton("保存", "Save", 1);
+        poCtrl.addCustomToolButton("签字", "InsertHandSign()", 3);
+
+
+
+        poCtrl.setSaveFilePage("/save/seal/word1");
+
+
+
+        poCtrl.webOpen(dir+"seal\\"+"test15.doc", OpenModeType.docNormalEdit,"张三");
+        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("seal/word/Word15");
+        return mv;
+    }
+    @RequestMapping(value="/seal/word16", method= RequestMethod.GET)
+    public ModelAndView addSealWord16(HttpServletRequest request, Map<String,Object> map){
+        //--- PageOffice的调用代码 开始 -----
+        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+
+        //添加自定义按钮
+        poCtrl.addCustomToolButton("保存", "Save", 1);
+        poCtrl.addCustomToolButton("签字", "AddHandSign()", 3);
+
+
+
+        poCtrl.setSaveFilePage("/save/seal/word1");
+
+
+
+        poCtrl.webOpen(dir+"seal\\"+"test16.doc", OpenModeType.docNormalEdit,"张三");
+        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("seal/word/Word16");
+        return mv;
+    }
+    @RequestMapping(value="/seal/word17", method= RequestMethod.GET)
+    public ModelAndView addSealWord17(HttpServletRequest request, Map<String,Object> map){
+        //--- PageOffice的调用代码 开始 -----
+        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+
+        //添加自定义按钮
+        poCtrl.addCustomToolButton("保存", "Save", 1);
+        poCtrl.addCustomToolButton("签字", "InsertHandSign()", 3);
+
+
+
+        poCtrl.setSaveFilePage("/save/seal/word1");
+
+
+
+        poCtrl.webOpen(dir+"seal\\"+"test17.doc", OpenModeType.docNormalEdit,"张三");
+        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("seal/word/Word17");
+        return mv;
+    }
 
 
 

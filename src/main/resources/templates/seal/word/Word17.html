@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="~{common/layout}">
+
+
+
+
+<head>
+    <title>5.特殊需求签字（签字后仍可编辑、修改文件内容）</title>
+</head>
+
+
+
+
+<th:block layout:fragment="content" >
+    <div style="font-size: 12px; line-height: 20px; border-bottom: dotted 1px #ccc; border-top: dotted 1px #ccc; padding: 5px;">
+        <span style="color: red;">操作说明：</span>点“签字”按钮即可，插入签字时的用户名为：李志，密码默认为：111111。
+        <br /> 关键代码：点右键，选择“查看源文件”，看js函数
+        <span style="background-color: Yellow;">InsertHandSign()</span>
+
+    </div>
+    <br />
+    <script type="text/javascript">
+        function Save() {
+            document.getElementById("PageOfficeCtrl1").WebSave();
+        }
+
+        function InsertHandSign() {
+            try {
+                document.getElementById("PageOfficeCtrl1").ZoomSeal.AddHandSign("","");
+            } catch(e) {};
+        }
+    </script>
+
+
+    <div th:replace="/common/common::office" ></div>
+
+
+
+
+</th:block>
+
+</html>

@@ -78,6 +78,14 @@ public class HelloController {
         return mv;
     }
 
+    @RequestMapping(value = "/index2", method = RequestMethod.GET)
+    public ModelAndView showIndex2() {
+        ModelAndView mv = new ModelAndView("Index2");
+        return mv;
+    }
+
+
+
 
     @RequestMapping(value = "/ppt", method = RequestMethod.GET)
     public ModelAndView showPpt(HttpServletRequest request, Map<String, Object> map) {

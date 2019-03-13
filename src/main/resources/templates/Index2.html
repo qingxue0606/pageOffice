@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Index</title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="pageoffice.js" id="po_js_main"></script>
+
+</head>
+`
+<body>
+<h1 th:inline="text">PageOffice 集成效果演示</h1>
+
+
+
+<div style="width: 49%;float: left ">
+
+
+
+    <div>打开文件word给Word文档中的数据区域（DataRegion）赋值的简单示例</div>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/word','fullscreen=no;');">打开文件word </a><br>
+
+
+
+
+</div>
+<div style="width: 49%;;float: right ">
+
+
+
+    <div>常规盖章</div>
+    <a href="javascript:POBrowser.openWindowModeless('/seal/word1','fullscreen=yes;');">打开/seal/word1 </a><br>
+    <br>
+
+
+</div>
+
+<div style="clear: both"></div>
+<div>生成准考证合</div>
+<a href="javascript:POBrowser.openWindowModeless('/word66','fullscreen=yes;');">打开文件word66 </a><br>
+
+<div>另存为</div>
+<a href="javascript:POBrowser.openWindowModeless('/word65','fullscreen=yes;');">打开文件word65 </a><br>
+
+<div>批量生成准考证</div>
+<a href="javascript:POBrowser.openWindowModeless('/word63','fullscreen=yes;');">打开文件word63 </a><br>
+
+
+<!--<a href="javascript:POBrowser.openWindowModeless('/ppt','fullscreen=yes;');">打开文件11 </a>-->
+</body>
+</html>
