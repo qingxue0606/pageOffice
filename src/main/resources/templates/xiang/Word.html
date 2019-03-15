@@ -3,6 +3,11 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Hello World!</title>
+
+
+
+
+
     <script type="text/javascript">
         function Save() {
             document.getElementById("PageOfficeCtrl1").WebSave();
@@ -10,11 +15,12 @@
 
         function Test() {
 
-            var str;
-            str= document.getElementById("PageOfficeCtrl1").DataRegionList.Item(1).Value;
+            //var str;
+            //str= document.getElementById("PageOfficeCtrl1").DataRegionList.Item(1).Value;
+            window.location.reload();
 
 
-            alert(str)
+            //alert(str)
         }
     </script>
     <script type="text/javascript">

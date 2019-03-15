@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
-public class SealController {
+public class SealWordController {
     @Value("${testPath}")
     private String dir;
 

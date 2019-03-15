@@ -60,6 +60,18 @@ public class SealSaveController {
         return mv;
 
     }
+
+
+    @RequestMapping("/save/seal/excel1")
+    public void saveSealExcel1(HttpServletRequest request, HttpServletResponse response){
+        //定义保存对象
+        FileSaver fs = new FileSaver(request, response);
+        //保存文件到本地磁盘
+        fs.saveToFile(dir+"seal\\"+ fs.getFileName());
+        fs.close();
+
+    }
+
     @RequestMapping("/save/seal/word3")
     public void saveSealWord3(HttpServletRequest request, HttpServletResponse response){
         //定义保存对象

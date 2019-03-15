@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="~{common/layout}">
+
+
+
+
+<head>
+    <title>删除光标所在行</title>
+</head>
+
+
+
+
+<th:block layout:fragment="content" >
+    <div style=" font-size:small; color:Red;">
+        <label>关键代码：点右键，选择“查看源文件”，看js函数：</label>
+        <label>function  addBookMark() 和 function delBookMark()</label>
+        <br/>
+        <label>插入书签时，请先输入要插入的书签名称和文本；删除书签时，请先输入相应的书签名称！</label><br />
+        <label>书签名称：</label><input id="txtBkName" type="text" value="test" />
+        &nbsp;&nbsp;<label>书签文本：</label><input id="txtBkText" type="text" value="[测试]" />
+    </div>
+    <input id="Button1" type="button" onclick="addBookMark();" value="插入书签" />
+    <input id="Button2" type="button" onclick="delBookMark()" value="删除书签" />
+
+    <div style=" font-size:small; color:Red;">
+        <label>关键代码：点右键，选择“查看源文件”，看js函数：</label>
+        <label>function  locateBookMark()</label>
+        <br/>
+        <label>将光标定位到书签前，请先在文本框中输入要定位到的书签名称（可点击Office工具栏上的“插入”→“书签”，来查看当前Word文档中所有的书签名称）！</label><br />
+        <label>书签名称：</label><input id="txtBkName2" type="text" value="PO_seal" />
+    </div>
+    <br />
+
+    <div style="font-size:12px; line-height:20px; border-bottom:dotted 1px #ccc;border-top:dotted 1px #ccc; padding:5px;">
+        <span style="color:red;">操作说明：</span>定位word文件中的光标到想插入超链接的位置，然后点“插入超链”按钮。<br />
+
+        关键代码：点右键，选择“查看源文件”，看js函数<span style="background-color:Yellow;">addHyperLink()</span></div><br />
+
+    <div style="font-size: 12px; line-height: 20px; border-bottom: dotted 1px #ccc; border-top: dotted 1px #ccc;
+        padding: 5px;">
+        <span style="color: red;">操作说明：</span>选中word文件中的一段文字，然后点“获取选中文字”按钮。<br />
+        关键代码：点右键，选择“查看源文件”，看js函数<span style="background-color: Yellow;">getSelectionText()</span></div>
+
+    <input id="Button3" type="button" onclick="getSelectionText();" value="js获取word选中的文字" /><br />
+
+    <div style="font-size:12px; line-height:20px; border-bottom:dotted 1px #ccc;border-top:dotted 1px #ccc; padding:5px;">
+        <span style="color:red;">操作说明：</span>请输入页码后点跳转按钮。页码：
+        <input id="pageNum" type="text" value="3" />
+        <input id="Button4" type="button" value="跳转" onclick="return Button1_onclick()" />
+        <br />
+
+        <div style="font-size: 12px; line-height: 20px; border-bottom: dotted 1px #ccc; border-top: dotted 1px #ccc;
+        padding: 5px;">
+            <span style="color: red;">操作说明：</span>手动定位光标到当前文档中要插入分页符的位置，然后点“插入分页符”的按钮。<br />
+            关键代码：点右键，选择“查看源文件”，看js函数<span style="background-color: Yellow;">InsertPageBreak()</span>
+        </div>
+
+        <span style="color:red"> 删除当前光标所在位置的光标::将光标放在指定书签上，点击删除当前光标所在位置书签按钮</span>
+        <label>关键代码：点右键，选择“查看源文件”，看js函数：</label>
+        <label style="color:blue">function  delBookMark2()</label>
+        <br/>
+        <span style="color:red">删除所选文本中的书签：选择文本内容，点击删除选择文本内容中的书签按钮，然后看效果</span>
+        <label >关键代码：点右键，选择“查看源文件”，看js函数：</label>
+        <label style="color:blue">function  delChoBookMark()</label>
+        <br/>
+        <span>模板中的</span><span>【xxxxx】</span><span>代表书签;&nbsp;或者可以选择   插入->书签->定位进行查看书签位置</span><br/>
+        <input id="Button5" type="button" onclick="delBookMark2();"    value="删除当前光标所在位置的书签" /> &nbsp;&nbsp;
+        <input id="Button6" type="button" onclick="delChoBookMark();" value="删除选中文本内容中的书签" /> &nbsp;&nbsp;
+
+
+
+
+
+        <script type="text/javascript">
+            function insertWaterMarkPic() {
+                /**
+                 *document.getElementById("PageOfficeCtrl1").SetWordWaterMarkImage( ImageURL, ImageWidth, IsWashout );
+                 *ImageURL  字符串类型，必选参数，图片的路径。
+                 *ImageWidth  整数类型，必选参数，图片的宽度（单位：厘米）。如果是0表示采用图片默认宽度。
+                 *IsWashout  布尔类型，必选参数，是否冲蚀。true：冲蚀，false：不冲蚀
+                 */
+                document.getElementById("PageOfficeCtrl1").SetWordWaterMarkImage("word/logo2.jpg",20,false);
+            }
+
+
+
+
+            function insertLogoPic() {
+                /**
+                 *document.getElementById("PageOfficeCtrl1").InsertWebImage( ImageURL, Transparent, Position );
+                 *ImageURL  字符串类型，图片的路径。
+                 *Transparent  布尔类型，可选参数，图片是否透明。默认值：FALSE，图片不透明；TRUE表示图片透明。注意：透明色为白色。
+                 *Position  整数类型，可选参数，浮于文字上方还是下方。默认值：4，图片浮于文字上方。 5，表示图片衬于文字下方。
+                 */
+                //该方法默认插入图片到当前光标处，如果想插入到文档指定位置，可以在文档中插入一个书签来设置位置，然后先定位光标到书签处再插入图片
+                locateBookMark2();
+                document.getElementById("PageOfficeCtrl1").InsertWebImage("word/logo.jpg", false, 4);
+            }
+
+            //定位书签到光标处
+            function locateBookMark2() {
+                //获取书签名称
+                var bkName = "PO_logo";
+                //将光标定位到书签所在的位置
+                var mac = "Function myfunc()" + " \r\n"
+                    + "  ActiveDocument.Bookmarks(\""+ bkName +"\").Select " + " \r\n"
+                    + "End Function " + " \r\n";
+                document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+            }
+        </script>
+
+
+        <script type="text/javascript">
+            //删除当前光标所在位置的书签
+            function delBookMark2() {
+                var mac = "Function myfunc()" + " \r\n"
+                    + "If Application.Selection.Bookmarks.Count > 0 Then " + " \r\n"
+                    + "   Application.Selection.Bookmarks(1).Select " + " \r\n"
+                    + "   Application.Selection.Range.Delete " + " \r\n"
+                    + "  'Application.Selection.Bookmarks(1).Delete"+"\r\n"
+                    + "   Else"+"\r\n"
+                    + '   MsgBox  "当前位置没有书签" ' +"\r\n"
+                    + "End If " + " \r\n"
+                    + "End Function " + " \r\n";
+                document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+            }
+            //删除选中文本的内容中的书签
+            function delChoBookMark() {
+                //判断当前是否选择了文本内容
+                if (document.getElementById("PageOfficeCtrl1").Document.Application.Selection.Range.Text != ""){
+                    var mac = "Function myfunc()" + " \r\n"
+                        + " If Application.Selection.Bookmarks.Count >= 1 Then " + " \r\n"
+                        + "   ReDim aMarks(Application.Selection.Bookmarks.Count - 1)" + " \r\n"
+                        + "   i = 0"+"\r\n"
+                        + "   For Each aBookmark In Application.Selection.Bookmarks " + " \r\n"
+                        + "   aMarks(i) = aBookmark.Name " + " \r\n"
+                        + "   i = i + 1"+"\r\n"
+                        + "   Next aBookmark " + " \r\n"
+                        + "   For Each myElement In aMarks"+"\r\n"
+                        + "   ActiveDocument.Bookmarks(myElement).Select" + " \r\n"
+                        + "   ActiveDocument.Bookmarks(myElement).Range.Delete"+" \r\n"
+                        + "   Next" +"\r\n"
+                        //判断选择文本中是否有书签
+                        + "   Else" +"\r\n"
+                        + '   MsgBox  "选择文本中没有书签" ' +"\r\n"
+                        + "   End If "+ "\r\n"
+                        + "   End Function " + " \r\n";
+                    document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+                }else{
+                    document.getElementById("PageOfficeCtrl1").Alert("您没有选择任何文本");
+                }
+            }
+        </script>
+
+
+
+
+
+
+
+
+        <script type="text/javascript">
+            function InsertPageBreak() {
+                document.getElementById("PageOfficeCtrl1").RunMacro("AddPage", "sub AddPage() \r\n Application.Selection.InsertBreak(7) \r\n End Sub");
+            }
+
+        </script>
+
+
+        <!--跳转到指定页码-->
+    <script type="text/javascript">
+
+        function gotoPage(num) {
+            var sMac = "function myfunc()" + "\r\n"
+                + "  If " + num + " > Application.Selection.Information(4) Then " + "\r\n"
+                + "     Msgbox \"超出文档范围，本文共\" & Application.Selection.Information(4) & \"页\"" + "\r\n"
+                + "  End If " + "\r\n"
+                + "  Selection.GoTo What:=wdGoToPage, Which:=wdGoToAbsolute, Name:= " + num + "\r\n"
+                + "End function";
+            return document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", sMac);
+        }
+
+
+        function Button1_onclick() {
+            var num = document.getElementById("pageNum").value;
+            if ("" == Trim(num)) {
+                document.getElementById("PageOfficeCtrl1").Alert("请输入页码");
+                return;
+            }
+            if (isNaN(num)){
+                document.getElementById("PageOfficeCtrl1").Alert("只能输入数字");
+                return;
+            }
+            gotoPage(num);
+        }
+    </script>
+    <script type="text/javascript">
+        function LTrim(str) {
+            var i;
+            for (i = 0; i < str.length; i++) {
+                if (str.charAt(i) != " " && str.charAt(i) != " ") break;
+            }
+            str = str.substring(i, str.length);
+            return str;
+        }
+        function RTrim(str) {
+            var i;
+            for (i = str.length - 1; i >= 0; i--) {
+                if (str.charAt(i) != " " && str.charAt(i) != " ") break;
+            }
+            str = str.substring(0, i + 1);
+            return str;
+        }
+        function Trim(str) {
+            return LTrim(RTrim(str));
+        }
+    </script>
+
+
+
+
+    <!-- ***************************PageOffice组件客户端Js代码******************************** -->
+    <script type="text/javascript">
+        var bkName = document.getElementById("txtBkName").value;
+        var bkText = document.getElementById("txtBkText").value;
+        function  getSelectionText()
+        {
+            if (document.getElementById("PageOfficeCtrl1").Document.Application.Selection.Range.Text != "") {
+                document.getElementById("PageOfficeCtrl1").Alert(document.getElementById("PageOfficeCtrl1").Document.Application.Selection.Range.Text);
+            }
+            else{
+                document.getElementById("PageOfficeCtrl1").Alert("您没有选择任何文本。");
+            }
+        }
+
+
+        function addBookMark() {
+            bkName = document.getElementById("txtBkName").value;
+            bkText = document.getElementById("txtBkText").value;
+
+            var mac = "Function myfunc()" + " \r\n"
+                + "Dim r As Range " + " \r\n"
+                + "Set r = Application.Selection.Range " + " \r\n"
+                + "r.Text = \"" + bkText + "\"" + " \r\n"
+                + "Application.ActiveDocument.Bookmarks.Add Name:=\"" + bkName + "\", Range:=r " + " \r\n"
+                + "Application.ActiveDocument.Bookmarks(\"" + bkName + "\").Select " + " \r\n"
+                + "End Function " + " \r\n";
+            document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+        }
+
+
+        function  addHyperLink()
+        {
+            var text = "卓正志远";
+            var url = "http://www.zhuozhengsoft.com/";
+
+            var mac = "Function myfunc()" + " \r\n"
+                + "  Application.ActiveWindow.View.ShowFieldCodes = False " + " \r\n"
+                + "  ActiveDocument.Hyperlinks.Add Anchor:=Selection.Range, Address:= _" + " \r\n"
+                + "   \"" + url + "\", SubAddress:=\"\", ScreenTip:=\"\", _ " + " \r\n"
+                + "   TextToDisplay:=\""+text+"\" " + " \r\n"
+                + "End Function " + " \r\n";
+            document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+        }
+
+        function delBookMark() {
+            var mac = "Function myfunc()" + " \r\n"
+                + "If  Application.ActiveDocument.Bookmarks.Exists(\"" + bkName + "\") Then " + " \r\n"
+                + "    Application.ActiveDocument.Bookmarks(\"" + bkName + "\").Select " + " \r\n"
+                + "    Application.Selection.Range.Text = \"\" " + " \r\n"
+                + "End If " + " \r\n"
+                + "End Function " + " \r\n";
+            document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+        }
+        function locateBookMark() {
+            //获取书签名称
+            var bkName = document.getElementById("txtBkName2").value;
+            //将光标定位到书签所在的位置
+            var mac = "Function myfunc()" + " \r\n"
+                + "  ActiveDocument.Bookmarks(\""+ bkName +"\").Select " + " \r\n"
+                + "End Function " + " \r\n";
+            document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+        }
+
+
+
+        //删除word表格中光标所在行
+        //        function DeleteRow() {
+        //            var appObj = document.getElementById("PageOfficeCtrl1").Document.Application;
+
+        //            appObj.Selection.HomeKey(10);
+        //            appObj.Selection.EndKey(10, true);
+        //            appObj.Selection.Cells.Delete(2);
+        //            appObj.Selection.TypeBackspace();
+        //        }
+        //删除word表格中光标所在行，各种浏览器下均可使用
+        function DeleteRow() {
+            var mac = "Function myfunc()" + " \r\n"
+                + "Application.Selection.HomeKey Unit:=wdLine " + " \r\n"
+                + "Application.Selection.EndKey Unit:=wdLine, Extend:=true " + " \r\n"
+                + "Application.Selection.Cells.Delete ShiftCells:=wdDeleteCellsEntireRow " + " \r\n"
+                + "Application.Selection.TypeBackspace " + " \r\n"
+                + "End Function " + " \r\n";
+            document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+        }
+
+        //显示/隐藏标尺
+        function Hidden() {
+            document.getElementById("PageOfficeCtrl1").Document.ActiveWindow.ActivePane.DisplayRulers =
+                !document.getElementById("PageOfficeCtrl1").Document.ActiveWindow.ActivePane.DisplayRulers;
+        }
+    </script>
+    “删除行”按钮可以删除光标所在行
+
+
+
+    <div th:replace="/common/common::office" ></div>
+
+
+
+
+</th:block>
+
+</html>
