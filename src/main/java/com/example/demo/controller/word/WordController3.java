@@ -103,6 +103,7 @@ public class WordController3 {
         poCtrl.setSaveFilePage("SaveFile.jsp");
 
         poCtrl.webOpen(dir+"test41.doc", OpenModeType.docSubmitForm,"zhangsan");
+        //poCtrl.webOpen(dir+"test41.doc", OpenModeType.docNormalEdit,"zhangsan");
         map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word41");

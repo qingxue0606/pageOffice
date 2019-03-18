@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.word;
 
 import com.example.demo.entity.Doc;
 import com.zhuozhengsoft.pageoffice.OpenModeType;

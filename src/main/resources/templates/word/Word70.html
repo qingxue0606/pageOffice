@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="~{common/layout}">
+
+
+
+
+<head>
+    <title>My JSP 'Edit.jsp' starting page</title>
+</head>
+
+
+
+
+<th:block layout:fragment="content" >
+
+    <a href="#"  onclick="window.external.close();">返回列表页</a>
+    <script type="text/javascript">
+        function Save() {
+            document.getElementById("PageOfficeCtrl1").WebSave();
+            document.getElementById("PageOfficeCtrl1").Alert("保存成功，返回值为：" + document.getElementById("PageOfficeCtrl1").CustomSaveResult);
+        }
+    </script>
+
+    <div th:replace="/common/common::office" ></div>
+
+
+
+
+</th:block>
+
+</html>

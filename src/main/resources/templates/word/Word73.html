@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="~{common/layout}">
+
+
+
+
+<head>
+    <title>在Word文档中动态生成 试卷</title>
+</head>
+
+
+
+
+<th:block layout:fragment="content" >
+
+
+
+
+    <div th:replace="/common/common::office" ></div>
+
+
+
+
+</th:block>
+
+</html>
