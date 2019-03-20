@@ -239,9 +239,10 @@ public class WordController3 {
         poCtrl.addCustomToolButton("显示A文档", "ShowFile1View()", 0);
         poCtrl.addCustomToolButton("显示B文档", "ShowFile2View()", 0);
         poCtrl.addCustomToolButton("显示比较结果", "ShowCompareView()", 0);
+        poCtrl.setSaveFilePage("/save/doc/data30");
 
 
-        poCtrl.wordCompare(dir+"test47//aaa1.doc", dir+"test47//aaa2.doc", OpenModeType.docAdmin, "张三");
+        poCtrl.wordCompare(dir+"test47//aaa1.doc", dir+"test47//aaa2.doc", OpenModeType.docReadOnly, "张三");
 
 
 

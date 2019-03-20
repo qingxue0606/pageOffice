@@ -13,9 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.sql.*;
 import java.util.Map;
 
@@ -314,6 +312,135 @@ public class WordController5 {
         ModelAndView mv = new ModelAndView("/word/Word75");
         return mv;
     }
+
+
+
+
+    @RequestMapping(value = "/word76", method = RequestMethod.GET)
+    public ModelAndView showWord76(HttpServletRequest request, Map<String, Object> map) {
+        //--- PageOffice的调用代码 开始 -----
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
+
+        poCtrl.addCustomToolButton("保存", "Save", 1);
+        poCtrl.addCustomToolButton("领导圈阅", "StartHandDraw", 3);
+        poCtrl.addCustomToolButton("分层显示手写批注", "ShowHandDrawDispBar", 7);
+        poCtrl.addCustomToolButton("全屏/还原", "IsFullScreen", 4);
+        poCtrl.setSaveFilePage("/save/doc/data29");
+
+        poCtrl.webOpen(dir +"test75\\"+ "test.doc", OpenModeType.docNormalEdit, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("/word/Word76");
+        return mv;
+    }
+    @RequestMapping(value = "/word77", method = RequestMethod.GET)
+    public ModelAndView showWord77(HttpServletRequest request, Map<String, Object> map) {
+        //--- PageOffice的调用代码 开始 -----
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
+
+        String fileName = "";
+        String mbName = request.getParameter("templateName");
+
+
+        poCtrl.setCustomToolbar(false);
+
+        if (mbName != null && mbName.trim() != "") {
+            // 选择模板后执行套红
+
+            // 复制模板，命名为正式发文的文件名：zhengshi.doc
+            fileName = "zhengshi.doc";
+            String templateName = request.getParameter("mb");
+            String templatePath = dir +"test75\\" + templateName;
+            String filePath = dir +"test75\\" + fileName;
+            copyFile(templatePath, filePath);
+
+            // 填充数据和正文内容到“zhengshi.doc”
+            WordDocument doc = new WordDocument();
+            DataRegion copies = doc.openDataRegion("PO_Copies");
+            copies.setValue("6");
+            DataRegion docNum = doc.openDataRegion("PO_DocNum");
+            docNum.setValue("001");
+            DataRegion issueDate = doc.openDataRegion("PO_IssueDate");
+            issueDate.setValue("2013-5-30");
+            DataRegion issueDept = doc.openDataRegion("PO_IssueDept");
+            issueDept.setValue("开发部");
+            DataRegion sTextS = doc.openDataRegion("PO_STextS");
+            sTextS.setValue("[word]"+dir +"test75\\"+"test.doc[/word]");
+            DataRegion sTitle = doc.openDataRegion("PO_sTitle");
+            sTitle.setValue("北京某公司文件");
+            DataRegion topicWords = doc.openDataRegion("PO_TopicWords");
+            topicWords.setValue("Pageoffice、 套红");
+            poCtrl.setWriter(doc);
+
+        } else {
+            //首次加载时，加载正文内容：test.doc
+            fileName = "test.doc";
+
+        }
+
+        poCtrl.setSaveFilePage("/save/doc/data29");
+
+        poCtrl.webOpen(dir +"test75\\"+ fileName, OpenModeType.docNormalEdit, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("/word/Word77");
+        return mv;
+    }
+
+
+    @RequestMapping(value = "/word78", method = RequestMethod.GET)
+    public ModelAndView showWord78(HttpServletRequest request, Map<String, Object> map) {
+        //--- PageOffice的调用代码 开始 -----
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
+
+        String fileName = "zhengshi.doc"; //正式发文的文件
+        poCtrl.setCaption(fileName);
+        poCtrl.addCustomToolButton("另存到本地", "ShowDialog1()", 5);
+        poCtrl.addCustomToolButton("页面设置", "ShowDialog2()", 0);
+        poCtrl.addCustomToolButton("打印", "ShowDialog3()", 6);
+        poCtrl.addCustomToolButton("全屏/还原", "IsFullScreen()", 4);
+
+        poCtrl.setMenubar(false);
+        poCtrl.setOfficeToolbars(false);
+
+        //poCtrl.setSaveFilePage("/save/doc/data29");
+
+        poCtrl.webOpen(dir +"test75\\"+ fileName, OpenModeType.docReadOnly, "zhangsan");
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("/word/Word78");
+        return mv;
+    }
+
+
+
+
+    // 拷贝文件
+    private void copyFile(String oldPath, String newPath){
+        try {
+            int bytesum = 0;
+            int byteread = 0;
+            File oldfile = new File(oldPath);
+            if (oldfile.exists()) { //文件存在时
+                InputStream inStream = new FileInputStream(oldPath); //读入原文件
+                FileOutputStream fs = new FileOutputStream(newPath);
+                byte[] buffer = new byte[1444];
+                int length;
+                while ((byteread = inStream.read(buffer)) != -1) {
+                    bytesum += byteread; //字节数 文件大小
+                    //System.out.println(bytesum);
+                    fs.write(buffer, 0, byteread);
+                }
+                inStream.close();
+            }
+        } catch (Exception e) {
+            System.out.println("复制单个文件操作出错");
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 

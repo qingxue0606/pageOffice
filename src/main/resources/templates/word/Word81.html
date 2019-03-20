@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="~{common/layout}">
+
+
+
+
+<head>
+    <title></title>
+    <script type="text/javascript">
+        function Save() {
+            document.getElementById("PageOfficeCtrl1").WebSave();
+        }
+    </script>
+</head>
+
+
+
+
+<th:block layout:fragment="content" >
+    <a href="#" onclick="window.external.close();">返回列表页</a>
+
+    <form id="form1">
+
+        <div th:replace="/common/common::office" ></div>
+
+    </form>
+
+
+</th:block>
+
+</html>

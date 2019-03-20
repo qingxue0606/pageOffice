@@ -49,7 +49,8 @@ public class TestWordController {
         poCtrl.setWriter(doc);
 
 
-        poCtrl.webOpen(dir+"xiang\\"+"2974-居住证明.docx", OpenModeType.docAdmin,"张三");
+        //poCtrl.webOpen(dir+"xiang\\"+"2974-居住证明.docx", OpenModeType.docAdmin,"张三");
+        poCtrl.webOpen("/1.doc", OpenModeType.docAdmin,"张三");
         map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("xiang/Word");
