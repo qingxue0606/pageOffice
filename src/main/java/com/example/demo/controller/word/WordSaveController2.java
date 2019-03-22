@@ -80,15 +80,16 @@ public class WordSaveController2 {
     @RequestMapping("/save/doc/data29")
     public void saveDocData29(HttpServletRequest request, HttpServletResponse response) {
         FileSaver fs = new FileSaver(request, response);
-        fs.saveToFile(dir+ "test75\\" + fs.getFileName());
+        fs.saveToFile(dir + "test75\\" + fs.getFileName());
         //fs.showPage(300,300);
         fs.close();
 
     }
+
     @RequestMapping("/save/doc/data30")
     public void saveDocData30(HttpServletRequest request, HttpServletResponse response) {
         FileSaver fs = new FileSaver(request, response);
-        fs.saveToFile(dir+ "data30.doc");
+        fs.saveToFile(dir + "data30.doc");
 
 
         //fs.showPage(300,300);
@@ -104,7 +105,7 @@ public class WordSaveController2 {
             String strSql = "select * from Salary where id =" + id
                     + " order by ID";
             Class.forName("org.sqlite.JDBC");
-            String strUrl = "jdbc:sqlite:" + dir +  "demodata\\WordSalaryBill.db";
+            String strUrl = "jdbc:sqlite:" + dir + "demodata\\WordSalaryBill.db";
             Connection conn = DriverManager.getConnection(strUrl);
             Statement stmt = conn.createStatement();
 
@@ -114,7 +115,7 @@ public class WordSaveController2 {
             userName = doc.openDataRegion("PO_UserName").getValue();
             deptName = doc.openDataRegion("PO_DeptName").getValue();
             //将格式化的数据转化为String存到数据库
-            salTotoal =doc.openDataRegion("PO_SalTotal").getValue();
+            salTotoal = doc.openDataRegion("PO_SalTotal").getValue();
             salDeduct = doc.openDataRegion("PO_SalDeduct").getValue();
             salCount = doc.openDataRegion("PO_SalCount").getValue();
             dateTime = doc.openDataRegion("PO_DataTime").getValue();
@@ -141,34 +142,33 @@ public class WordSaveController2 {
 
     @RequestMapping("/save/doc/data32")
     public void saveDocData32(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
-        FileSaver fs=new FileSaver(request,response);
+        FileSaver fs = new FileSaver(request, response);
 
 
-        fs.saveToFile(dir+"test83\\"+fs.getFileName());
+        fs.saveToFile(dir + "test83\\" + fs.getFileName());
         fs.setCustomSaveResult("ok");
         String strDocumentText = fs.getDocumentText();
 //更新数据库中文档的文本内容
-        int  id=Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         Class.forName("org.sqlite.JDBC");
-        String strUrl = "jdbc:sqlite:" + dir +  "demodata\\SaveAndSearch.db";
+        String strUrl = "jdbc:sqlite:" + dir + "demodata\\SaveAndSearch.db";
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
-        String strsql="update word set Content='"+strDocumentText+"' where id="+id;
+        String strsql = "update word set Content='" + strDocumentText + "' where id=" + id;
         stmt.executeUpdate(strsql);
         stmt.close();
         conn.close();
         fs.close();
 
     }
+
     @RequestMapping("/save/doc/data33")
     public void saveDocData33(HttpServletRequest request, HttpServletResponse response) {
         FileSaver fs = new FileSaver(request, response);
-        fs.saveToFile(dir+"test85\\"+fs.getFileName());
+        fs.saveToFile(dir + "test85\\" + fs.getFileName());
         fs.close();
 
     }
-
-
 
 
     private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {

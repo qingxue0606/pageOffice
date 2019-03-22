@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class Doc implements Serializable {
     private static final long serialVersionUID = 4601357741959494322L;
-    private  int id;
-    private  String fileName;
-    private  String subject;
-    private  String submitTime;
+    private int id;
+    private String fileName;
+    private String subject;
+    private String submitTime;
 
     public int getId() {
         return id;

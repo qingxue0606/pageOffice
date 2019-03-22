@@ -24,15 +24,15 @@ public class TestWordController {
     @Value("${testPath}")
     private String dir;
 
-    @RequestMapping(value="/xiang/word", method= RequestMethod.GET)
-    public ModelAndView showWord(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/xiang/word", method = RequestMethod.GET)
+    public ModelAndView showWord(HttpServletRequest request, Map<String, Object> map) {
         //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
 
-        poCtrl.addCustomToolButton("保存","Save",1); //添加自定义按钮
+        poCtrl.addCustomToolButton("保存", "Save", 1); //添加自定义按钮
         poCtrl.setSaveFilePage("/test/save/doc1");//设置保存的action
-        poCtrl.addCustomToolButton("盖章","AddSeal",2); //添加自定义盖章按钮
-        poCtrl.addCustomToolButton("自定义","Test",3); //添加自定义盖章按钮
+        poCtrl.addCustomToolButton("盖章", "AddSeal", 2); //添加自定义盖章按钮
+        poCtrl.addCustomToolButton("自定义", "Test", 3); //添加自定义盖章按钮
 
 
         //新建一个WordDocument用来操作数据
@@ -50,27 +50,24 @@ public class TestWordController {
 
 
         //poCtrl.webOpen(dir+"xiang\\"+"2974-居住证明.docx", OpenModeType.docAdmin,"张三");
-        poCtrl.webOpen("/1.doc", OpenModeType.docAdmin,"张三");
+        poCtrl.webOpen("/1.doc", OpenModeType.docAdmin, "张三");
         //map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("xiang/Word");
         return mv;
     }
+
     @RequestMapping("/test/save/doc1")
     public void saveDoc8(HttpServletRequest request, HttpServletResponse response) {
         FileSaver fs = new FileSaver(request, response);
-        fs.saveToFile(dir +"xiang\\"+ fs.getFileName());
+        fs.saveToFile(dir + "xiang\\" + fs.getFileName());
         fs.close();
 
     }
 
 
-
-
-
-
     private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {
-        PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = new PageOfficeCtrl(request);
         poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
         return poCtrl;
     }

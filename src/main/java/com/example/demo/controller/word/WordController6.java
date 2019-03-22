@@ -28,7 +28,7 @@ public class WordController6 {
     @RequestMapping(value = "/word79", method = RequestMethod.GET)
     public ModelAndView showWord79(HttpServletRequest request, Map<String, Object> map) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        String strUrl = "jdbc:sqlite:" + dir +  "demodata\\WordSalaryBill.db";
+        String strUrl = "jdbc:sqlite:" + dir + "demodata\\WordSalaryBill.db";
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("select * from Salary  order by ID");
@@ -57,9 +57,9 @@ public class WordController6 {
             strHtmls.append("<td style=' text-align:left;'>" + rs.getString("UserName").toString() + "</td>");
             strHtmls.append("<td style=' text-align:left;'>" + rs.getString("DeptName").toString() + "</td>");
 
-            strHtmls.append("<td style=' text-align:left;'>" + rs.getString("SalTotal").toString()+ "</td>");
+            strHtmls.append("<td style=' text-align:left;'>" + rs.getString("SalTotal").toString() + "</td>");
             strHtmls.append("<td style=' text-align:left;'>" + rs.getString("SalDeduct").toString() + "</td>");
-            strHtmls.append("<td style=' text-align:left;'>" +rs.getString("SalCount").toString()+ "</td>");
+            strHtmls.append("<td style=' text-align:left;'>" + rs.getString("SalCount").toString() + "</td>");
             strHtmls.append("<td style=' text-align:center;'>" + rs.getString("DataTime") + "</td>");
             strHtmls.append("<td style=' text-align:center;'><a href='javascript:POBrowser.openWindowModeless(\"/word80?ID=" + pID + "\" ,\"width=1200px;height=800px;\");'>查看</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:POBrowser.openWindowModeless(\"/word81?ID=" + pID + "\" ,\"width=1200px;height=800px;\");'>编辑</a></td>");
             strHtmls.append("</tr>");
@@ -71,7 +71,7 @@ public class WordController6 {
             strHtmls.append("</td></tr>\r\n");
         }
 
-        map.put("strHtmls",strHtmls);
+        map.put("strHtmls", strHtmls);
 
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word79");
@@ -80,6 +80,7 @@ public class WordController6 {
 
     /**
      * view
+     *
      * @param request
      * @param map
      * @return
@@ -90,14 +91,14 @@ public class WordController6 {
     public ModelAndView showWord80(HttpServletRequest request, Map<String, Object> map) throws ClassNotFoundException, SQLException {
         String err = "";
         String id = request.getParameter("ID").trim();
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         //创建WordDocment对象
         WordDocument doc = new WordDocument();
         if (id != null && id.length() > 0) {
             String strSql = "select * from Salary where id =" + id
                     + " order by ID";
             Class.forName("org.sqlite.JDBC");
-            String strUrl = "jdbc:sqlite:" + dir +  "demodata\\WordSalaryBill.db";
+            String strUrl = "jdbc:sqlite:" + dir + "demodata\\WordSalaryBill.db";
             Connection conn = DriverManager.getConnection(strUrl);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(strSql);
@@ -153,10 +154,10 @@ public class WordController6 {
 
         poCtrl.setWriter(doc);
 
-        poCtrl.webOpen(dir+"test80\\"+"template.doc", OpenModeType.docSubmitForm, "someBody");
+        poCtrl.webOpen(dir + "test80\\" + "template.doc", OpenModeType.docSubmitForm, "someBody");
 
 
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word80");
@@ -165,6 +166,7 @@ public class WordController6 {
 
     /**
      * edit
+     *
      * @param request
      * @param map
      * @return
@@ -176,12 +178,12 @@ public class WordController6 {
         String err = "";
         String id = request.getParameter("ID").trim();
 
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         if (id != null && id.length() > 0) {
             String strSql = "select * from Salary where id =" + id
                     + " order by ID";
             Class.forName("org.sqlite.JDBC");
-            String strUrl ="jdbc:sqlite:" + dir +  "demodata\\WordSalaryBill.db";
+            String strUrl = "jdbc:sqlite:" + dir + "demodata\\WordSalaryBill.db";
             Connection conn = DriverManager.getConnection(strUrl);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(strSql);
@@ -253,11 +255,10 @@ public class WordController6 {
         }
 
 
+        poCtrl.webOpen(dir + "test80\\" + "template.doc", OpenModeType.docSubmitForm, "someBody");
 
-        poCtrl.webOpen(dir+"test80\\"+"template.doc", OpenModeType.docSubmitForm, "someBody");
 
-
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word81");
@@ -265,12 +266,11 @@ public class WordController6 {
     }
 
 
-
     @RequestMapping(value = "/word82", method = RequestMethod.GET)
     public ModelAndView showWord82(HttpServletRequest request, Map<String, Object> map) throws ClassNotFoundException, SQLException {
 
 
-        PageOfficeCtrl poCtrl=initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         if (request.getParameter("ids").equals(null)
                 || request.getParameter("ids").equals("")) {
             throw new RuntimeException("ids 不能为空");
@@ -282,7 +282,7 @@ public class WordController6 {
                 + ") order by ID";
 
         Class.forName("org.sqlite.JDBC");
-        String strUrl = "jdbc:sqlite:" + dir +  "demodata\\WordSalaryBill.db";
+        String strUrl = "jdbc:sqlite:" + dir + "demodata\\WordSalaryBill.db";
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(strSql);
@@ -298,7 +298,7 @@ public class WordController6 {
         while (rs.next()) {
             data = doc.createDataRegion("reg" + i,
                     DataRegionInsertType.Before, "[End]");
-            data.setValue("[word]"+dir+"test80\\"+"template.doc[/word]");
+            data.setValue("[word]" + dir + "test80\\" + "template.doc[/word]");
 
             table = data.openTable(1);
             table.openCellRC(2, 1).setValue(rs.getString("ID"));
@@ -341,10 +341,10 @@ public class WordController6 {
         poCtrl.setCaption("生成工资条");
         poCtrl.setCustomToolbar(false);
 
-        poCtrl.webOpen(dir+"test80\\"+"test.doc", OpenModeType.docSubmitForm, "someBody");
+        poCtrl.webOpen(dir + "test80\\" + "test.doc", OpenModeType.docSubmitForm, "someBody");
 
 
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word82");
@@ -352,16 +352,8 @@ public class WordController6 {
     }
 
 
-
-
-
-
-
-
-
-
     // 拷贝文件
-    private void copyFile(String oldPath, String newPath){
+    private void copyFile(String oldPath, String newPath) {
         try {
             int bytesum = 0;
             int byteread = 0;
@@ -383,16 +375,6 @@ public class WordController6 {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
     private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {

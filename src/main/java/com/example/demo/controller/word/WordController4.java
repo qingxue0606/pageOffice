@@ -257,13 +257,13 @@ public class WordController4 {
         //--- PageOffice的调用代码 开始 -----
         PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         WordDocument doc = new WordDocument();
-        String[] names=new String[]{"zhangsan","lisi","wangwu"};
+        String[] names = new String[]{"zhangsan", "lisi", "wangwu"};
 
-        File file=new File(dir+"test63");
-        File[] files=new File[]{};
+        File file = new File(dir + "test63");
+        File[] files = new File[]{};
 
-        if(file.isDirectory()){
-            files=file.listFiles();
+        if (file.isDirectory()) {
+            files = file.listFiles();
             for (int i = 0; i < files.length; i++) {
 
 
@@ -276,14 +276,13 @@ public class WordController4 {
             }
         }
 
-        for(int i=0;i<files.length;i++){
-            DataRegion mydr2 = doc.createDataRegion("PO_second"+i, DataRegionInsertType.Before, "[end]");
-            mydr2.setValue("考生："+names[i]);
-            mydr2.setValue("[word]"+dir+"test63\\"+files[i].getName()+"[/word]");
+        for (int i = 0; i < files.length; i++) {
+            DataRegion mydr2 = doc.createDataRegion("PO_second" + i, DataRegionInsertType.Before, "[end]");
+            mydr2.setValue("考生：" + names[i]);
+            mydr2.setValue("[word]" + dir + "test63\\" + files[i].getName() + "[/word]");
 
             doc.insertPageBreak();//插入分页符
         }
-
 
 
         poCtrl.addCustomToolButton("保存", "Save()", 1);
@@ -304,26 +303,24 @@ public class WordController4 {
         PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         //隐藏菜单栏
         poCtrl.setMenubar(false);
-        poCtrl.addCustomToolButton("删除行","DeleteRow()",1);
+        poCtrl.addCustomToolButton("删除行", "DeleteRow()", 1);
         //添加自定义按钮
-        poCtrl.addCustomToolButton("显示/隐藏标尺","Hidden",2);
+        poCtrl.addCustomToolButton("显示/隐藏标尺", "Hidden", 2);
         //添加自定义按钮
-        poCtrl.addCustomToolButton("插入书签","addBookMark",3);
-        poCtrl.addCustomToolButton("删除书签","delBookMark",4);
+        poCtrl.addCustomToolButton("插入书签", "addBookMark", 3);
+        poCtrl.addCustomToolButton("删除书签", "delBookMark", 4);
         //添加自定义按钮
-        poCtrl.addCustomToolButton("定位光标到指定书签","locateBookMark",5);
+        poCtrl.addCustomToolButton("定位光标到指定书签", "locateBookMark", 5);
         //添加自定义按钮
-        poCtrl.addCustomToolButton("在当前光标处用js插入超链接","addHyperLink",6);
+        poCtrl.addCustomToolButton("在当前光标处用js插入超链接", "addHyperLink", 6);
         //添加自定义按钮
-        poCtrl.addCustomToolButton("获取word选中的文字","getSelectionText",7);
+        poCtrl.addCustomToolButton("获取word选中的文字", "getSelectionText", 7);
         poCtrl.addCustomToolButton("插入分页符", "InsertPageBreak()", 8);
         //添加自定义按钮
-        poCtrl.addCustomToolButton("删除光标处的","delBookMark2()",9);
-        poCtrl.addCustomToolButton("删除选中文本中的","delChoBookMark()",10);
-        poCtrl.addCustomToolButton("js方式插入图片","insertLogoPic()",11);
-        poCtrl.addCustomToolButton("用JS给文档插入图片水印","insertWaterMarkPic()",11);
-
-
+        poCtrl.addCustomToolButton("删除光标处的", "delBookMark2()", 9);
+        poCtrl.addCustomToolButton("删除选中文本中的", "delChoBookMark()", 10);
+        poCtrl.addCustomToolButton("js方式插入图片", "insertLogoPic()", 11);
+        poCtrl.addCustomToolButton("用JS给文档插入图片水印", "insertWaterMarkPic()", 11);
 
 
         poCtrl.webOpen(dir + "test67.doc", OpenModeType.docNormalEdit, "zhangsan");
@@ -332,7 +329,6 @@ public class WordController4 {
         ModelAndView mv = new ModelAndView("/word/Word67");
         return mv;
     }
-
 
 
     @RequestMapping(value = "/word68", method = RequestMethod.GET)
@@ -344,16 +340,12 @@ public class WordController4 {
         poCtrl.setCustomToolbar(false);
 
 
-
-
         poCtrl.webOpen(dir + "test68.doc", OpenModeType.docNormalEdit, "zhangsan");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word68");
         return mv;
     }
-
-
 
 
     private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {

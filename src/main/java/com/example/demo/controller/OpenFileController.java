@@ -20,7 +20,7 @@ public class OpenFileController {
     @Value("${testPath}")
     private String dir;
 
-    @RequestMapping(value="/openWord", method= RequestMethod.GET)
+    @RequestMapping(value = "/openWord", method = RequestMethod.GET)
     public void openWord(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, IOException {
 
         String id = "2";
@@ -30,7 +30,7 @@ public class OpenFileController {
         }
         Class.forName("org.sqlite.JDBC");
 
-        String strUrl = "jdbc:sqlite:"+dir+"demodata\\DataBase.db";
+        String strUrl = "jdbc:sqlite:" + dir + "demodata\\DataBase.db";
 
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
@@ -60,22 +60,22 @@ public class OpenFileController {
         conn.close();
     }
 
-    @RequestMapping(value="/openWord2", method= RequestMethod.GET)
-    public ModelAndView openWord2(HttpServletRequest request, HttpServletResponse response, Map<String,Object> map) throws SQLException, ClassNotFoundException, IOException {
+    @RequestMapping(value = "/openWord2", method = RequestMethod.GET)
+    public ModelAndView openWord2(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) throws SQLException, ClassNotFoundException, IOException {
 
-        String subject="";
-        String fileName="";
+        String subject = "";
+        String fileName = "";
 
         Class.forName("org.sqlite.JDBC");
 
-        String strUrl = "jdbc:sqlite:"+dir+"demodata\\CreateWord.db";
+        String strUrl = "jdbc:sqlite:" + dir + "demodata\\CreateWord.db";
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
-        String id=request.getParameter("id");
-        if(!id.equals("")&&!id.equals(null)){
-            ResultSet rs=stmt.executeQuery("select * from word where ID="+id);
-            subject=rs.getString("Subject");
-            fileName=rs.getString("FileName");
+        String id = request.getParameter("id");
+        if (!id.equals("") && !id.equals(null)) {
+            ResultSet rs = stmt.executeQuery("select * from word where ID=" + id);
+            subject = rs.getString("Subject");
+            fileName = rs.getString("FileName");
             rs.close();
             System.out.println(subject);
             System.out.println(fileName);
@@ -86,10 +86,8 @@ public class OpenFileController {
         conn.close();
 
 
-
-
         //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = new PageOfficeCtrl(request);
         poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
 
         poCtrl.setAllowCopy(false);//禁止拷贝
@@ -101,9 +99,9 @@ public class OpenFileController {
 
         poCtrl.setCaption("演示：文件在线安全浏览");
         //打开文件
-        poCtrl.webOpen(dir+"test18.doc", OpenModeType.docNormalEdit,"张三");
+        poCtrl.webOpen(dir + "test18.doc", OpenModeType.docNormalEdit, "张三");
 
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("Word18");
@@ -111,7 +109,6 @@ public class OpenFileController {
 
 
     }
-
 
 
 }

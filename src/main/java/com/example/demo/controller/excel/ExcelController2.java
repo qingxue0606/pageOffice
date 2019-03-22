@@ -287,13 +287,14 @@ public class ExcelController2 {
         ModelAndView mv = new ModelAndView("excel/excel16");
         return mv;
     }
+
     @RequestMapping(value = "/excel22", method = RequestMethod.GET)
     public ModelAndView showExcel22(HttpServletRequest request, Map<String, Object> map) {
         //--- PageOffice的调用代码 开始 -----
         PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
 
         //添加自定义按钮
-        poCtrl.addCustomToolButton("保存","Save",1);
+        poCtrl.addCustomToolButton("保存", "Save", 1);
 
 
         poCtrl.webOpen(dir + "test22.xls", OpenModeType.xlsNormalEdit, "张三");
@@ -302,6 +303,7 @@ public class ExcelController2 {
         ModelAndView mv = new ModelAndView("excel/excel22");
         return mv;
     }
+
     @RequestMapping(value = "/excel23", method = RequestMethod.GET)
     public ModelAndView showExcel23(HttpServletRequest request, Map<String, Object> map) {
         Workbook wb = new Workbook();
@@ -543,8 +545,6 @@ public class ExcelController2 {
         ModelAndView mv = new ModelAndView("excel/excel23");
         return mv;
     }
-
-
 
 
     private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {

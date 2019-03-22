@@ -27,7 +27,7 @@ public class WordController5 {
     public ModelAndView showWord69(HttpServletRequest request, Map<String, Object> map) throws ClassNotFoundException, SQLException {
 //--- PageOffice的调用代码 开始 -----
         Class.forName("org.sqlite.JDBC");
-        String strUrl = "jdbc:sqlite:" + dir +  "demodata\\ExaminationPaper.db";
+        String strUrl = "jdbc:sqlite:" + dir + "demodata\\ExaminationPaper.db";
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("Select * from stream");
@@ -55,8 +55,6 @@ public class WordController5 {
         }
 
 
-
-
         map.put("strHtmls", strHtmls);
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word69");
@@ -71,7 +69,7 @@ public class WordController5 {
                 && request.getParameter("id").trim().length() > 0) {
             String id = request.getParameter("id");
             Class.forName("org.sqlite.JDBC");
-            String strUrl = "jdbc:sqlite:"+dir+"demodata\\ExaminationPaper.db";
+            String strUrl = "jdbc:sqlite:" + dir + "demodata\\ExaminationPaper.db";
             Connection conn = DriverManager.getConnection(strUrl);
             Statement stmt = conn.createStatement();
             String strSql = "select * from stream where id =" + id;
@@ -110,7 +108,6 @@ public class WordController5 {
         if (err.length() > 0)
             err = "<script>alert(" + err + ");</script>";
     }
-
 
 
     @RequestMapping(value = "/word72", method = RequestMethod.GET)
@@ -159,8 +156,6 @@ public class WordController5 {
     }
 
 
-
-
     @RequestMapping(value = "/word73", method = RequestMethod.GET)
     public ModelAndView showWord73(HttpServletRequest request, Map<String, Object> map) {
         //--- PageOffice的调用代码 开始 -----
@@ -174,10 +169,10 @@ public class WordController5 {
         for (int i = 0; i < ids.length; i++) {
 
             DataRegion dataNum = doc.createDataRegion("PO_" + num,
-                    DataRegionInsertType.After,temp);
+                    DataRegionInsertType.After, temp);
             dataNum.setValue(num + ".\t");
             DataRegion dataRegion = doc.createDataRegion("PO_begin"
-                    + (i +1), DataRegionInsertType.After, "PO_" + num);
+                    + (i + 1), DataRegionInsertType.After, "PO_" + num);
             dataRegion.setValue("[word]/word71?id=" + ids[i]
                     + "[/word]");
             temp = "PO_begin" + (i + 1);
@@ -280,7 +275,7 @@ public class WordController5 {
 
         DataRegion body4 = doc.createDataRegion("PO_body4",
                 DataRegionInsertType.After, "PO_body3");
-        body4.setValue("[image]"+dir+"test74\\"+"logo.png[/image]");
+        body4.setValue("[image]" + dir + "test74\\" + "logo.png[/image]");
         //body4.setValue("[word]doc/1.doc[/word]");//还可嵌入其他Word文件
         ParagraphFormat bodyPara4 = body4.getParagraphFormat();
         bodyPara4.setAlignment(WdParagraphAlignment.wdAlignParagraphCenter);
@@ -300,11 +295,6 @@ public class WordController5 {
     }
 
 
-
-
-
-
-
     @RequestMapping(value = "/word75", method = RequestMethod.GET)
     public ModelAndView showWord75(HttpServletRequest request, Map<String, Object> map) throws ClassNotFoundException, SQLException {
 //--- PageOffice的调用代码 开始 -----
@@ -312,8 +302,6 @@ public class WordController5 {
         ModelAndView mv = new ModelAndView("/word/Word75");
         return mv;
     }
-
-
 
 
     @RequestMapping(value = "/word76", method = RequestMethod.GET)
@@ -327,12 +315,13 @@ public class WordController5 {
         poCtrl.addCustomToolButton("全屏/还原", "IsFullScreen", 4);
         poCtrl.setSaveFilePage("/save/doc/data29");
 
-        poCtrl.webOpen(dir +"test75\\"+ "test.doc", OpenModeType.docNormalEdit, "zhangsan");
+        poCtrl.webOpen(dir + "test75\\" + "test.doc", OpenModeType.docNormalEdit, "zhangsan");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word76");
         return mv;
     }
+
     @RequestMapping(value = "/word77", method = RequestMethod.GET)
     public ModelAndView showWord77(HttpServletRequest request, Map<String, Object> map) {
         //--- PageOffice的调用代码 开始 -----
@@ -350,8 +339,8 @@ public class WordController5 {
             // 复制模板，命名为正式发文的文件名：zhengshi.doc
             fileName = "zhengshi.doc";
             String templateName = request.getParameter("mb");
-            String templatePath = dir +"test75\\" + templateName;
-            String filePath = dir +"test75\\" + fileName;
+            String templatePath = dir + "test75\\" + templateName;
+            String filePath = dir + "test75\\" + fileName;
             copyFile(templatePath, filePath);
 
             // 填充数据和正文内容到“zhengshi.doc”
@@ -365,7 +354,7 @@ public class WordController5 {
             DataRegion issueDept = doc.openDataRegion("PO_IssueDept");
             issueDept.setValue("开发部");
             DataRegion sTextS = doc.openDataRegion("PO_STextS");
-            sTextS.setValue("[word]"+dir +"test75\\"+"test.doc[/word]");
+            sTextS.setValue("[word]" + dir + "test75\\" + "test.doc[/word]");
             DataRegion sTitle = doc.openDataRegion("PO_sTitle");
             sTitle.setValue("北京某公司文件");
             DataRegion topicWords = doc.openDataRegion("PO_TopicWords");
@@ -380,7 +369,7 @@ public class WordController5 {
 
         poCtrl.setSaveFilePage("/save/doc/data29");
 
-        poCtrl.webOpen(dir +"test75\\"+ fileName, OpenModeType.docNormalEdit, "zhangsan");
+        poCtrl.webOpen(dir + "test75\\" + fileName, OpenModeType.docNormalEdit, "zhangsan");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word77");
@@ -405,7 +394,7 @@ public class WordController5 {
 
         //poCtrl.setSaveFilePage("/save/doc/data29");
 
-        poCtrl.webOpen(dir +"test75\\"+ fileName, OpenModeType.docReadOnly, "zhangsan");
+        poCtrl.webOpen(dir + "test75\\" + fileName, OpenModeType.docReadOnly, "zhangsan");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word78");
@@ -413,10 +402,8 @@ public class WordController5 {
     }
 
 
-
-
     // 拷贝文件
-    private void copyFile(String oldPath, String newPath){
+    private void copyFile(String oldPath, String newPath) {
         try {
             int bytesum = 0;
             int byteread = 0;
@@ -438,16 +425,6 @@ public class WordController5 {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
     private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {

@@ -24,33 +24,32 @@ public class WordListController {
     private String dir;
 
 
-
-    @RequestMapping(value="/wordlists", method= RequestMethod.GET)
-    public ModelAndView showWord20(HttpServletRequest request, Map<String,Object> map) throws ClassNotFoundException, SQLException, ParseException {
+    @RequestMapping(value = "/wordlists", method = RequestMethod.GET)
+    public ModelAndView showWord20(HttpServletRequest request, Map<String, Object> map) throws ClassNotFoundException, SQLException, ParseException {
         Class.forName("org.sqlite.JDBC");
-        String strUrl = "jdbc:sqlite:"+dir+"demodata\\CreateWord.db";
+        String strUrl = "jdbc:sqlite:" + dir + "demodata\\CreateWord.db";
 
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
-        ResultSet rs=stmt.executeQuery("select * from word order by id desc");
-        String fileName="";
-        String subject="";
-        String submitTime="";
-        List<Doc> list=new ArrayList<>();
+        ResultSet rs = stmt.executeQuery("select * from word order by id desc");
+        String fileName = "";
+        String subject = "";
+        String submitTime = "";
+        List<Doc> list = new ArrayList<>();
 
-        while(rs.next()){
-            int id=rs.getInt("ID");
+        while (rs.next()) {
+            int id = rs.getInt("ID");
             fileName = rs.getString("FileName");
             subject = rs.getString("Subject");
             submitTime = rs.getString("SubmitTime");
-            if(submitTime!=null&&submitTime.length()>0){
-                submitTime=new SimpleDateFormat("yyyy/MM/dd")
+            if (submitTime != null && submitTime.length() > 0) {
+                submitTime = new SimpleDateFormat("yyyy/MM/dd")
                         .format(new SimpleDateFormat("yyyy-MM-dd")
                                 .parse(submitTime));
             }
 
 
-            Doc doc=new Doc();
+            Doc doc = new Doc();
             doc.setId(id);
             doc.setFileName(fileName);
             doc.setSubject(subject);
@@ -65,10 +64,7 @@ public class WordListController {
         conn.close();
 
 
-
-
-        map.put("list",list);
-
+        map.put("list", list);
 
 
         //--- PageOffice的调用代码 结束 -----

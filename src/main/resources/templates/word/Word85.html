@@ -18,11 +18,8 @@
                     obj[i].checked=false;
                     checkit=true;
                 }
-
             }
-
         }
-
         var count=0;
         var strLength=0;
         var str= new Array();
@@ -39,7 +36,6 @@
             if(ids==""||ids==null||ids=="on,"){
                 alert("请至少选择一个要转换的文档！");
                 return;
-
             }
             //去掉最后一个逗号
             ids=ids.substring(0,ids.length-1);
@@ -57,7 +53,6 @@
             document.getElementById("iframe1").src = "/word86?id="+str[count];
             strLength=str.length;
         }
-
         function  convert(){
             count=count+1;
             if(count<strLength){

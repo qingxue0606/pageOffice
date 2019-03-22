@@ -34,7 +34,7 @@ public class ExcelSaveController {
     private String dir;
 
     @RequestMapping("/save/exl2")
-    public String saveExl2(HttpServletRequest request, HttpServletResponse response){
+    public String saveExl2(HttpServletRequest request, HttpServletResponse response) {
         Workbook workBook = new Workbook(request, response);
         Sheet sheet = workBook.openSheet("Sheet1");
         Table table = sheet.openTable("Info");
@@ -53,15 +53,15 @@ public class ExcelSaveController {
                         + table.getDataFields().get(3).getText();
                 //out.print(table.getDataFields().get(2).getText()+"      mmmmmmmmmmmmm          "+table.getDataFields().get(1).getText());
                 if (table.getDataFields().get(2).getText().equals(null)
-                        || table.getDataFields().get(2).getText().trim().length()==0
+                        || table.getDataFields().get(2).getText().trim().length() == 0
                 ) {
                     content += "<br/>完成率：0%";
                 } else {
                     float f = Float.parseFloat(table.getDataFields().get(2)
                             .getText());
                     f = f / Float.parseFloat(table.getDataFields().get(1).getText());
-                    DecimalFormat df=(DecimalFormat) NumberFormat.getInstance();
-                    content += "<br/>完成率：" + df.format(f*100)+"%";
+                    DecimalFormat df = (DecimalFormat) NumberFormat.getInstance();
+                    content += "<br/>完成率：" + df.format(f * 100) + "%";
                 }
                 content += "<br/>*********************************************";
             }
@@ -72,13 +72,13 @@ public class ExcelSaveController {
         System.out.println(content);
         workBook.showPage(500, 400);
         workBook.close();
-        return"/resp";
+        return "/resp";
 
     }
 
 
     @RequestMapping("/save/exl/data1")
-    public String saveExlData1(HttpServletRequest request, HttpServletResponse response){
+    public String saveExlData1(HttpServletRequest request, HttpServletResponse response) {
         Workbook workBook = new Workbook(request, response);
         Sheet sheet = workBook.openSheet("Sheet1");
         Table table = sheet.openTable("B4:F13");
@@ -96,17 +96,17 @@ public class ExcelSaveController {
                 content += "<br/>累计完成量："
                         + table.getDataFields().get(3).getText();
                 if (table.getDataFields().get(2).getText().equals(null)
-                        || table.getDataFields().get(2).getText().trim().length()==0
+                        || table.getDataFields().get(2).getText().trim().length() == 0
                 ) {
                     content += "<br/>完成率：0%";
                 } else {
                     float f = Float.parseFloat(table.getDataFields().get(2)
                             .getText());
                     f = f / Float.parseFloat(table.getDataFields().get(1).getText());
-                    DecimalFormat df=(DecimalFormat)NumberFormat.getInstance();
-                    content += "<br/>完成率：" + df.format(f*100)+"%";
+                    DecimalFormat df = (DecimalFormat) NumberFormat.getInstance();
+                    content += "<br/>完成率：" + df.format(f * 100) + "%";
                 }
-                content +="</br>";
+                content += "</br>";
             }
             //循环进入下一行
             table.nextRow();
@@ -115,12 +115,13 @@ public class ExcelSaveController {
         workBook.showPage(500, 400);
         workBook.close();
         System.out.println(content);
-        request.setAttribute("content",content);
-        return"/resp";
+        request.setAttribute("content", content);
+        return "/resp";
 
     }
+
     @RequestMapping("/save/exl/data2")
-    public void saveExlData2(HttpServletRequest request, HttpServletResponse response){
+    public void saveExlData2(HttpServletRequest request, HttpServletResponse response) {
         Workbook workBook = new Workbook(request, response);
         Sheet sheet = workBook.openSheet("Sheet1");
         Table table = sheet.openTable("B4:D8");
@@ -130,8 +131,7 @@ public class ExcelSaveController {
 
             //获取提交的数值
             //DataFields.Count标识的是table的列数
-            if (!table.getDataFields().getIsEmpty())
-            {
+            if (!table.getDataFields().getIsEmpty()) {
                 content += "<br/>月份名称：" + table.getDataFields().get(0).getText();
                 content += "<br/>计划完成量：" + table.getDataFields().get(1).getText();
                 content += "<br/>实际完成量：" + table.getDataFields().get(2).getText();
@@ -150,7 +150,7 @@ public class ExcelSaveController {
     }
 
     @RequestMapping("/save/exl/data3")
-    public void saveExlData3(HttpServletRequest request, HttpServletResponse response){
+    public void saveExlData3(HttpServletRequest request, HttpServletResponse response) {
         Workbook workBook = new Workbook(request, response);
         Sheet sheet = workBook.openSheet("Sheet1");
 
@@ -165,7 +165,7 @@ public class ExcelSaveController {
     }
 
     @RequestMapping("/save/exl/data4")
-    public void saveExlData4(HttpServletRequest request, HttpServletResponse response){
+    public void saveExlData4(HttpServletRequest request, HttpServletResponse response) {
         Workbook workBook = new Workbook(request, response);
         Sheet sheet = workBook.openSheet("Sheet1");
 
@@ -188,14 +188,14 @@ public class ExcelSaveController {
                 int colCount = table.getDataFields().size();//获取列数
 
                 if (table.getDataFields().get(2).getText().equals(null)
-                        || table.getDataFields().get(2).getText().trim().length()==0) {
+                        || table.getDataFields().get(2).getText().trim().length() == 0) {
                     content += "<br/>完成率：0%";
                 } else {
                     float f = Float.parseFloat(table.getDataFields().get(2)
                             .getText());
                     f = f / Float.parseFloat(table.getDataFields().get(1).getText());
-                    DecimalFormat df=(DecimalFormat)NumberFormat.getInstance();
-                    content += "<br/>完成率：" + df.format(f*100)+"%";
+                    DecimalFormat df = (DecimalFormat) NumberFormat.getInstance();
+                    content += "<br/>完成率：" + df.format(f * 100) + "%";
                 }
                 content += "<br/>*********************************************";
             }
@@ -208,12 +208,6 @@ public class ExcelSaveController {
         System.out.println(content);
 
     }
-
-
-
-
-
-
 
 
 }

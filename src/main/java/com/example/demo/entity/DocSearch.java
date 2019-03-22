@@ -7,9 +7,9 @@ public class DocSearch implements Serializable {
 
 
     private static final long serialVersionUID = -7018440186557492797L;
-    private String  fileName;
-    private String  content;
-    private Integer  id;
+    private String fileName;
+    private String content;
+    private Integer id;
 
     public String getFileName() {
         return fileName;

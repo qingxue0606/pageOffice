@@ -17,8 +17,8 @@ public class PdfController {
     @Value("${testPath}")
     private String dir;
 
-    @RequestMapping(value="/pdf1", method= RequestMethod.GET)
-    public ModelAndView showWord(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/pdf1", method = RequestMethod.GET)
+    public ModelAndView showWord(HttpServletRequest request, Map<String, Object> map) {
         //--- PageOffice的调用代码 开始 -----
         PDFCtrl poCtrl1 = new PDFCtrl(request);
         poCtrl1.setServerPage("/poserver.zz"); //此行必须
@@ -35,41 +35,39 @@ public class PdfController {
         poCtrl1.addCustomToolButton("下一页", "NextPage()", 10);
         poCtrl1.addCustomToolButton("尾页", "LastPage()", 11);
         poCtrl1.addCustomToolButton("-", "", 0);
-        poCtrl1.webOpen(dir+"test1.pdf");
+        poCtrl1.webOpen(dir + "test1.pdf");
 
 
-
-        map.put("pageoffice",poCtrl1.getHtmlCode("PDFCtrl1"));
+        map.put("pageoffice", poCtrl1.getHtmlCode("PDFCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("pdf/pdf1");
         return mv;
     }
 
 
-
-   @RequestMapping(value="/pdf2", method= RequestMethod.GET)
-    public ModelAndView showPdf2(HttpServletRequest request, Map<String,Object> map){
-       PDFCtrl poCtrl1 = new PDFCtrl(request);
-       poCtrl1.setServerPage("/poserver.zz"); //此行必须
+    @RequestMapping(value = "/pdf2", method = RequestMethod.GET)
+    public ModelAndView showPdf2(HttpServletRequest request, Map<String, Object> map) {
+        PDFCtrl poCtrl1 = new PDFCtrl(request);
+        poCtrl1.setServerPage("/poserver.zz"); //此行必须
 
 // Create custom toolbar
-       poCtrl1.addCustomToolButton("搜索", "SearchText()", 0);
-       poCtrl1.addCustomToolButton("搜索下一个", "SearchTextNext()", 0);
-       poCtrl1.addCustomToolButton("搜索上一个", "SearchTextPrev()", 0);
-       poCtrl1.addCustomToolButton("实际大小", "SetPageReal()", 16);
-       poCtrl1.addCustomToolButton("适合页面", "SetPageFit()", 17);
-       poCtrl1.addCustomToolButton("适合宽度", "SetPageWidth()", 18);
-       poCtrl1.webOpen(dir+"test2.pdf");
+        poCtrl1.addCustomToolButton("搜索", "SearchText()", 0);
+        poCtrl1.addCustomToolButton("搜索下一个", "SearchTextNext()", 0);
+        poCtrl1.addCustomToolButton("搜索上一个", "SearchTextPrev()", 0);
+        poCtrl1.addCustomToolButton("实际大小", "SetPageReal()", 16);
+        poCtrl1.addCustomToolButton("适合页面", "SetPageFit()", 17);
+        poCtrl1.addCustomToolButton("适合宽度", "SetPageWidth()", 18);
+        poCtrl1.webOpen(dir + "test2.pdf");
 
 
-        map.put("pageoffice",poCtrl1.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", poCtrl1.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/pdf/pdf2");
         return mv;
     }
 
-    @RequestMapping(value="/pdf3", method= RequestMethod.GET)
-    public ModelAndView showPdf3(HttpServletRequest request, Map<String,Object> map){
+    @RequestMapping(value = "/pdf3", method = RequestMethod.GET)
+    public ModelAndView showPdf3(HttpServletRequest request, Map<String, Object> map) {
         PDFCtrl poCtrl1 = new PDFCtrl(request);
         poCtrl1.setServerPage("/poserver.zz"); //此行必须
 
@@ -88,23 +86,14 @@ public class PdfController {
         poCtrl1.addCustomToolButton("缩小", "ZoomOut()", 15);
         poCtrl1.addCustomToolButton("-", "", 0);
         poCtrl1.addCustomToolButton("全屏", "SwitchFullScreen()", 4);
-        poCtrl1.webOpen(dir+"test3.jpg");
+        poCtrl1.webOpen(dir + "test3.jpg");
 
 
-        map.put("pageoffice",poCtrl1.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", poCtrl1.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/pdf/pdf3");
         return mv;
     }
-
-
-
-
-
-
-
-
-
 
 
 }

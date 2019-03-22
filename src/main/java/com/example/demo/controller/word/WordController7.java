@@ -46,14 +46,14 @@ public class WordController7 {
             sql = "select * from word order by ID desc";
         }
         Class.forName("org.sqlite.JDBC");
-        String strUrl = "jdbc:sqlite:" + dir +  "demodata\\SaveAndSearch.db";
+        String strUrl = "jdbc:sqlite:" + dir + "demodata\\SaveAndSearch.db";
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
-        List<DocSearch> docSearchs=new ArrayList<>();
+        List<DocSearch> docSearchs = new ArrayList<>();
 
         while (rs.next()) {
-            DocSearch docSearch=new DocSearch();
+            DocSearch docSearch = new DocSearch();
             docSearch.setFileName(rs.getString("FileName"));
             docSearch.setContent(rs.getString("Content"));
             docSearch.setId(rs.getInt("ID"));
@@ -63,8 +63,8 @@ public class WordController7 {
 
         stmt.close();
         conn.close();
-        map.put("docSearchs",docSearchs);
-        map.put("key",key);
+        map.put("docSearchs", docSearchs);
+        map.put("key", key);
 
 
         //--- PageOffice的调用代码 结束 -----
@@ -75,13 +75,13 @@ public class WordController7 {
     @RequestMapping(value = "/word84", method = RequestMethod.GET)
     public ModelAndView showWord84(HttpServletRequest request, Map<String, Object> map) throws ClassNotFoundException, SQLException, UnsupportedEncodingException {
 
-        int  id=Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         //根据id查询数据库中对应的文档名称
         Class.forName("org.sqlite.JDBC");
-        String strUrl ="jdbc:sqlite:" + dir +  "demodata\\SaveAndSearch.db";
+        String strUrl = "jdbc:sqlite:" + dir + "demodata\\SaveAndSearch.db";
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
-        String  sql="select * from word where id="+id;
+        String sql = "select * from word where id=" + id;
 
         ResultSet rs = stmt.executeQuery(sql);
         String FileName = "";
@@ -91,32 +91,30 @@ public class WordController7 {
         stmt.close();
         conn.close();
 
-        PageOfficeCtrl poCtrl =initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
 
         //隐藏菜单栏
         poCtrl.setMenubar(false);
-        poCtrl.addCustomToolButton("保存","Save()",1);
+        poCtrl.addCustomToolButton("保存", "Save()", 1);
         //设置保存页面
-        poCtrl.setSaveFilePage("/save/doc/data32?id="+id);
+        poCtrl.setSaveFilePage("/save/doc/data32?id=" + id);
 
         //打开Word文件
-        String filePath= dir+"test83\\" +FileName+".doc";
+        String filePath = dir + "test83\\" + FileName + ".doc";
 
         poCtrl.webOpen(filePath, OpenModeType.docNormalEdit, "张三");
 
-        map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
+        map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
 
-
-                //--- PageOffice的调用代码 结束 -----
+        //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word84");
         return mv;
     }
 
 
-
     @RequestMapping(value = "/word85", method = RequestMethod.GET)
-    public ModelAndView showWord85(HttpServletRequest request, Map<String, Object> map)  {
+    public ModelAndView showWord85(HttpServletRequest request, Map<String, Object> map) {
 
         ModelAndView mv = new ModelAndView("/word/Word85");
         return mv;
@@ -124,26 +122,27 @@ public class WordController7 {
 
     /**
      * 批量转pdf
+     *
      * @param request
      * @param map
      * @return
      */
     @RequestMapping(value = "/word86", method = RequestMethod.GET)
-    public ModelAndView showWord86(HttpServletRequest request, Map<String, Object> map)  {
-        String  filePath=dir+"test85\\";
-        String id=request.getParameter("id").trim();
+    public ModelAndView showWord86(HttpServletRequest request, Map<String, Object> map) {
+        String filePath = dir + "test85\\";
+        String id = request.getParameter("id").trim();
 
-        if("1".equals(id)){
-            filePath = filePath+"PageOffice产品简介.doc";
+        if ("1".equals(id)) {
+            filePath = filePath + "PageOffice产品简介.doc";
         }
-        if("2".equals(id)){
-            filePath = filePath+"Pageoffice客户端安装步骤.doc";
+        if ("2".equals(id)) {
+            filePath = filePath + "Pageoffice客户端安装步骤.doc";
         }
-        if("3".equals(id)){
-            filePath = filePath+"PageOffice的应用领域.doc";
+        if ("3".equals(id)) {
+            filePath = filePath + "PageOffice的应用领域.doc";
         }
-        if("4".equals(id)){
-            filePath = filePath+"PageOffice产品对客户端环境要求.doc";
+        if ("4".equals(id)) {
+            filePath = filePath + "PageOffice产品对客户端环境要求.doc";
         }
 
         FileMakerCtrl fmCtrl = new FileMakerCtrl(request);
@@ -152,9 +151,7 @@ public class WordController7 {
         fmCtrl.setSaveFilePage("/save/doc/data33");
         fmCtrl.fillDocumentAsPDF(filePath, DocumentOpenType.Word, "a.pdf");
 
-        map.put("pageoffice",fmCtrl.getHtmlCode("PageOfficeCtrl1"));
-
-
+        map.put("pageoffice", fmCtrl.getHtmlCode("PageOfficeCtrl1"));
 
 
         ModelAndView mv = new ModelAndView("/word/Word86");
@@ -163,31 +160,29 @@ public class WordController7 {
 
 
     @RequestMapping(value = "/word87", method = RequestMethod.GET)
-    public ModelAndView showWord87(HttpServletRequest request, Map<String, Object> map)  {
-        String  filePath=dir+"test85\\";
-        String id=request.getParameter("id").trim();
+    public ModelAndView showWord87(HttpServletRequest request, Map<String, Object> map) {
+        String filePath = dir + "test85\\";
+        String id = request.getParameter("id").trim();
 
-        if("1".equals(id)){
-            filePath = filePath+"PageOffice产品简介.doc";
+        if ("1".equals(id)) {
+            filePath = filePath + "PageOffice产品简介.doc";
         }
-        if("2".equals(id)){
-            filePath = filePath+"Pageoffice客户端安装步骤.doc";
+        if ("2".equals(id)) {
+            filePath = filePath + "Pageoffice客户端安装步骤.doc";
         }
-        if("3".equals(id)){
-            filePath = filePath+"PageOffice的应用领域.doc";
+        if ("3".equals(id)) {
+            filePath = filePath + "PageOffice的应用领域.doc";
         }
-        if("4".equals(id)){
-            filePath = filePath+"PageOffice产品对客户端环境要求.doc";
+        if ("4".equals(id)) {
+            filePath = filePath + "PageOffice产品对客户端环境要求.doc";
         }
 
-        PageOfficeCtrl poCtrl1 =initPageOfficeCtrl(request);
+        PageOfficeCtrl poCtrl1 = initPageOfficeCtrl(request);
         poCtrl1.setSaveFilePage("/save/doc/data33");//如要保存文件，此行必须
         poCtrl1.addCustomToolButton("保存", "Save()", 1);//添加自定义工具栏按钮
         poCtrl1.webOpen(filePath, OpenModeType.docNormalEdit, "张三");
 
-        map.put("pageoffice",poCtrl1.getHtmlCode("PageOfficeCtrl1"));
-
-
+        map.put("pageoffice", poCtrl1.getHtmlCode("PageOfficeCtrl1"));
 
 
         ModelAndView mv = new ModelAndView("/word/Word87");
@@ -195,20 +190,8 @@ public class WordController7 {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     // 拷贝文件
-    private void copyFile(String oldPath, String newPath){
+    private void copyFile(String oldPath, String newPath) {
         try {
             int bytesum = 0;
             int byteread = 0;
@@ -230,16 +213,6 @@ public class WordController7 {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
     private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {
