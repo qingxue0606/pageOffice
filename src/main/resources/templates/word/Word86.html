@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="~{common/layout}">
+
+
+
+
+<head>
+    <title>My JSP 'FileMaker.jsp' starting page</title>
+
+
+</head>
+
+
+
+
+<th:block layout:fragment="content" >
+
+
+    <div>
+        <!--**************   卓正 PageOffice 客户端代码开始    ************************-->
+
+        <script language="javascript" type="text/javascript">
+            function OnProgressComplete() {
+                window.parent.convert(); //调用父页面的js函数
+            }
+
+        </script>
+        <!--**************   卓正 PageOffice 客户端代码结束    ************************-->
+        <div th:replace="/common/common::office" ></div>
+
+    </div>
+
+
+
+</th:block>
+
+</html>
