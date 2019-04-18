@@ -15,10 +15,21 @@
 
 <div style="width: 49%;float: left ">
 
-
+    <div>后台保存</div>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;');">打开文件word2 </a><br>
 
     <div>打开文件word给Word文档中的数据区域（DataRegion）赋值的简单示例</div>
-    <a href="javascript:POBrowser.openWindowModeless('xiang/word','fullscreen=no;');">打开文件word </a><br>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/word','fullscreen=yes;');">打开文件word </a><br>
+    <div>打开文件word给Word文档中的数据区域（DataRegion）赋值的简单示例2</div>
+
+    <a href="javascript:"  onclick="openWord()">打开文件word </a><br>
+    <script>
+        function openWord() {
+            POBrowser.openWindowModeless('xiang/word','fullscreen=no;');
+        }
+
+    </script>
+
 
 
 

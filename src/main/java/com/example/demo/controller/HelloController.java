@@ -12,6 +12,7 @@ import com.zhuozhengsoft.pageoffice.wordwriter.WordDocument;
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.RequestWrapper;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -79,8 +82,16 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/index2", method = RequestMethod.GET)
-    public ModelAndView showIndex2() {
+    public ModelAndView showIndex2(HttpSession session) {
+        session.setAttribute("user","xiang");
+
+
+
+
         ModelAndView mv = new ModelAndView("Index2");
+
+
+
         return mv;
     }
 

@@ -190,6 +190,16 @@ public class WordController7 {
     }
 
 
+    @RequestMapping(value = "/word88", method = RequestMethod.GET)
+    public ModelAndView showWord88(HttpServletRequest request, Map<String, Object> map) {
+
+        ModelAndView mv = new ModelAndView("/word/Word88");
+        return mv;
+    }
+
+
+
+
     // 拷贝文件
     private void copyFile(String oldPath, String newPath) {
         try {
