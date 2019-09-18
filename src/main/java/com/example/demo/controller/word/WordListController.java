@@ -35,7 +35,7 @@ public class WordListController {
         String fileName = "";
         String subject = "";
         String submitTime = "";
-        List<Doc> list = new ArrayList<>();
+        List<Doc> list = new ArrayList<Doc>();
 
         while (rs.next()) {
             int id = rs.getInt("ID");

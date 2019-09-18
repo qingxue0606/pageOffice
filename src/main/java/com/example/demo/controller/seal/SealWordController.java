@@ -50,6 +50,7 @@ public class SealWordController {
         //添加自定义按钮
         poCtrl.addCustomToolButton("保存", "Save", 1);
         poCtrl.addCustomToolButton("加盖印章", "InsertSeal()", 2);
+
         //设置保存页面
 
 
@@ -71,6 +72,7 @@ public class SealWordController {
         //添加自定义按钮
         poCtrl.addCustomToolButton("保存", "Save", 1);
         poCtrl.addCustomToolButton("加盖印章", "InsertSeal()", 2);
+        poCtrl.addCustomToolButton("印章数量", "Num()", 3);
         //设置保存页面
 
 
@@ -343,6 +345,11 @@ public class SealWordController {
     private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {
         PageOfficeCtrl poCtrl = new PageOfficeCtrl(request);
         poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
+        //poCtrl.setZoomSealServer("http://xqx.zoomseal.cn:8080/ZoomSealEnt/enserver.zz");
+        poCtrl.setZoomSealServer("http://xqx.zoomsealent.cn:8080/ZoomSealEnt/enserver.zz");
+
+
+
         return poCtrl;
     }
 

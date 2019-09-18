@@ -61,6 +61,8 @@ public class HelloController {
         adminSeal.setAdminPassword(poPassWord);//设置印章管理员admin的登录密码
         adminSeal.setSysPath(poSysPath);//设置印章数据库文件poseal.db存放目录
         ServletRegistrationBean srb = new ServletRegistrationBean(adminSeal);
+        //srb.addUrlMappings("http://xqx.zoomseal.cn:8080/ZoomSealEnt/enserver.zz");
+
         srb.addUrlMappings("/adminseal.zz");
         srb.addUrlMappings("/sealimage.zz");
         srb.addUrlMappings("/loginseal.zz");

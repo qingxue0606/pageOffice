@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+    <title>Hello World!</title>
+    <script type="text/javascript" src="/jquery.min.js"></script>
+
+
+
+
+
+    <script type="text/javascript">
+        function Save() {
+            document.getElementById("PageOfficeCtrl1").WebSave();
+
+        }
+
+
+
+        function AfterDocumentOpened() {
+            var mac = "Function myfunc()" + " \r\n"
+                + "ActiveWindow.ToggleShowAllReviewers " + " \r\n"
+                //+ "ActiveWindow.View.Reviewers(\"李四\").Visible = True " + " \r\n"
+
+                + "End Function " + " \r\n";
+            document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+
+        }
+
+
+
+
+
+
+        function Test() {
+            bkName = document.getElementById("txtBkName").value;
+            bkText = document.getElementById("txtBkText").value;
+
+            var mac = "Function myfunc()" + " \r\n"
+                + "Dim r As Range " + " \r\n"
+                + "Set r = Application.Selection.Range " + " \r\n"
+                + "r.Text = \"" + bkText + "\"" + " \r\n"
+                + "Application.ActiveDocument.Bookmarks.Add Name:=\"" + bkName + "\", Range:=r " + " \r\n"
+                + "End Function " + " \r\n";
+            document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+        }
+        function Test2() {
+            document.getElementById("PageOfficeCtrl1").DataRegionList.Refresh();
+
+
+
+            var VBAdoc = document.getElementById("PageOfficeCtrl1");
+
+            var i;
+            for(i=0; i<VBAdoc.DataRegionList.Count; i++)
+            {
+                var bkName = VBAdoc.DataRegionList.Item(i).Name;
+                alert(bkName);
+                var mac = "Function myfunc()" + " \r\n"
+                    + "  ActiveDocument.Bookmarks(\""+ bkName +"\").Select " + " \r\n"
+                    + "End Function " + " \r\n";
+                document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+                document.getElementById("PageOfficeCtrl1").Document.Application.Selection.TypeBackspace();
+                document.getElementById("PageOfficeCtrl1").InsertWebImage("/word/logo.jpg", false, 5);
+            }
+
+        }
+
+
+
+        function Test3() {
+
+            var mac = "Function myfunc()" + " \r\n"
+                + "ActiveWindow.View.SplitSpecial = wdPaneRevisions " + " \r\n"
+                + "End Function " + " \r\n";
+            document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+        }
+
+
+
+
+    </script>
+    <script type="text/javascript">
+        function AddSeal() {
+            try {
+                document.getElementById("PageOfficeCtrl1").ZoomSeal.AddSeal("李志");
+                alert(document.getElementById("PageOfficeCtrl1").Document.Application.Selection.Range.Text);
+
+
+
+            } catch (e) {
+            }
+            ;
+        }
+    </script>
+
+</head>
+<body>
+<h1 th:inline="text">Hello.v.2</h1>
+
+<label>书签名称：</label><input id="txtBkName" type="text" value="PO_test1" />
+&nbsp;&nbsp;<label>书签文本：</label><input id="txtBkText" type="text" value="[测试]" />
+
+
+<form id="form1">
+
+    <input id="Hidden1" name="age" type="hidden" value="25"/>
+
+
+
+
+    <div style="height:800px;" th:utext="${pageoffice}"></div>
+
+
+</form>
+
+</body>
+</html>

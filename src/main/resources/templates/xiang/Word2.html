@@ -3,10 +3,11 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title></title>
+    <meta charset="UTF-8">
 
     <script type="text/javascript">
-        window.myFunc = function() {
-            document.getElementById("aDiv").style.display = "";
+        window.myFunc = function(a) {
+            document.getElementById("xiang").innerText = a;
             //alert('转换完毕！');
         };
 
@@ -27,9 +28,27 @@
         <div id="aDiv" style="display: none; color: Red; font-size: 12px;">
             <span>转换完成，可在下面的地址中打开文件名为“maker.doc”的Word文件，查看转换的效果：<%=url %></span>
         </div>
+        <div id="xiang" style=" color: Red; font-size: 12px;">
+            333
+        </div>
+
+
+
+
+
+
+
     </div>
     <div style="width: 1px; height: 1px; overflow: hidden;">
-        <iframe id="iframe1" name="iframe1" src=""></iframe>
+
+
+
+
+        <iframe id="iframe1" name="iframe1" src="">
+
+
+
+        </iframe>
     </div>
 </form>
 

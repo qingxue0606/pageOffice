@@ -2,31 +2,170 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
+
     <title>Hello World!</title>
-
-
-
+    <script type="text/javascript" src="/jquery.min.js"></script>
 
 
     <script type="text/javascript">
+
+        function saveAsHTML() {
+            document.getElementById("PageOfficeCtrl1").WebSaveAsHTML();
+            document.getElementById("PageOfficeCtrl1").Alert("HTML格式的文件已经保存到 SaveAsHTML\\doc 目录下。");
+            //document.getElementById("div1").innerHTML = "<a href='doc/test.htm?r=" + Math.random() +"'> 查看另存的html文件<a><br><br>";
+        }
+
+
+
+        function Test3() {
+            var iCount = document.getElementById("PageOfficeCtrl1").DataRegionList.Count;
+            var j;
+
+
+
+            for(j = 0; j <= iCount; j++){
+                var bkName = document.getElementById("PageOfficeCtrl1").DataRegionList.Item(j).Name;
+                var bkText = " "+j+" " ;
+                document.getElementById("PageOfficeCtrl1").DataRegionList.GetDataRegionByName(bkName).Value=bkText;
+            }
+        }
+
+
+
+        function Test2() {
+
+            //document.getElementById("PageOfficeCtrl1").SaveAs( "d:\\a.docx", false );
+
+            //document.getElementById("PageOfficeCtrl1").PrintOut(false,"Microsoft Print To PDF",1,2,3,"");
+            //document.getElementById("PageOfficeCtrl1").PrintOut(false,"Microsoft Print To PDF",1);
+            //alert(document.getElementById("PageOfficeCtrl1").Document.Application.Selection.information(6)) ;
+
+            //document.getElementById("PageOfficeCtrl1").FullScreen = false;
+
+
+
+
+            //标准
+            var strRet = document.getElementById("PageOfficeCtrl1").ShowHtmlModalDialog("HTMLPage.htm", 11, "left=" + 11 + "px;top=" + 11 + "px;width=400px;height=300px;frame=no;");
+            //专业
+            //var strRet = document.getElementById("PageOfficeCtrl1").ShowHtmlModelessDialog("HTMLPage.htm", 11, "left=" + 11 + "px;top=" + 11 + "px;width=400px;height=300px;frame=yes;");
+
+
+
+
+
+        }
+
+
+        function AfterDocumentOpened() {
+            //document.getElementById("PageOfficeCtrl1").HandDraw.Start( true );
+            document.getElementById("PageOfficeCtrl1").Document.TrackRevisions = true;
+            document.getElementById("PageOfficeCtrl1").ShowRevisions = true;
+
+            //document.getElementById("PageOfficeCtrl1").FullScreen = true;
+            //document.getElementById("PageOfficeCtrl1").AcceptAllRevisions();
+
+
+        }
+
+        function AfterDocumentSaved() {
+            //window.external.close();
+            //document.getElementById("PageOfficeCtrl1").HandDraw.Start( true );
+            //document.getElementById("PageOfficeCtrl1").Document.TrackRevisions = true;
+            //document.getElementById("PageOfficeCtrl1").ShowRevisions = true;
+            //全屏
+            //document.getElementById("PageOfficeCtrl1").FullScreen = true;
+
+            //接受全部
+            //document.getElementById("PageOfficeCtrl1").AcceptAllRevisions();
+            //document.getElementById("PageOfficeCtrl1").AcceptAllRevisions();
+        }
+
+
+
+
+
+
+
+
         function Save() {
+            document.getElementById("PageOfficeCtrl1").AcceptAllRevisions();
+            //document.getElementById("PageOfficeCtrl1").Document.Revisions.AcceptAll();
             document.getElementById("PageOfficeCtrl1").WebSave();
+            $.ajax({
+                url:'/xiang1/ajaxtest',
+
+                type:'post',
+                success:function(data){
+                    alert(data);
+                },
+                error:function (err){
+                    //alert(err);
+                }
+                 });
+
         }
 
         function Test() {
+            /*var VBAdoc = document.getElementById("PageOfficeCtrl1");
 
-            //var str;
-            //str= document.getElementById("PageOfficeCtrl1").DataRegionList.Item(1).Value;
-            window.location.reload();
+            for(i=0; i<VBAdoc.DataRegionList.Count; i++)
+            {
+                document.getElementById("PageOfficeCtrl1").Alert(VBAdoc.DataRegionList.Item(i).Name);//Name为书签的名称，Value为书签的值
+            }*/
+
+            //js调用vba
+            //document.getElementById("PageOfficeCtrl1").DataRegionList.GetDataRegionByName("PO_reg1").Value=111
+
+
+            var iCount = document.getElementById("PageOfficeCtrl1").DataRegionList.Count;
+            for(j = 0; j < iCount; j++){
+                var bkName = document.getElementById("PageOfficeCtrl1").DataRegionList.Item(j).Name;
+                var bkText = " "+j+" " ;
+                document.getElementById("PageOfficeCtrl1").DataRegionList.GetDataRegionByName(bkName).Value=bkText;
+            }
+
+
+
+
+
+
+
+            //window.location.reload();
 
 
             //alert(str)
         }
+
+
+        function Test3() {
+
+
+            var a = "项";
+            window.external.CallParentFunc("updateCount('"+encodeURI(encodeURI(a))+"');");
+
+
+            //window.external.CallParentFunc("updateValue('"+url+"','"+tempId+"');");
+
+        }
+        function increaseCountAndClose(value) {
+            var sResult = window.external.CallParentFunc("updateCount("+value+");");
+            if(sResult=='poerror:parentlost'){
+                alert('父页面关闭或跳转刷新了，导致父页面函数没有调用成功！');
+            }
+            window.external.close();
+        }
+
+
     </script>
     <script type="text/javascript">
         function AddSeal() {
             try {
-                document.getElementById("PageOfficeCtrl1").ZoomSeal.AddSeal();
+                document.getElementById("PageOfficeCtrl1").ZoomSeal.AddSeal("李志");
+                alert(document.getElementById("PageOfficeCtrl1").Document.Application.Selection.Range.Text);
+
+
+
             } catch (e) {
             }
             ;
@@ -40,6 +179,11 @@
 <form id="form1">
 
     <input id="Hidden1" name="age" type="hidden" value="25"/>
+
+
+
+    <input type="button" value="设置父窗口Count的值加1" onclick="increaseCount(1);" />
+    <input type="button" value="设置父窗口Count的值加5，并关闭窗口" onclick="increaseCountAndClose(5);" /></br>
 
 
 

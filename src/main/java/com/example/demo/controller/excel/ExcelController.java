@@ -31,7 +31,7 @@ public class ExcelController {
         //定义Workbook对象
         Workbook workBook = new Workbook();
         //定义Sheet对象，"Sheet1"是打开的Excel表单的名称
-        Sheet sheet = workBook.openSheet("Sheet1");
+        Sheet sheet = workBook.openSheet("Sheet2");
         //定义Cell对象
         Cell cellB4 = sheet.openCell("B4");
         //给单元格赋值
@@ -75,6 +75,17 @@ public class ExcelController {
 
         //定义table对象，设置table对象的设置范围
         Table table = sheet.openTable("B4:F13");
+
+
+        /*for(int i=0; i < 50; i++)
+        {
+            table.getDataFields().get(0).setValue("产品 " + i);
+            table.getDataFields().get(1).setValue("100");
+            table.getDataFields().get(2).setValue(String.valueOf(100+i));
+            table.nextRow();
+        }*/
+        table.close();
+
         //设置table对象的提交名称，以便保存页面获取提交的数据
         table.setSubmitName("Info");
 
@@ -84,7 +95,7 @@ public class ExcelController {
         poCtrl.setSaveDataPage("/save/exl2");
 
         poCtrl.addCustomToolButton("盖章", "AddSeal", 2); //添加自定义盖章按钮
-        poCtrl.webOpen(dir + "test2.xls", OpenModeType.xlsSubmitForm, "张三");
+        poCtrl.webOpen(dir + "test2.xls", OpenModeType.xlsNormalEdit, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("Word");

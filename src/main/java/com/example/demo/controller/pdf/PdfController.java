@@ -35,6 +35,10 @@ public class PdfController {
         poCtrl1.addCustomToolButton("下一页", "NextPage()", 10);
         poCtrl1.addCustomToolButton("尾页", "LastPage()", 11);
         poCtrl1.addCustomToolButton("-", "", 0);
+        poCtrl1.setJsFunction_AfterDocumentOpened("AfterDocumentOpened()");
+
+
+
         poCtrl1.webOpen(dir + "test1.pdf");
 
 

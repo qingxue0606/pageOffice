@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+</head>
+<body>
+
+<script type="text/javascript">
+    function Save() {
+        document.getElementById("PageOfficeCtrl1").WebSave();
+    }
+    function Close() {
+        window.external.close();
+    }
+
+    function saveAsHTML() {
+        document.getElementById("PageOfficeCtrl1").WebSaveAsHTML();
+        document.getElementById("PageOfficeCtrl1").Alert("HTML格式的文件已经保存到 SaveAsHTML\\doc 目录下。");
+        //document.getElementById("div1").innerHTML = "<a href='doc/test.htm?r=" + Math.random() +"'> 查看另存的html文件<a><br><br>";
+    }
+    //另存为PDF文件
+    function SaveAsPDF() {
+        document.getElementById("PageOfficeCtrl1").WebSaveAsPDF();
+        document.getElementById("PageOfficeCtrl1").Alert("PDF文件已经保存到 SaveAsPDF\\doc目录下。");
+
+    }
+</script>
+
+
+<div id="main">
+
+    <div th:replace="/common/common::office" ></div>
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>

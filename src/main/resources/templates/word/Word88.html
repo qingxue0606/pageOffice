@@ -3,43 +3,26 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>使用静态页面集成pageoffice</title>
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="this is my page">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <!-- PageOffice.js文件和jquery.min.js一定要引用 -->
-    <script type="text/javascript" src="../jquery.min.js"></script>
-    <script type="text/javascript" src="../pageoffice.js" id="po_js_main"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="pageoffice.js" id="po_js_main"></script>
+
+    <script type="text/javascript">
+        var count = 0;
+        function updateCount(value) {
+            count = count + value;
+            document.getElementById("Text1").value = count;
+            return count.toString();
+        }
+
+    </script>
 
 </head>
 <body  >
 
-<input type="button" value="打开文档" id="btn1" onclick="OpenDocument('/word89?param1=123')"/>
-<div style=" width:auto; height:700px;" id="divDocView">
-</div>
+<a href="javascript:POBrowser.openWindowModeless('/word89','fullscreen=yes;');">打开文件word89 </a><br>
 
-<script type="text/javascript">
+<div >Count=<input id="Text1" type="text" value="0" /></div>
 
-
-    function Save() {
-        document.getElementById("PageOfficeCtrl1").WebSave();
-    }
-    function AfterDocumentOpened() {
-
-        $("#btn1").removeAttr("disabled");
-    }
-
-
-    function OpenDocument(strUrl) {
-        //使打开按钮变灰
-        $('#btn1').attr('disabled','true');
-        //使用post请求打开文档的action
-        $.get(strUrl,{ param2: "456"},function(data){
-            debugger;
-            $("#divDocView").html(data);
-        });
-    }
-
-</script>
 
 
 </body>

@@ -54,6 +54,7 @@ public class SealSaveController {
         fmCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened()");
         fmCtrl.setJsFunction_OnProgressComplete("OnProgressComplete()");
         fmCtrl.setSaveFilePage("/save/seal/word3");
+        fmCtrl.setZoomSealServer("http://xqx.zoomseal.cn:8080/ZoomSealEnt/enserver.zz");
         fmCtrl.fillDocument(filePath, DocumentOpenType.Word);
         map.put("pageoffice", fmCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----

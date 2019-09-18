@@ -38,8 +38,13 @@
     function SetBookmarks() {
         document.getElementById("PDFCtrl1").BookmarksVisible = !document.getElementById("PDFCtrl1").BookmarksVisible;
     }
+    function test() {
+        document.getElementById("PDFCtrl1").PrintOut(false,"Microsoft Print To PDF",1);
+    }
 
     function PrintFile() {
+
+        //document.getElementById("PDFCtrl1").PrintOut(false,"Microsoft Print To PDF",1);
         document.getElementById("PDFCtrl1").ShowDialog(4);
     }
     function SwitchFullScreen() {

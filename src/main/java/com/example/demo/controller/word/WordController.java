@@ -47,7 +47,7 @@ public class WordController {
         poCtrl.webOpen(dir + "test1.doc", OpenModeType.docAdmin, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word");
+        ModelAndView mv = new ModelAndView("/word/Word");
         return mv;
     }
 
@@ -79,7 +79,7 @@ public class WordController {
         poCtrl.webOpen(dir + "test2.doc", OpenModeType.docSubmitForm, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word");
+        ModelAndView mv = new ModelAndView("/word/Word");
         return mv;
     }
 
@@ -102,10 +102,10 @@ public class WordController {
         poCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened");
 
 
-        poCtrl.webOpen(dir + "test3.doc", OpenModeType.docNormalEdit, "张三");
+        poCtrl.webOpen(dir + "sdasd.doc", OpenModeType.docNormalEdit, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word3");
+        ModelAndView mv = new ModelAndView("/word/Word3");
         return mv;
     }
 
@@ -143,7 +143,7 @@ public class WordController {
         poCtrl.webOpen(dir + "test4.doc", OpenModeType.docNormalEdit, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word3");
+        ModelAndView mv = new ModelAndView("/word/Word3");
         return mv;
     }
 
@@ -178,7 +178,7 @@ public class WordController {
         poCtrl.webOpen(dir + "test5.doc", OpenModeType.docNormalEdit, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word4");
+        ModelAndView mv = new ModelAndView("/word/Word4");
         return mv;
     }
 
@@ -200,6 +200,16 @@ public class WordController {
         poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
         poCtrl.addCustomToolButton("保存", "Save", 1);
         poCtrl.setSaveFilePage("/save");
+
+        WordDocument doc = new WordDocument();
+        //打开数据区域
+        DataRegion dataRegion1 = doc.openDataRegion("PO_userName");
+        dataRegion1.setEditing(true);
+
+
+
+        poCtrl.setWriter(doc);
+
         //设置并发控制时间
         poCtrl.setTimeSlice(20);
 
@@ -207,7 +217,7 @@ public class WordController {
         poCtrl.webOpen(dir + "test6.doc", OpenModeType.docRevisionOnly, userName);
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word6");
+        ModelAndView mv = new ModelAndView("/word/Word6");
         return mv;
     }
 
@@ -229,7 +239,7 @@ public class WordController {
         poCtrl.webOpen(dir + "test7.doc", OpenModeType.docNormalEdit, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word7");
+        ModelAndView mv = new ModelAndView("/word/Word7");
         return mv;
     }
 
@@ -250,7 +260,7 @@ public class WordController {
         poCtrl.webOpen(dir + "test8.doc", OpenModeType.docNormalEdit, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word8");
+        ModelAndView mv = new ModelAndView("/word/Word8");
         return mv;
     }
 
@@ -273,7 +283,7 @@ public class WordController {
         poCtrl.webOpen(dir + "test9.doc", OpenModeType.docNormalEdit, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word9");
+        ModelAndView mv = new ModelAndView("/word/Word9");
         return mv;
     }
 
@@ -299,7 +309,7 @@ public class WordController {
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word10");
+        ModelAndView mv = new ModelAndView("/word/Word10");
         return mv;
     }
 
@@ -334,7 +344,7 @@ public class WordController {
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word11");
+        ModelAndView mv = new ModelAndView("/word/Word11");
         return mv;
     }
 
@@ -358,7 +368,7 @@ public class WordController {
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word12");
+        ModelAndView mv = new ModelAndView("/word/Word12");
         return mv;
     }
 
@@ -384,7 +394,7 @@ public class WordController {
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word12");
+        ModelAndView mv = new ModelAndView("/word/Word12");
         return mv;
     }
 
@@ -408,7 +418,7 @@ public class WordController {
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word15");
+        ModelAndView mv = new ModelAndView("/word/Word15");
         return mv;
     }
 
@@ -436,7 +446,7 @@ public class WordController {
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word16");
+        ModelAndView mv = new ModelAndView("/word/Word16");
         return mv;
     }
 
@@ -459,7 +469,7 @@ public class WordController {
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word17");
+        ModelAndView mv = new ModelAndView("/word/Word17");
         return mv;
     }
 
@@ -479,12 +489,12 @@ public class WordController {
 
         poCtrl.setCaption("演示：文件在线安全浏览");
         //打开文件
-        poCtrl.webOpen(dir + "test18.doc", OpenModeType.docReadOnly, "张三");
+        poCtrl.webOpen(dir + "test.ppt", OpenModeType.pptReadOnly, "张三");
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word18");
+        ModelAndView mv = new ModelAndView("/word/Word18");
         return mv;
     }
 
@@ -506,7 +516,7 @@ public class WordController {
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word20");
+        ModelAndView mv = new ModelAndView("/word/Word20");
         return mv;
     }
 
@@ -524,7 +534,8 @@ public class WordController {
         String pdfName = fileName.substring(0, fileName.length() - 4) + ".pdf";
 
 
-        poCtrl.webOpen(dir + "test22.doc", OpenModeType.docNormalEdit, "张三");
+        poCtrl.webOpen(dir + "其他类型-多.docx", OpenModeType.docNormalEdit, "张三");
+        //poCtrl.webOpen(dir + "test2.xls", OpenModeType.xlsNormalEdit, "张三");
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         map.put("pdfName", pdfName);

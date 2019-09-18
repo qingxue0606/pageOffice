@@ -22,6 +22,7 @@
 <body>
 <script type="text/javascript">
     function AfterDocumentOpened() {
+        //alert(11);
         // 打开文件的时候，给word中当前光标位置赋值一个文本值
         //document.getElementById("PageOfficeCtrl1").Document.Application.Selection.Range.Text = "文件打开了";
 
@@ -30,8 +31,18 @@
 
             + "End Function " + " \r\n";
 
-        document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
-        document.getElementById("PageOfficeCtrl1").ShowRevisions = true;
+        //document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+
+
+        //document.getElementById("PageOfficeCtrl1").ShowRevisions = true;
+
+        document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(1, false);
+        document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(2, false);
+        document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(3, false); // 禁止保存
+        document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(4, false); // 禁止另存
+        document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(5, false); //禁止打印
+        document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(6, false); // 禁止页面设置
+
 
 
 

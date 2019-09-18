@@ -180,6 +180,7 @@ public class SealExcelController {
     private PageOfficeCtrl initPageOfficeCtrl(HttpServletRequest request) {
         PageOfficeCtrl poCtrl = new PageOfficeCtrl(request);
         poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
+        poCtrl.setZoomSealServer("http://xqx.zoomseal.cn:8080/ZoomSealEnt/enserver.zz");
         return poCtrl;
     }
 

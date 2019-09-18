@@ -50,7 +50,7 @@ public class WordController7 {
         Connection conn = DriverManager.getConnection(strUrl);
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
-        List<DocSearch> docSearchs = new ArrayList<>();
+        List<DocSearch> docSearchs = new ArrayList<DocSearch>();
 
         while (rs.next()) {
             DocSearch docSearch = new DocSearch();
@@ -196,6 +196,25 @@ public class WordController7 {
         ModelAndView mv = new ModelAndView("/word/Word88");
         return mv;
     }
+
+
+    @RequestMapping(value = "/word89", method = RequestMethod.GET)
+    public ModelAndView showWord89(HttpServletRequest request, Map<String, Object> map) {
+
+        PageOfficeCtrl poCtrl1 = initPageOfficeCtrl(request);
+        //添加自定义按钮
+        poCtrl1.addCustomToolButton("关闭","Close",21);
+
+
+        poCtrl1.webOpen(dir+"test89.doc", OpenModeType.docNormalEdit, "张三");
+
+        map.put("pageoffice", poCtrl1.getHtmlCode("PageOfficeCtrl1"));
+
+
+        ModelAndView mv = new ModelAndView("/word/Word89");
+        return mv;
+    }
+
 
 
 

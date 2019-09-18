@@ -15,6 +15,51 @@
 
 <div style="width: 49%;float: left ">
 
+
+
+
+
+
+    <h3>word</h3>
+
+
+    <div>百度</div>
+    <a href="javascript:POBrowser.openWindowModeless('http://www.baidu.com','fullscreen=yes;');">打开百度 </a><br>
+    <br>
+
+
+
+    <div>打开ppt</div>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/ppt','fullscreen=yes;');">打开文件ppt </a><br>
+    <br>
+
+
+
+
+    <div>pdf演示使用POPDF组件在线打开PDF文件的效果，标题栏、菜单栏、工具栏和自定义工具条都可以分别隐藏，同时自定义工具条上的按钮的数量和功能均可编程控制</div>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/pdf','fullscreen=yes;');">打开文件pdf1 </a><br>
+    <br>
+
+
+    <div>IFram测试</div>
+    <a href="/xiang/iframOut">IFram测试 </a><br>
+
+
+
+    <div>VBA测试</div>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/word6','fullscreen=yes;','');">打开文件word6 </a><br>
+
+
+    <div>三个标签页</div>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/word5','fullscreen=yes;','');">打开文件word5 </a><br>
+
+
+    <div>baidu</div>
+    <a href="javascript:POBrowser.openWindowModeless('http://www.baidu.com/','fullscreen=yes;','');">打开百度 </a><br>
+
+
+
+
     <div>后台保存</div>
     <a href="javascript:POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;');">打开文件word2 </a><br>
 
@@ -25,7 +70,34 @@
     <a href="javascript:"  onclick="openWord()">打开文件word </a><br>
     <script>
         function openWord() {
-            POBrowser.openWindowModeless('xiang/word','fullscreen=no;');
+
+            var strValue=["number","name"];
+            console.log('1');
+            POBrowser.openWindowModeless('xiang/word','fullscreen=no;',"");
+
+
+
+
+            setTimeout(function () {
+
+                POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;',"");
+
+                console.log('2');
+            },10000);
+
+
+
+
+
+        }
+
+        function updateCount(value) {
+
+            alert(decodeURI(value));
+
+            //count = count + value;
+            //document.getElementById("Text1").value = count;
+            //return count.toString();
         }
 
     </script>
@@ -39,9 +111,9 @@
 
 
 
-    <div>常规盖章</div>
-    <a href="javascript:POBrowser.openWindowModeless('/seal/word1','fullscreen=yes;');">打开/seal/word1 </a><br>
-    <br>
+    <h3>excel</h3>
+    <div>excel</div>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/excel','fullscreen=yes;','');">打开文件excel </a><br>
 
 
 </div>

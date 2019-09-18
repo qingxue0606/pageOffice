@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Hello World!</title>
+    <style type="text/css">
+        /* CSS样式制作 */
+        *{padding:0px; margin:0px;}
+        a{ text-decoration:none; color:black;}
+        a:hover{text-decoration:none; color:#336699;}
+        #tab{width:auto; padding:5px;height:150px;margin:20px;}
+        #tab ul{list-style:none; height:30px;line-height:30px; border-bottom:2px #C88 solid;}
+        #tab ul li{background:#FFF;cursor:pointer;float:left;list-style:none height:29px; line-height:29px;padding:0px 10px; margin:0px 3px; border:1px solid #BBB; border-bottom:2px solid #C88;}
+        #tab ul li.on{border-top:2px solid Saddlebrown; border-bottom:2px solid #FFF;}
+        #tab div{height:700px;width:auto; line-height:24px;border-top:none;  padding:1px; border:1px solid #336699;padding:10px;}
+        .hide{display:none;}
+        .show{ display:block;}
+        .page{}
+    </style>
+
+    <script type="text/javascript" src="/jquery.min.js"></script>
+    <script type="text/javascript">
+        // JS实现选项卡切换
+        window.onload = function() {
+            var myTab = document.getElementById("tab");    //整个div
+            var myUl = myTab.getElementsByTagName("ul")[0]; //一个节点
+            var myLi = myUl.getElementsByTagName("li");    //数组
+            var myDiv = $(".page"); //myTab.getElementsByTagName("div"); //数组
+
+            for (var i = 0; i < myLi.length; i++) {
+                myLi[i].index = i;
+                myLi[i].onclick = function() {
+                    for (var j = 0; j < myLi.length; j++) {
+                        myLi[j].className = "off";
+                        myDiv[j].className = "hide";
+                    }
+                    this.className = "on";
+                    myDiv[this.index].className = "show";
+                    //找到iframe里的dom元素
+                    var _iframe = document.getElementById('iframe'+this.index).contentWindow;
+                    _iframe.document.getElementById('PageOfficeCtrl1').Activate();
+
+                }
+            }
+        }
+    </script>
+
+
+
+</head>
+<body>
+<!-- HTML页面布局 -->
+<div id = "tab">
+    <ul>
+        <li class="on">Word文件1.doc</li>
+        <li class="off">Word文件2.doc</li>
+        <li class="off">Word文件3.doc</li>
+    </ul>
+    <div id="firstPage" class="page show">
+        <iframe id="iframe0"  style="width:1000px;height:700px;" name="iframe1" src="/xiang/word4?id=1"></iframe>
+    </div>
+    <div id="secondPage" class="page hide" style="  ">
+        <iframe id="iframe1"  style="width:1000px;height:700px;" name="iframe1" src="/xiang/word4?id=2"></iframe>
+    </div>
+    <div id="AAPage" class = "page hide">
+        <iframe id="iframe2"  style="width:1000px;height:700px;" name="iframe1" src="/xiang/word4?id=3"></iframe>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

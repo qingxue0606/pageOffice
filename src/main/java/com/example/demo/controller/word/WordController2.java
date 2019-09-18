@@ -29,7 +29,7 @@ public class WordController2 {
         //先在要插入word文件的位置手动插入书签,书签必须以“PO_”为前缀
         //给DataRegion赋值,值的形式为："[word]word文件路径[/word]、[excel]excel文件路径[/excel]、[image]图片路径[/image]"
         DataRegion data1 = worddoc.openDataRegion("PO_p1");
-        data1.setValue("[word]word/1.doc[/word]");
+        data1.setValue("[word]word/data.doc[/word]");
         DataRegion data2 = worddoc.openDataRegion("PO_p2");
         data2.setValue("[image]images/img_6.jpg[/image]");
         DataRegion data3 = worddoc.openDataRegion("PO_p3");
@@ -42,6 +42,7 @@ public class WordController2 {
         poCtrl.setMenubar(false);
         //隐藏自定义工具栏
         poCtrl.setCustomToolbar(false);
+        poCtrl.setSaveFilePage("/save/common");
 
 
         poCtrl.webOpen(dir + "test23\\test.doc", OpenModeType.docAdmin, "张三");

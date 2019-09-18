@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript" src="/jquery.min.js"></script>
+    <script type="text/javascript" src="/pageoffice.js" id="po_js_main"></script>
+
+    <script type="text/javascript">
+        var count = 0;
+        function updateCount(value) {
+            count = count + value;
+            document.getElementById("Text1").value = count;
+            return count.toString();
+        }
+
+    </script>
+
+
+</head>
+<body>
+
+out
+
+<div >Count=<input id="Text1" type="text" value="0" /></div>
+
+
+
+<iframe id="iframe1" name="iframe1" src="/xiang/iframIn" >
+
+
+
+</iframe>
+
+
+
+
+
+</body>
+</html>

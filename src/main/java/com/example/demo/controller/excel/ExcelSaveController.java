@@ -38,6 +38,8 @@ public class ExcelSaveController {
         Workbook workBook = new Workbook(request, response);
         Sheet sheet = workBook.openSheet("Sheet1");
         Table table = sheet.openTable("Info");
+        int rangeAddress=table.getRowCount();
+        System.out.println(rangeAddress);
         String content = "";
         int result = 0;
         while (!table.getEOF()) {

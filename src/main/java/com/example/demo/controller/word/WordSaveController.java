@@ -78,11 +78,15 @@ public class WordSaveController {
     }
 
 
-    @RequestMapping("/save/doc2")
+    @RequestMapping("/save/doc2   ")
     public String saveDoc2(HttpServletRequest request, HttpServletResponse response) {
         WordDocument doc = new WordDocument(request, response);
         //获取提交的数值
         DataRegion dataUserName = doc.openDataRegion("PO_userName");
+        byte[] bytes= dataUserName.getFileBytes();
+        System.out.println(bytes.toString());
+
+
         DataRegion dataDeptName = doc.openDataRegion("PO_deptName");
         String content = "";
         //content += "公司名称：" + doc.getFormField("txtCompany");
@@ -244,6 +248,8 @@ public class WordSaveController {
         //定义保存对象
         FileSaver fs = new FileSaver(request, response);
         //保存文件到本地磁盘
+        System.out.println(fs.getFileName());
+        System.out.println(fs.getFileExtName());
         fs.saveToFile(dir + fs.getFileName());
         fs.close();
 
@@ -351,6 +357,8 @@ public class WordSaveController {
     public void saveDocData20(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         FileSaver fs = new FileSaver(request, response);
+        System.out.println(fs.getFileName());
+
         String fileName = "testpfd" + fs.getFileExtName();
         fs.saveToFile(dir + fileName);
         fs.close();

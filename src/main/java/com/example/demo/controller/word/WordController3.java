@@ -62,7 +62,8 @@ public class WordController3 {
         DataRegion dataReg = doc.openDataRegion("PO_table");
         Table table = dataReg.openTable(1);
         //合并table中的单元格
-        table.openCellRC(1, 1).mergeTo(1, 4);
+        //table.openCellRC(1, 1).mergeTo(1, 4);
+        table.openCellRC(1, 1).mergeTo(2, 1);
         //给合并后的单元格赋值
         table.openCellRC(1, 1).setValue("销售情况表");
         //设置单元格文本样式
@@ -165,7 +166,7 @@ public class WordController3 {
         poCtrl.setBorderStyle(BorderStyleType.BorderThin);
         poCtrl.setWriter(doc);
 
-        poCtrl.webOpen(dir + "test43.doc", OpenModeType.docNormalEdit, "zhangsan");
+        poCtrl.webOpen(dir + "test43.doc", OpenModeType.docRevisionOnly, "zhangsan");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word43");
@@ -220,7 +221,7 @@ public class WordController3 {
         fmCtrl.setSaveFilePage("/save/doc/data20");
         fmCtrl.setWriter(doc);
         fmCtrl.setJsFunction_OnProgressComplete("OnProgressComplete()");
-        fmCtrl.fillDocumentAsPDF(dir + "test46.doc", DocumentOpenType.Word, "a.pdf");
+        fmCtrl.fillDocumentAsPDF(dir + "其他类型-多.docx", DocumentOpenType.Word, "a.pdf");
 
 
         map.put("pageoffice", fmCtrl.getHtmlCode("PageOfficeCtrl1"));
@@ -241,7 +242,8 @@ public class WordController3 {
         poCtrl.setSaveFilePage("/save/doc/data30");
 
 
-        poCtrl.wordCompare(dir + "test47//aaa1.doc", dir + "test47//aaa2.doc", OpenModeType.docReadOnly, "张三");
+        //poCtrl.wordCompare(dir + "test47//aaa1.doc", dir + "test47//aaa2.doc", OpenModeType.docReadOnly, "张三");
+        poCtrl.wordCompare(dir + "test47//集团公司8月计划发文.docx", dir + "test47//集团公司8月计划发文错误.docx", OpenModeType.docReadOnly, "张三");
 
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
@@ -359,7 +361,7 @@ public class WordController3 {
         PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         poCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened()");
         poCtrl.addCustomToolButton("保存", "Save()", 1);
-        poCtrl.setOfficeToolbars(false);//隐藏office工具栏
+        //poCtrl.setOfficeToolbars(false);//隐藏office工具栏
 
         poCtrl.setSaveFilePage("/save/common");
 
