@@ -1,0 +1,296 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns:oa="urn:schemas-microsoft-com:office:activation"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=gb2312">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 14">
+<link id=Main-File rel=Main-File href="../test.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>22</title>
+<meta name=Description content="2019/11/11: 2222222">
+<link rel=Stylesheet href="master03_stylesheet.css">
+<![if !ppt]>
+<style>
+.CB
+	{color:black;}
+.CT
+	{color:black;}
+</style>
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:72% !important;}
+-->
+</style>
+<script><!--
+function LoadSld()
+{
+	var sld=GetObj("SlideObj")
+	if( !g_supportsPPTHTML ) {
+		sld.style.visibility="visible"
+		return
+	}
+	if( MakeNotesVis() ) return
+	runAnimations = _InitAnimations();
+	if( IsWin("PPTSld") )
+		parent.SldUpdated(GetSldId())
+	g_origSz=parseInt(SlideObj.style.fontSize)
+	g_origH=sld.style.posHeight
+	g_origW=sld.style.posWidth
+	g_scaleHyperlinks=(document.all.tags("AREA").length>0)
+	if( g_scaleHyperlinks )
+		InitHLinkArray()
+	if( g_scaleInFrame||(IsWin("PPTSld") && parent.IsFullScrMode() ) )
+		document.body.scroll="no"
+	_RSW()
+	if( IsWin("PPTSld") && parent.IsFullScrMode() )
+		FullScrInit();
+	
+	MakeSldVis();
+	
+	if( runAnimations )
+	{
+		if( document.all("NSPlay") )
+			document.all("NSPlay").autoStart = false;
+		if( sld.filters && sld.filters.revealtrans )
+			setTimeout( "document.body.start()", sld.filters.revealtrans.duration * 1000 );
+		else
+			document.body.start();
+	}
+}
+function MakeSldVis()
+{
+	var fTrans=g_showAnimation && SldHasTrans()
+	if( fTrans )
+	{
+		if( g_bgSound ) {
+			idx=g_bgSound.indexOf(",");
+			pptSound.src=g_bgSound.substr( 0, idx );
+			pptSound.loop= -(parseInt(g_bgSound.substr(idx+1)));
+		}
+		SlideObj.filters.revealtrans.Apply()
+    }
+	SlideObj.style.visibility="visible"
+	if( fTrans )
+		SlideObj.filters.revealtrans.Play()
+}
+function MakeNotesVis()
+{
+	if( !IsNts() ) return false
+	SlideObj.style.display="none"
+	nObj = document.all.item("NotesObj")
+	parent.SetHasNts(0)
+	if( nObj ) {
+		nObj.style.display=""
+		parent.SetHasNts(1)
+	}
+	return 1
+}
+function ChkAutoAdv()
+{
+	if(SldHasTrans())
+		SlideObj.onfilterchange=AutoAdv
+	else
+		AutoAdv()
+}
+function AutoAdv()
+{
+	if(!IsWin("PPTSld") || !gUseSldTimings )return
+	var sld=GetCurSld()
+	if( (sld.mAdvDelay>0) && !parent.IsFramesMode() )
+		setTimeout("parent.GoToNextSld()",sld.mAdvDelay)
+}
+function GetObj(id)
+{
+	if(g_supportsPPTHTML) return document.all(id);
+	else return document.getElementById(id);
+}
+function SldHasTrans() { return SlideObj.style.filter != ""; }
+function GetSldId() { return sId=location.href.substring(location.href.lastIndexOf('/')+1) }
+function HideMenu() { if( frames["PPTSld"] && PPTSld.document.all.item("ctxtmenu") && PPTSld.ctxtmenu.style.display!="none" ) { PPTSld.ctxtmenu.style.display='none'; return true } return false }
+function IsWin( name ) { return window.name == name }
+function IsNts() { return IsWin("PPTNts") }
+function IsSldOrNts() { return( IsWin("PPTSld")||IsWin("PPTNts") ) }
+function SupportsPPTAnimation() { return( navigator.platform == "Win32" && navigator.appVersion.indexOf("Windows")>0 ) }
+function SupportsPPTHTML()
+{
+	var appVer=navigator.appVersion, msie=appVer.indexOf("MSIE "), ver=0
+	if( msie >= 0 )
+		ver=parseFloat( appVer.substring( msie+5, appVer.indexOf(";",msie) ) )
+	else
+		ver=parseInt(appVer)
+	return( ver >= 4 && msie >= 0 )
+}
+function _RSW()
+{
+	if( !g_supportsPPTHTML || IsNts() ||
+	  ( !g_scaleInFrame && (!IsWin("PPTSld") || !parent.IsFullScrMode()) ) )
+		return
+        var padding=0;
+        if( IsWin("PPTSld") && parent.IsFramesMode() ) padding=6
+	cltWidth=document.body.clientWidth-padding
+	cltHeight=document.body.clientHeight-padding
+	factor=(1.0*cltWidth)/g_origW
+	if( cltHeight < g_origH*factor )
+		factor=(1.0*cltHeight)/g_origH
+	newSize = g_origSz * factor
+	if( newSize < 1 ) newSize=1
+	s=SlideObj.style
+	s.fontSize=newSize+"px"
+	s.posWidth=g_origW*factor
+	s.posHeight=g_origH*factor
+	s.posLeft=(cltWidth-s.posWidth+padding)/2
+	s.posTop=(cltHeight-s.posHeight+padding)/2
+	if( g_scaleHyperlinks )
+		ScaleHyperlinks( factor )
+}
+function _InitAnimations()
+{
+	animRuntimeInstalled = ''+document.body.localTime != 'undefined';
+	isFullScreen = (window.name == "PPTSld") && !parent.IsFramesMode();
+	g_animUseRuntime = g_showAnimation && animRuntimeInstalled && !(isFullScreen && parent.IsSldVisited());
+	if( g_animUseRuntime ) {
+		collSeq = document.all.tags("seq");
+		if( collSeq != null ) {
+			for(ii=0;ii<collSeq.length;ii++) {
+				if( collSeq[ii].getAttribute( "p:nodeType" ) == "mainSeq" ) {
+					g_animMainSequence = collSeq[ii];
+					break;
+				}
+			}
+		}
+		if( g_animItemsToHide && document.body.playAnimations != false ) {
+			for(jj = 0; jj < g_animItemsToHide.length; jj++) {
+				if( hideObj = GetObj(g_animItemsToHide[jj]) )
+					hideObj.runtimeStyle.visibility="hidden";
+			}
+		}
+		if( g_animInteractiveItems ){
+			for(jj = 0; jj < g_animInteractiveItems.length; jj++) {
+				if( triggerObj = GetObj(g_animInteractiveItems[jj]) )
+					triggerObj.runtimeStyle.cursor="hand";
+			}
+		}
+		if( gUseSldTimings && ''+g_animSlideTime != 'undefined' ) {
+			adjustedTime = document.body.calculateAutoAdvanceTimes( g_animSlideTime, g_animEffectTimings );
+			if( IsWin("PPTSld") && adjustedTime != g_animSlideTime ) {
+			   var sld = GetCurSld();
+			   sld.mAdvDelay = adjustedTime * 1000;
+			}
+		}
+	}
+	return g_animUseRuntime;
+}
+
+var g_supportsPPTHTML = SupportsPPTHTML(), g_scaleInFrame = 1, gId="", g_bgSound="",
+    g_scaleHyperlinks = false, g_allowAdvOnClick = 1, g_showInBrowser = 0, gLoopCont = 0, gUseSldTimings = 1;
+var g_showAnimation = g_supportsPPTHTML && SupportsPPTAnimation() && g_showInBrowser;
+var g_animManager = null;
+var g_animUseRuntime = false;
+var g_animItemsToHide, g_animInteractiveItems, g_animSlideTime;
+var g_animMainSequence = null;
+
+//--></script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="2"/>
+</o:shapelayout>
+</head>
+
+<body lang=ZH-CN style='margin:0px;background-color:white' onresize="_RSW()"
+onload="LoadSld()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:800px;height:600px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#ffffff,#000000,#eeece1,#1f497d,#4f81bd,#c0504d,#0000ff,#800080"
+ masterhref="master03.xml">
+ <p:shaperange href="master03.xml#_x0000_s1025"/><p:shaperange
+  href="master03.xml#_x0000_m1026"/><v:shape id="_x0000_s2050" type="#_x0000_m1026"
+  style='position:absolute;left:54pt;top:167.75pt;width:612pt;height:115.75pt;
+  visibility:visible;mso-wrap-style:square;v-text-anchor:middle'>
+  <v:stroke o:forcedash="f"/>
+  <v:path arrowok="t"/>
+  <o:lock v:ext="edit" rotation="f" aspectratio="f" position="f" selection="f"
+   verticies="f" text="f" adjusthandles="f" grouping="t" shapetype="f"/>
+  <v:textbox style='layout-flow:horizontal;mso-rotate-with-shape:f;
+   mso-fit-shape-to-text:f' inset="7.2pt,3.6pt,7.2pt,3.6pt"/>
+  <p:placeholder type="centerTitle" position="-1"/></v:shape><p:shaperange
+  href="master03.xml#_x0000_m1027"/><v:shape id="_x0000_s2051" type="#_x0000_m1027"
+  style='position:absolute;left:108pt;top:306pt;width:7in;height:138pt;
+  visibility:visible;mso-wrap-style:square;v-text-anchor:top' o:gfxdata="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
+">
+  <v:stroke o:forcedash="f"/>
+  <v:path arrowok="t"/>
+  <o:lock v:ext="edit" rotation="f" aspectratio="f" position="f" selection="f"
+   verticies="f" text="f" adjusthandles="f" grouping="t" shapetype="f"/>
+  <v:textbox style='layout-flow:horizontal;mso-rotate-with-shape:f;
+   mso-fit-shape-to-text:f' inset="7.2pt,3.6pt,7.2pt,3.6pt"/>
+  <p:placeholder type="subTitle" position="-1"/></v:shape>
+ <div v:shape="_x0000_s2050" class=CT style='position:absolute;top:36.83%;
+ left:8.5%;width:83.12%;height:10.16%'><span lang=EN-US style='mso-fareast-language:
+ ZH-CN'>2222222</span><span lang=ZH-CN style='font-family:宋体;mso-fareast-font-family:
+ 宋体;mso-ansi-language:EN-US;mso-special-format:lastCR;display:none'>&#13;</span></div>
+ <div v:shape="_x0000_s2051">
+ <div class=CB1 style='mso-margin-left-alt:468'></div>
+ <div class=CB2 style='mso-margin-left-alt:720'></div>
+ <div class=CB3 style='mso-margin-left-alt:1008'></div>
+ <div class=CB4 style='mso-margin-left-alt:1296'></div>
+ <div class=CB style='position:absolute;top:57.16%;left:16.0%;width:68.12%;
+ height:7.33%'><span lang=EN-US style='color:#898989;mso-fareast-language:ZH-CN'>22</span><span
+ lang=ZH-CN style='font-family:宋体;mso-fareast-font-family:宋体;color:#898989;
+ mso-ansi-language:EN-US;mso-special-format:lastCR;display:none'>&#13;</span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>
