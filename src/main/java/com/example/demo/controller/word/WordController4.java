@@ -28,7 +28,7 @@ public class WordController4 {
         poCtrl.setSaveFilePage("/save/doc/data22");
 
 
-        poCtrl.webOpen(dir + "test56.doc", OpenModeType.docNormalEdit, "zhangsan");
+        poCtrl.webOpen(dir + "chuanpiao.docx", OpenModeType.docNormalEdit, "zhangsan");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word56");
@@ -94,18 +94,18 @@ public class WordController4 {
         int dataRowCount = 5;//需要插入数据的行数
         int oldRowCount = 3;//表格中原有的行数
         // 扩充表格
-        for (int j = 0; j < dataRowCount - oldRowCount; j++) {
-            table1.insertRowAfter(table1.openCellRC(2, 5));  //在第2行的最后一个单元格下插入新行
-        }
+        //for (int j = 0; j < dataRowCount - oldRowCount; j++) {
+            table1.insertRowAfter(table1.openCellRC(2, 2));  //在第2行的最后一个单元格下插入新行
+        //}
         // 填充数据
-        int i = 1;
+        /*int i = 1;
         while (i <= dataRowCount) {
             table1.openCellRC(i, 2).setValue("AA" + String.valueOf(i));
             table1.openCellRC(i, 3).setValue("BB" + String.valueOf(i));
             table1.openCellRC(i, 4).setValue("CC" + String.valueOf(i));
             table1.openCellRC(i, 5).setValue("DD" + String.valueOf(i));
             i++;
-        }
+        }*/
         poCtrl.setWriter(doc);
 
 

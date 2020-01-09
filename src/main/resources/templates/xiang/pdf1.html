@@ -39,7 +39,11 @@
         document.getElementById("PDFCtrl1").BookmarksVisible = !document.getElementById("PDFCtrl1").BookmarksVisible;
     }
     function test() {
-        document.getElementById("PDFCtrl1").PrintOut(false,"Microsoft Print To PDF",1);
+        //document.getElementById("PDFCtrl1").PrintOut(false,"Microsoft Print To PDF",1);
+        document.getElementById("PDFCtrl1").ShowDialog(3);
+
+
+        //var strRet = document.getElementById("PDFCtrl1").ShowHtmlModalDialog("HTMLPage.htm", 11, "left=" + 11 + "px;top=" + 11 + "px;width=400px;height=300px;frame=no;");
     }
 
     function PrintFile() {
@@ -72,6 +76,7 @@
         document.getElementById("PDFCtrl1").GoToPreviousPage();
     }
     function NextPage() {
+        alert(11)
         document.getElementById("PDFCtrl1").GoToNextPage();
     }
     function LastPage() {

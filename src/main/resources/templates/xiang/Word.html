@@ -9,13 +9,106 @@
 
     <script type="text/javascript">
 
+        function Save() {
+            //document.getElementById("PageOfficeCtrl1").AcceptAllRevisions();
+            //document.getElementById("PageOfficeCtrl1").Document.Revisions.AcceptAll();
+
+
+            document.getElementById("PageOfficeCtrl1").SaveFilePage = "/test/save/doc1?id=22";
+            document.getElementById("PageOfficeCtrl1").WebSave();
+
+
+            $.ajax({
+                url:'/xiang1/ajaxtest',
+
+                type:'post',
+                success:function(data){
+                    alert(data);
+                },
+                error:function (err){
+                    //alert(err);
+                }
+            });
+
+        }
+        function  deleteAllComments(){
+            var docObj = document.getElementById("PageOfficeCtrl1").Document;
+            for(var i=docObj .Comments.Count; i>=1; i--){
+                docObj .Comments(i).Delete();
+            }
+        }
+
         function saveAsHTML() {
-            document.getElementById("PageOfficeCtrl1").WebSaveAsHTML();
-            document.getElementById("PageOfficeCtrl1").Alert("HTML格式的文件已经保存到 SaveAsHTML\\doc 目录下。");
+
+
+
+            //deleteAllComments();
+//接受文档中的所有修订
+            //document.getElementById("PageOfficeCtrl1").Document.Revisions.AcceptAll();
+
+
+
+
+
+            document.getElementById("PageOfficeCtrl1").WebSaveAsPDF();
+            //document.getElementById("PageOfficeCtrl1").Alert("保存成功，返回值为：" + document.getElementById("PageOfficeCtrl1").CustomSaveResult);
+            //document.getElementById("PageOfficeCtrl1").WebSaveAsHTML();
+            //document.getElementById("PageOfficeCtrl1").Alert("HTML格式的文件已经保存到 SaveAsHTML\\doc 目录下。");
             //document.getElementById("div1").innerHTML = "<a href='doc/test.htm?r=" + Math.random() +"'> 查看另存的html文件<a><br><br>";
         }
 
+        function Test() {
+            /*var VBAdoc = document.getElementById("PageOfficeCtrl1");
 
+            for(i=0; i<VBAdoc.DataRegionList.Count; i++)
+            {
+                document.getElementById("PageOfficeCtrl1").Alert(VBAdoc.DataRegionList.Item(i).Name);//Name为书签的名称，Value为书签的值
+            }*/
+
+            //js调用vba
+            //document.getElementById("PageOfficeCtrl1").DataRegionList.GetDataRegionByName("PO_reg1").Value=111
+
+
+            var iCount = document.getElementById("PageOfficeCtrl1").DataRegionList.Count;
+            for(j = 0; j < iCount; j++){
+                var bkName = document.getElementById("PageOfficeCtrl1").DataRegionList.Item(j).Locate();
+                //var bkText = " "+j+" " ;
+                //document.getElementById("PageOfficeCtrl1").DataRegionList.GetDataRegionByName(bkName).Value=bkText;
+                document.getElementById("PageOfficeCtrl1").InsertWebImage("/word/1118.png", false, 5);
+
+
+
+            }
+
+
+            //window.location.reload();
+
+
+            //alert(str)
+        }
+
+        function Test2() {
+            //document.getElementById("PageOfficeCtrl1").SaveAs( "d:\\a.docx", false );
+
+            //document.getElementById("PageOfficeCtrl1").PrintOut(false,"Microsoft Print To PDF",1,2,3,"");
+            //document.getElementById("PageOfficeCtrl1").PrintOut(false,"Microsoft Print To PDF",1);
+            //默认打印
+            //document.getElementById("FileMakerCtrl1").PrintOut();
+            //alert(document.getElementById("PageOfficeCtrl1").Document.Application.Selection.information(6)) ;
+
+            //document.getElementById("PageOfficeCtrl1").FullScreen = false;
+
+
+            //标准
+            //var strRet = document.getElementById("PageOfficeCtrl1").ShowHtmlModalDialog("HTMLPage.htm", 11, "left=" + 11 + "px;top=" + 11 + "px;width=400px;height=300px;frame=no;");
+            //专业
+            alert(document.getElementById("PageOfficeCtrl1").DocumentText);
+
+            var strRet = document.getElementById("PageOfficeCtrl1").ShowHtmlModelessDialog("HTMLPage.htm", 11, "left=" + 11 + "px;top=" + 11 + "px;width=400px;height=300px;frame=yes;");
+            alert(document.getElementById("PageOfficeCtrl1").DocumentText);
+
+
+        }
 
         function Test3() {
             var iCount = document.getElementById("PageOfficeCtrl1").DataRegionList.Count;
@@ -30,40 +123,68 @@
             }
         }
 
-
-
-        function Test2() {
-
-            //document.getElementById("PageOfficeCtrl1").SaveAs( "d:\\a.docx", false );
-
-            //document.getElementById("PageOfficeCtrl1").PrintOut(false,"Microsoft Print To PDF",1,2,3,"");
-            //document.getElementById("PageOfficeCtrl1").PrintOut(false,"Microsoft Print To PDF",1);
-            //alert(document.getElementById("PageOfficeCtrl1").Document.Application.Selection.information(6)) ;
-
-            //document.getElementById("PageOfficeCtrl1").FullScreen = false;
+        function Test4() {
+            alert(22);
 
 
 
+            //跳转页面
+            //window.navigate('http://www.baidu.com')
 
-            //标准
-            var strRet = document.getElementById("PageOfficeCtrl1").ShowHtmlModalDialog("HTMLPage.htm", 11, "left=" + 11 + "px;top=" + 11 + "px;width=400px;height=300px;frame=no;");
-            //专业
-            //var strRet = document.getElementById("PageOfficeCtrl1").ShowHtmlModelessDialog("HTMLPage.htm", 11, "left=" + 11 + "px;top=" + 11 + "px;width=400px;height=300px;frame=yes;");
+
+
+            //document.getElementById("PageOfficeCtrl1").ShowDialog(2);
+            document.getElementById("PageOfficeCtrl1").close();
+            document.getElementById("PageOfficeCtrl1").WebOpen("/word/1.doc", "docAdmin", "ADMIN" );
+
 
 
 
 
 
         }
+        function Test5() {
+            document.getElementById("PageOfficeCtrl1").InsertWebImage("/word/logo.jpg", false, 5);
+
+
+
+            //document.getElementById("PageOfficeCtrl1").Document.Range.HighlightColorIndex = wdNoHighlight;
+            //document.getElementById("PageOfficeCtrl1").Document.Range.HighlightColorIndex = wdNoHighlight;
+
+
+            //var a = "s房贷首付是！@@#￥%%…………&&&**————+";
+            window.external.CallParentFunc("updateCount('"+encodeURI(encodeURI(a))+"');");
+
+            //window.external.CallParentFunc("updateCount('"+encodeURIComponent(encodeURIComponent(a))+"');");
+
+            //window.external.CallParentFunc("updateValue('"+url+"','"+tempId+"');");
+
+        }
+        function WebSave2(){
+            alert(22);
+            document.getElementById("PageOfficeCtrl1").AutoWebSave();
+            //alert(11);
+
+        }
+
 
 
         function AfterDocumentOpened() {
             //document.getElementById("PageOfficeCtrl1").HandDraw.Start( true );
-            document.getElementById("PageOfficeCtrl1").Document.TrackRevisions = true;
-            document.getElementById("PageOfficeCtrl1").ShowRevisions = true;
+            //document.getElementById("PageOfficeCtrl1").Document.TrackRevisions = true;
+            //document.getElementById("PageOfficeCtrl1").ShowRevisions = true;
 
             //document.getElementById("PageOfficeCtrl1").FullScreen = true;
             //document.getElementById("PageOfficeCtrl1").AcceptAllRevisions();
+
+            //document.getElementById("PageOfficeCtrl1").OpenImageDialog();
+
+            //setInterval("WebSave2()",1000*10);//假设每分钟保存一次
+
+
+
+
+
 
 
         }
@@ -83,71 +204,6 @@
 
 
 
-
-
-
-
-
-        function Save() {
-            document.getElementById("PageOfficeCtrl1").AcceptAllRevisions();
-            //document.getElementById("PageOfficeCtrl1").Document.Revisions.AcceptAll();
-            document.getElementById("PageOfficeCtrl1").WebSave();
-            $.ajax({
-                url:'/xiang1/ajaxtest',
-
-                type:'post',
-                success:function(data){
-                    alert(data);
-                },
-                error:function (err){
-                    //alert(err);
-                }
-                 });
-
-        }
-
-        function Test() {
-            /*var VBAdoc = document.getElementById("PageOfficeCtrl1");
-
-            for(i=0; i<VBAdoc.DataRegionList.Count; i++)
-            {
-                document.getElementById("PageOfficeCtrl1").Alert(VBAdoc.DataRegionList.Item(i).Name);//Name为书签的名称，Value为书签的值
-            }*/
-
-            //js调用vba
-            //document.getElementById("PageOfficeCtrl1").DataRegionList.GetDataRegionByName("PO_reg1").Value=111
-
-
-            var iCount = document.getElementById("PageOfficeCtrl1").DataRegionList.Count;
-            for(j = 0; j < iCount; j++){
-                var bkName = document.getElementById("PageOfficeCtrl1").DataRegionList.Item(j).Name;
-                var bkText = " "+j+" " ;
-                document.getElementById("PageOfficeCtrl1").DataRegionList.GetDataRegionByName(bkName).Value=bkText;
-            }
-
-
-
-
-
-
-
-            //window.location.reload();
-
-
-            //alert(str)
-        }
-
-
-        function Test3() {
-
-
-            var a = "项";
-            window.external.CallParentFunc("updateCount('"+encodeURI(encodeURI(a))+"');");
-
-
-            //window.external.CallParentFunc("updateValue('"+url+"','"+tempId+"');");
-
-        }
         function increaseCountAndClose(value) {
             var sResult = window.external.CallParentFunc("updateCount("+value+");");
             if(sResult=='poerror:parentlost'){
@@ -156,13 +212,15 @@
             window.external.close();
         }
 
-
     </script>
     <script type="text/javascript">
         function AddSeal() {
             try {
                 document.getElementById("PageOfficeCtrl1").ZoomSeal.AddSeal("李志");
-                alert(document.getElementById("PageOfficeCtrl1").Document.Application.Selection.Range.Text);
+                //document.getElementById("PageOfficeCtrl1").ZoomSeal.AddSeal("", null, "G30000");
+
+
+
 
 
 
@@ -189,6 +247,11 @@
 
 
     <div style="height:800px;" th:utext="${pageoffice}"></div>
+
+
+
+
+
 
 
 </form>

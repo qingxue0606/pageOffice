@@ -55,7 +55,7 @@
 
 
     <div>baidu</div>
-    <a href="javascript:POBrowser.openWindowModeless('http://www.baidu.com/','fullscreen=yes;','');">打开百度 </a><br>
+    <a href="javascript:POBrowser.openWindowModeless('http://www.baidu.com/','fullscreen=yes;httpbasic=yes;','');">打开百度 </a><br>
 
 
 
@@ -63,42 +63,42 @@
     <div>后台保存</div>
     <a href="javascript:POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;');">打开文件word2 </a><br>
 
-    <div>打开文件word给Word文档中的数据区域（DataRegion）赋值的简单示例</div>
-    <a href="javascript:POBrowser.openWindowModeless('xiang/word','fullscreen=yes;');">打开文件word </a><br>
-    <div>打开文件word给Word文档中的数据区域（DataRegion）赋值的简单示例2</div>
+    <div>打开文件word1 a标签的方式</div>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/word?id=11&name=xiang','fullscreen=yes;');">打开文件word </a><br>
 
+
+
+
+
+
+
+
+    <div>打开文件js方式1</div>
     <a href="javascript:"  onclick="openWord()">打开文件word </a><br>
     <script>
         function openWord() {
-
             var strValue=["number","name"];
             console.log('1');
-            POBrowser.openWindowModeless('xiang/word','fullscreen=no;',"");
+            var url='xiang/word';
+            POBrowser.openWindowModeless(url,'fullscreen=no;',"");
 
 
-
-
-            setTimeout(function () {
+            /*setTimeout(function () {
 
                 POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;',"");
 
                 console.log('2');
-            },10000);
-
-
-
+            },10000);*/
 
 
         }
 
         function updateCount(value) {
-
             alert(decodeURI(value));
-
-            //count = count + value;
-            //document.getElementById("Text1").value = count;
-            //return count.toString();
+            alert(decodeURIComponent(value));
         }
+
+
 
     </script>
 
@@ -109,24 +109,14 @@
 </div>
 <div style="width: 49%;;float: right ">
 
-
-
     <h3>excel</h3>
     <div>excel</div>
-    <a href="javascript:POBrowser.openWindowModeless('xiang/excel','fullscreen=yes;','');">打开文件excel </a><br>
-
+    <a href="javascript:POBrowser.openWindowModeless('xiang/excel','fullscreen=yes;','');">数据文档同时保存文件 /excel </a><br>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/excel2','fullscreen=yes;','');">文档保存文件 /excel2</a><br>
 
 </div>
 
-<div style="clear: both"></div>
-<div>生成准考证合</div>
-<a href="javascript:POBrowser.openWindowModeless('/word66','fullscreen=yes;');">打开文件word66 </a><br>
 
-<div>另存为</div>
-<a href="javascript:POBrowser.openWindowModeless('/word65','fullscreen=yes;');">打开文件word65 </a><br>
-
-<div>批量生成准考证</div>
-<a href="javascript:POBrowser.openWindowModeless('/word63','fullscreen=yes;');">打开文件word63 </a><br>
 
 
 <!--<a href="javascript:POBrowser.openWindowModeless('/ppt','fullscreen=yes;');">打开文件11 </a>-->

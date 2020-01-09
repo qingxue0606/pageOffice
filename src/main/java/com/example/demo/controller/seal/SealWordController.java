@@ -35,6 +35,7 @@ public class SealWordController {
         poCtrl.setSaveFilePage("/save/seal/word1");
 
 
+
         poCtrl.webOpen(dir + "seal\\" + "test1.doc", OpenModeType.docNormalEdit, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
@@ -114,6 +115,8 @@ public class SealWordController {
         //添加自定义按钮
         poCtrl.addCustomToolButton("保存", "Save", 1);
         poCtrl.addCustomToolButton("盖章到印章位置", "AddSealByPos()", 2);
+        poCtrl.addCustomToolButton("删除指定印章", "DeleteAllSeal()", 21);
+
 
 
         poCtrl.setSaveFilePage("/save/seal/word1");

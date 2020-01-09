@@ -340,7 +340,7 @@ public class WordController {
         poCtrl.setSaveDataPage("/save/doc/data");
 
 
-        poCtrl.webOpen(dir + "test11.doc", OpenModeType.docSubmitForm, "张三");
+        poCtrl.webOpen(dir + "test11.doc", OpenModeType.docRevisionOnly, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----

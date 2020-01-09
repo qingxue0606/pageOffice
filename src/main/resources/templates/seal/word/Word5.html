@@ -28,6 +28,23 @@
                 document.getElementById("PageOfficeCtrl1").ZoomSeal.AddSeal("xiang61", null, "Seal1");
             } catch(e) {};
         }
+        var strSealName = "Seal1";//指定印章名称
+
+
+
+        function DeleteAllSeal(){
+            var iCount = document.getElementById("PageOfficeCtrl1").ZoomSeal.Count;//获取加盖的印章数量
+            if(iCount > 0){
+                for(var i=iCount-1; i>=0; i--){
+                    strTempSealName = document.getElementById("PageOfficeCtrl1").ZoomSeal.Item(i).SealName;//获取加盖的印章名称
+                    document.getElementById("PageOfficeCtrl1").ZoomSeal.Item(i).DeleteSeal();//删除印章
+                }
+            }else{
+                alert("请先在文档中加盖印章后，再执行当前操作。");
+            }
+        }
+
+
 
         function Save() {
             document.getElementById("PageOfficeCtrl1").WebSave();

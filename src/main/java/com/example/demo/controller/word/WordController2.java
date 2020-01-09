@@ -186,6 +186,10 @@ public class WordController2 {
             table1.openCellRC(i, 5).setValue("DD" + String.valueOf(i));
             i++;
         }
+        table1.openColumn(1).setWidth(50.2f);
+        table1.openColumn(2).setWidth(100.2f);
+        table1.openColumn(3).setWidth(150.2f);
+        table1.openColumn(4).setWidth(200.2f);
         poCtrl.setWriter(doc);
 
 

@@ -44,6 +44,9 @@
         }
         //访问手写集合
         function GetHandDrawList() {
+            var mac = "Function myfunc()" + " \r\n"
+                + "Selection.Delete Unit:=wdCharacter, Count:=1 " + " \r\n"
+                + "End Function " + " \r\n";
 
             var handDrawList = null;
             var handDraw = null;
@@ -54,8 +57,16 @@
             for (i = 0; i < handDrawList.Count; i++) {
                 handDraw = handDrawList.Item(i);
                 handDraw.Locate();
-                document.getElementById("PageOfficeCtrl1").Alert("第" + handDraw.PageNumber + "页" + ", " + handDraw.UserName + ", " + handDraw.DateTime);
+                document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", mac);
+
+                //document.getElementById("PageOfficeCtrl1").Alert("第" + handDraw.PageNumber + "页" + ", " + handDraw.UserName + ", " + handDraw.DateTime);
             }
+
+
+
+
+
+
         }
 
     </script>

@@ -29,6 +29,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -78,13 +79,15 @@ public class WordSaveController {
     }
 
 
-    @RequestMapping("/save/doc2   ")
+    @RequestMapping("/save/doc2")
     public String saveDoc2(HttpServletRequest request, HttpServletResponse response) {
         WordDocument doc = new WordDocument(request, response);
+        List<DataRegion> list=doc.getDataRegions();
+        System.out.println(list.size());
         //获取提交的数值
         DataRegion dataUserName = doc.openDataRegion("PO_userName");
-        byte[] bytes= dataUserName.getFileBytes();
-        System.out.println(bytes.toString());
+        //byte[] bytes= dataUserName.getFileBytes();
+        //System.out.println(bytes.toString());
 
 
         DataRegion dataDeptName = doc.openDataRegion("PO_deptName");
@@ -261,7 +264,6 @@ public class WordSaveController {
 
         //定义保存对象
         FileMakerCtrl fmCtrl = new FileMakerCtrl(request);
-
         fmCtrl.setServerPage("/poserver.zz");
         com.zhuozhengsoft.pageoffice.wordwriter.WordDocument doc =
                 new com.zhuozhengsoft.pageoffice.wordwriter.WordDocument();
@@ -281,8 +283,6 @@ public class WordSaveController {
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word29");
         return mv;
-
-
     }
 
 

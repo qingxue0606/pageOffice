@@ -44,8 +44,9 @@
     }
     //文档关闭前先提示用户是否保存
     function BeforeBrowserClosed(){
+        alert("11");
         if (document.getElementById("PageOfficeCtrl1").IsDirty){
-            if(confirm("提示：文档已被修改，是否继续关闭放弃保存 ？"))
+            if(confirm("提示：文档已被修改，是否继续关闭放弃保存?？"))
             {
                 return  true;
 
