@@ -220,7 +220,7 @@ public class TestWordController {
 
         //poCtrl.setOfficeVendor(OfficeVendorType.WPSOffice);
 
-        poCtrl.webOpen(dir+"xiang\\"+"demo.doc", OpenModeType.docAdmin,"张三");
+        poCtrl.webOpen(dir+"xiang\\"+"zw_20200109.doc", OpenModeType.docAdmin,"张三");
         //poCtrl.webOpen("/sasf/dfa", OpenModeType.docSubmitForm,"张三");
         //poCtrl.webOpen("/0709.doc", OpenModeType.docSubmitForm, "张三");
         map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));

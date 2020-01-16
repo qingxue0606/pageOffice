@@ -16,7 +16,7 @@ public class MusicController {
 
 
         int min=1;
-        int max=7;
+        int max=10;
         int num=min+(int)(Math.random()*(max-min+1));
 
         //num=1;
@@ -27,7 +27,6 @@ public class MusicController {
             case 1 :
                 note="C";
                 break;
-
             case 2 :
                 note="D";
                 break;
@@ -46,12 +45,19 @@ public class MusicController {
             case 7 :
                 note="B";
                 break;
-
+            case 8 :
+                note="C2";
+                break;
+                //重点练的音
+            case 9 :
+                note="F";
+                break;
+            case 10 :
+                note="E";
+                break;
             default :
                 note="H";
         }
-
-
 
 
         map.put("note",note);

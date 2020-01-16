@@ -78,15 +78,15 @@ public class TestExcelController {
         //cell2.setValue("eeeee");
         //cell2.setSubmitName("eeeee2");
 
-        Sheet sheet = workBook.openSheet("Sheet1");
-        com.zhuozhengsoft.pageoffice.excelwriter.Cell cell= sheet.openCell("C5") ;
+        Sheet sheet = workBook.openSheet("比表面积2");
+/*        com.zhuozhengsoft.pageoffice.excelwriter.Cell cell= sheet.openCell("C5") ;
         cell.setValue("卓正软件"); // 此单元格不会提交
         cell.setReadOnly(false);
         sheet.openCellByDefinedName("xiang").setValue("openCellByDefinedName");
 
         Sheet sheet2 = workBook.openSheet("Sheet2");
         com.zhuozhengsoft.pageoffice.excelwriter.Cell cell2= sheet2.openCell("C5") ;
-        cell2.setReadOnly(false);
+        cell2.setReadOnly(false);*/
 
 
 
@@ -109,11 +109,11 @@ public class TestExcelController {
         }
         table.close();*/
 
-        //poCtrl.setWriter(workBook);
-        poCtrl.setDisableCopyOnly(true);
+        poCtrl.setWriter(workBook);
+        //poCtrl.setDisableCopyOnly(true);
 
 
-        poCtrl.webOpen(dir+"xiang\\"+"test1.xls",OpenModeType.xlsNormalEdit,"张佚名");
+        poCtrl.webOpen(dir+"xiang\\"+"0115.xls",OpenModeType.xlsSubmitForm,"张佚名");
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
@@ -197,7 +197,7 @@ public class TestExcelController {
         //poCtrl.setWriter(workBook);
 
 
-        poCtrl.webOpen(dir+"xiang\\"+"原始记录单宏示例.xls",OpenModeType.xlsNormalEdit,"张佚名");
+        poCtrl.webOpen(dir+"xiang\\"+"原始记录单宏示例.xls",OpenModeType.xlsSubmitForm,"张佚名");
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----

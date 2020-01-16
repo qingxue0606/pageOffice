@@ -18,25 +18,27 @@
 </audio>
 
 <br>
+<!--
 以下标准A<br>
 <audio id="player2"  controls="controls" >
     <source th:src="@{/music/A.mp3}" />
 
 
-</audio>
+</audio>-->
 <div>
     <input th:value="${note}" id="Text2" style="display: none" type="text" value="">
 
-    <label><input name="Fruit" type="radio" value="C" />C </label>
-    <label><input name="Fruit" type="radio" value="D" />D </label>
-    <label><input name="Fruit" type="radio" value="E" />E </label>
-    <label><input name="Fruit" type="radio" value="F" />F </label>
-    <label><input name="Fruit" type="radio" value="G" />G </label>
-    <label><input name="Fruit" type="radio" value="A" />A </label>
-    <label><input name="Fruit" type="radio" value="B" />B </label>
+    <label><input name="Fruit" onclick="openWord()" type="radio" value="C" />C </label>
+    <label><input name="Fruit" onclick="openWord()" type="radio" value="D" />D </label>
+    <label><input name="Fruit" onclick="openWord()" type="radio" value="E" />E </label>
+    <label><input name="Fruit" onclick="openWord()" type="radio" value="F" />F </label>
+    <label><input name="Fruit" onclick="openWord()" type="radio" value="G" />G </label>
+    <label><input name="Fruit" onclick="openWord()" type="radio" value="A" />A </label>
+    <label><input name="Fruit" onclick="openWord()" type="radio" value="B" />B </label>
+    <label><input name="Fruit" onclick="openWord()" type="radio" value="C2" />C2 </label>
     <br>
-    <br>
-    <a href="javascript:"  onclick="openWord()">打开文件word </a><br>
+    <a href="javascript:"  onclick="openWord()">打开文件word
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  打开文件word</a><br>
 
     <div id="aDiv" style="display: none; color: Red; font-size: 24px;">
     对，还有两秒跳转
@@ -51,14 +53,14 @@
         function openWord() {
             if($('input[name="Fruit"]:checked').val()==$("#Text2").val()){
 
-                $("#aDiv").text("对，还有1 秒跳转");
+                $("#aDiv").text("对，0.5秒跳");
                 $("#aDiv").show();
 
                 setTimeout(function(){
                     //alert(22)
                     window.location.replace("http://localhost:8081/index3");
 
-                },1000);
+                },500);
 
 
             }else {

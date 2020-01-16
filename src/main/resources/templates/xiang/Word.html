@@ -181,6 +181,9 @@
 
             //setInterval("WebSave2()",1000*10);//假设每分钟保存一次
 
+            var userName=window.external.UserParams;
+            document.getElementById("userName").value=decodeURI(userName);
+
 
 
 
@@ -221,9 +224,6 @@
 
 
 
-
-
-
             } catch (e) {
             }
             ;
@@ -233,6 +233,12 @@
 </head>
 <body>
 <h1 th:inline="text">Hello.v.2</h1>
+
+<div>
+    <font color="red">父页面传递过来的参数:</font><input type="text" id="userName" name="userName"/>
+</div>
+
+
 
 <form id="form1">
 
@@ -246,7 +252,7 @@
 
 
 
-    <div style="height:800px;" th:utext="${pageoffice}"></div>
+    <div style="width: auto; height:800px;" th:utext="${pageoffice}"></div>
 
 
 
