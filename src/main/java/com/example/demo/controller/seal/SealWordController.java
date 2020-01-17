@@ -198,8 +198,11 @@ public class SealWordController {
 
         //添加自定义按钮
         poCtrl.addCustomToolButton("保存", "Save", 1);
-        poCtrl.addCustomToolButton("加盖印章", "InsertSeal()", 2);
-        poCtrl.addCustomToolButton("删除指定印章", "DeleteSeal()", 21);
+        poCtrl.addCustomToolButton("加盖印章1", "InsertSeal()", 2);
+        poCtrl.addCustomToolButton("加盖印章2", "InsertSeal2()", 2);
+        poCtrl.addCustomToolButton("加盖印章3", "InsertSeal3()", 2);
+        poCtrl.addCustomToolButton("删除指定印章1", "DeleteSeal1()", 21);
+        poCtrl.addCustomToolButton("删除指定印章3", "DeleteSeal3()", 21);
         poCtrl.addCustomToolButton("清除所有印章", "DeleteAllSeal()", 21);
 
 
@@ -349,7 +352,7 @@ public class SealWordController {
         PageOfficeCtrl poCtrl = new PageOfficeCtrl(request);
         poCtrl.setServerPage("/poserver.zz");//设置授权程序servlet
         //poCtrl.setZoomSealServer("http://xqx.zoomseal.cn:8080/ZoomSealEnt/enserver.zz");
-        poCtrl.setZoomSealServer("http://xqx.zoomsealent.cn:8080/ZoomSealEnt/enserver.zz");
+        //poCtrl.setZoomSealServer("http://xqx.zoomsealent.cn:8080/ZoomSealEnt/enserver.zz");
 
 
 
