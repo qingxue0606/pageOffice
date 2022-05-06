@@ -13,7 +13,8 @@ import java.util.Map;
 public class MusicController {
     @RequestMapping(value = "/index3", method = RequestMethod.GET)
     public ModelAndView showIndex3(HttpSession session, Map<String, Object> map) {
-
+        Object user=session.getAttribute("user");
+        System.out.println("urser:"+ user);
 
         int min=1;
         int max=10;
@@ -68,6 +69,24 @@ public class MusicController {
 
 
 
+
+
+
+
         return mv;
     }
+
+
+
+    @RequestMapping(value = "/index4", method = RequestMethod.GET)
+    public ModelAndView showIndex4(HttpSession session, Map<String, Object> map) {
+
+        ModelAndView mv = new ModelAndView("Index4");
+
+
+
+
+        return mv;
+    }
+
 }

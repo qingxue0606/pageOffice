@@ -83,6 +83,15 @@ public class SealSaveController {
         fs.close();
 
     }
+    @RequestMapping("/save/seal/pdf1")
+    public void saveSealPdf1(HttpServletRequest request, HttpServletResponse response) {
+        //定义保存对象
+        FileSaver fs = new FileSaver(request, response);
+        //保存文件到本地磁盘
+        fs.saveToFile(dir + "seal\\" + fs.getFileName());
+        fs.close();
+
+    }
 
 
 }

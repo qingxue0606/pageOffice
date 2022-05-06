@@ -1,0 +1,63 @@
+//创建pageOffice
+    	PageOfficeCtrl poCtrl1 = new PageOfficeCtrl(request);
+    	//设置服务页面
+    	poCtrl1.setServerPage(request.getContextPath() + "/poserver.zz");
+    	//创建WordDocument对象
+    	WordDocument doc = new WordDocument();
+        //三个参数分别为要新插入书签的名称、新书签的插入位置、相关联的书签名称（“[home]”代表Word文档的第一个位置）
+    	DataRegion xcdm = doc.openDataRegion("PO_xcdm");
+    	xcdm.setValue("HC02-TEST");
+    	
+        DataRegion projectName = doc.createDataRegion("PO_proName",DataRegionInsertType.After, "[home]");
+        projectName.setValue("吸附无细胞百（三组分）白破联合疫苗\n\n");
+        projectName.getFont().setBold(true);
+        projectName.getFont().setSize(22);
+        projectName.getFont().setName("宋体");
+        //设置对齐方式
+        ParagraphFormat projectPara = projectName.getParagraphFormat();
+        projectPara.setAlignment(WdParagraphAlignment.wdAlignParagraphCenter);
+        
+        DataRegion title = doc.createDataRegion("PO_title",DataRegionInsertType.After, "PO_proName");
+        title.setValue("电子病例报告表（eCRF）\n");
+        title.getFont().setBold(true);
+        title.getFont().setSize(16);
+        title.getFont().setName("宋体");
+        //设置对齐方式
+        ParagraphFormat titlePara = title.getParagraphFormat();
+        titlePara.setAlignment(WdParagraphAlignment.wdAlignParagraphCenter);
+        
+        DataRegion type = doc.createDataRegion("PO_type",DataRegionInsertType.After, "PO_title");
+        type.setValue("注释CRF\n");
+        type.getFont().setBold(true);
+        type.getFont().setSize(16);
+        type.getFont().setName("宋体");
+        type.getFont().setColor(Color.red);
+        //设置对齐方式
+        ParagraphFormat typePara = type.getParagraphFormat();
+        typePara.setAlignment(WdParagraphAlignment.wdAlignParagraphCenter);
+        
+        DataRegion drTable2 = doc.createDataRegion("PO_two",DataRegionInsertType.After, "PO_type");
+        Table table2 = drTable2.createTable(11, 2, WdAutoFitBehavior.wdAutoFitWindow);
+        table2.openCellRC(1, 1).mergeTo(1, 2);
+        table2.openCellRC(1, 1).setValue("基本信息");
+        table2.openCellRC(1, 1).getFont().setBold(true);
+        table2.openCellRC(1, 1).getShading().setBackgroundPatternColor(Color.gray);
+        table2.openCellRC(2, 1).setValue("申办单位");
+        table2.openCellRC(3, 1).setValue("方案编号");
+        table2.openCellRC(4, 1).setValue("方案版本号");
+        table2.openCellRC(5, 1).setValue("eCRF版本号");
+        table2.openCellRC(6, 1).setValue("eCRF版本日期");
+        table2.openCellRC(7, 1).setValue("研究现场代码");
+        table2.openCellRC(8, 1).setValue("筛选号");
+        table2.openCellRC(9, 1).setValue("研究编号");
+        table2.openCellRC(10, 1).setValue("姓名缩写");
+        table2.openCellRC(11, 1).setValue("生成时间");
+        //设置表格行的高度
+        table2.setRowsHeight(30,WdRowHeightRule.wdRowHeightExactly);
+        //设置表格的宽度
+        table2.setPreferredWidthType(WdPreferredWidthType.wdPreferredWidthPoints);
+        //设置表格列的宽度
+        table2.openColumn(1).setWidth(30.2f);
+        table2.openColumn(2).setWidth(130.2f);
+        
+    	poCtrl1.setWriter(doc);

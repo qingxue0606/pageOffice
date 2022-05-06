@@ -26,7 +26,10 @@
 
 
     function AfterDocumentOpened() {
-        delBookMark();
+        document.getElementById("PageOfficeCtrl1").PrintPreview();
+        throw new Error("选择标识无效");
+
+        //delBookMark();
 
     }
 

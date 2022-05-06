@@ -321,7 +321,6 @@ public class WordSaveController {
 
         System.out.println();
 
-
         doc.close();
 
     }
@@ -372,7 +371,22 @@ public class WordSaveController {
         WordDocument doc = new WordDocument(request, response);
         byte[] bWord;
 
-        DataRegion dr1 = doc.openDataRegion("PO_test1");
+       /* List<DataRegion> dataRegions=doc.getDataRegions();
+        for(int i=0;i<dataRegions.size();i++){
+            //String s=dataRegions.get(i).getValue();
+            //System.out.println(s);
+            dataRegions.get(i).getName();
+
+            byte[] bytes=dataRegions.get(i).getFileBytes();
+            System.out.println(bytes.length);
+            System.out.println(dataRegions.get(i).getName());
+
+
+        }*/
+
+
+
+        /*DataRegion dr1 = doc.openDataRegion("PO_test1");
 
 
         bWord = dr1.getFileBytes();
@@ -394,7 +408,20 @@ public class WordSaveController {
         FileOutputStream fos3 = new FileOutputStream(filePath + "new3.doc");
         fos3.write(bWord);
         fos3.flush();
-        fos3.close();
+        fos3.close();*/
+        FileOutputStream fos4=new FileOutputStream(filePath + "new"+200+".doc");
+        for(int i=1;i<201;i++){
+            System.out.println(i);
+            DataRegion dr4 = doc.openDataRegion("PO_test"+i);
+            bWord = dr4.getFileBytes();
+            //fos4 = new FileOutputStream(filePath + "new"+i+".doc");
+            fos4.write(bWord);
+            fos4.flush();
+
+        }
+        fos4.close();
+
+
 
 //doc.showPage(500,400);
         doc.close();

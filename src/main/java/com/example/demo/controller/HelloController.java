@@ -15,16 +15,19 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.RequestWrapper;
+import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Map;
@@ -60,15 +63,27 @@ public class HelloController {
         com.zhuozhengsoft.pageoffice.poserver.AdminSeal adminSeal = new com.zhuozhengsoft.pageoffice.poserver.AdminSeal();
         adminSeal.setAdminPassword(poPassWord);//设置印章管理员admin的登录密码
         adminSeal.setSysPath(poSysPath);//设置印章数据库文件poseal.db存放目录
+
         ServletRegistrationBean srb = new ServletRegistrationBean(adminSeal);
         //srb.addUrlMappings("http://xqx.zoomseal.cn:8080/ZoomSealEnt/enserver.zz");
+        //srb.addUrlMappings("http://10.61.0.42:8080/ZoomSealEnt/enserver.zz");
 
         srb.addUrlMappings("/adminseal.zz");
         srb.addUrlMappings("/sealimage.zz");
         srb.addUrlMappings("/loginseal.zz");
         return srb;//
     }
-
+    @Bean
+    public ServletRegistrationBean servletRegistrationBean5() {
+        com.zhuozhengsoft.moboffice.Server mobserver = new com.zhuozhengsoft.moboffice.Server();
+        mobserver.setSysPath(poSysPath);//设置MobOffice注册成功后,mlicense.lic文件存放的目录
+        ServletRegistrationBean srb2 = new ServletRegistrationBean(mobserver);
+        srb2.setName("moboffice");
+        srb2.addUrlMappings("/mobserver.zz");
+        srb2.addUrlMappings("/moboffice.js");
+        //srb.addUrlMappings("/jquery.min.js");
+        return srb2;//
+    }
 
     @RequestMapping("/helloHtml")
     public String helloHtml(Map<String, Object> map) {
@@ -84,8 +99,16 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/index2", method = RequestMethod.GET)
-    public ModelAndView showIndex2(HttpSession session) {
+    public ModelAndView showIndex2(HttpSession session,HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException {
+
+
+
+        Object user=session.getAttribute("user");
+        System.out.println("user:"+user);
+        System.out.println(ResourceUtils.getURL("classpath:").getPath());
         session.setAttribute("user","xiang");
+        response.setHeader("token1111",
+                "8888"); //fileN应该是编码后的(utf-8)
 
 
 

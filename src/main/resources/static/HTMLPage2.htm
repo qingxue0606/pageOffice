@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>输入部门名称</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">
+        function setValue() {
+        }
+        function getValue() {
+            var arr = new Array()
+            var  x=document.getElementsByName("x");
+            for(i=0;i < x.length;i++){
+                if(x[i].checked){
+                    //alert(x[i].getAttribute("value"))
+                    arr.push(x[i].getAttribute("value"))
+                }
+            }
+            //alert(arr);
+
+            window.external.DialogResult = arr.toString();
+           window.external.close();
+            return;
+        }
+
+        function closeWindow() {
+           window.external.close();
+        }
+    </script>
+    <style type="text/css">
+        table {
+            border-right: 1px solid #ffffff;
+            border-bottom: 1px solid #ffffff;
+            text-align: center;
+        }
+
+        table th {
+            border-left: 1px solid #000000;
+            border-top: 1px solid #000000;
+        }
+
+        table td {
+            border-left: 1px solid #000000;
+            border-top: 1px solid #000000;
+        }
+        .last{
+            border-right: 1px solid #ffffff;;
+            border-bottom: 1px solid #ffffff;
+            border-top:1px solid #ffffff; ;
+        }
+        .black{
+            border-bottom: 1px solid #000000;
+        }
+    </style>
+
+</head>
+<body>
+    <div>
+        <form id="inputForm" action="">
+        <div  style=" margin:0; padding:0; height:25px; background-color:lightGreen; line-height:25px; border: solid 1px blue; text-align:right; padding:0 10px;">
+        <a href="#" onclick="window.opener=null;window.open('','_self');window.close();" style=" font-size:18px; text-decoration:none;">×</a>
+        </div>
+        <div  id="rect1" style=" margin:0; padding:0; height:200px; border: solid 1px blue;">
+        <br />
+    <h1>22</h1>
+            爱好：
+            <table>
+                <tr>
+                    <td>阅读1</td>
+                    <td>阅读2</td>
+                    <td>阅读3</td>
+                    <td  class="last" ><input type="checkbox" name="x" value="阅读" checked></td>
+                </tr>
+                <tr>
+                    <td>购物1</td>
+                    <td>购物2</td>
+                    <td>购物3</td>
+                    <td  class="last" ><input type="checkbox" name="x" value="购物" checked></td>
+                </tr>
+                <tr>
+                    <td class="black">运动1</td>
+                    <td class="black">运动2</td>
+                    <td class="black">运动3</td>
+                    <td class="last" ><input type="checkbox" name="x" value="运动" checked></td>
+                </tr>
+
+            </table>
+
+
+            <br />
+        <input type="submit" value="确定" onclick="getValue();" />
+        <input type="submit" value="取消" onclick="closeWindow();" />
+        </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        setValue();
+    </script>
+        <script language="javascript" type="text/javascript">
+            document.getElementById("rect1").style.height = document.body.clientHeight - 90;
+	</script>
+</body>
+</html>

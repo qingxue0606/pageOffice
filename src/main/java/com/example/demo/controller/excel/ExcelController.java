@@ -74,23 +74,14 @@ public class ExcelController {
         Sheet sheet = workBook.openSheet("Sheet1");
 
         //定义table对象，设置table对象的设置范围
-        Table table = sheet.openTable("B4:F13");
+        Table table = sheet.openTable("B6:AX5000");
 
 
-        /*for(int i=0; i < 50; i++)
-        {
-            table.getDataFields().get(0).setValue("产品 " + i);
-            table.getDataFields().get(1).setValue("100");
-            table.getDataFields().get(2).setValue(String.valueOf(100+i));
-            table.nextRow();
-        }*/
         table.close();
 
         //设置table对象的提交名称，以便保存页面获取提交的数据
         table.setSubmitName("Info");
-
         poCtrl.setWriter(workBook);
-
 
         poCtrl.setSaveDataPage("/save/exl2");
 
@@ -98,7 +89,7 @@ public class ExcelController {
         poCtrl.webOpen(dir + "test2.xls", OpenModeType.xlsNormalEdit, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
-        ModelAndView mv = new ModelAndView("Word");
+        ModelAndView mv = new ModelAndView("excel/excel6");
         return mv;
     }
 
@@ -487,9 +478,10 @@ public class ExcelController {
         Workbook workBook = new Workbook();
         //定义Sheet对象，"Sheet1"是打开的Excel表单的名称
         Sheet sheet = workBook.openSheet("Sheet1");
+
         sheet.openCellByDefinedName("testA1").setValue("Tom");
         sheet.openCellByDefinedName("testB1").setValue("John");
-
+        sheet.openCellByDefinedName("testB1").setReadOnly(false);
         poCtrl.setWriter(workBook);
 
         //隐藏菜单栏

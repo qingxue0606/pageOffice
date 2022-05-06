@@ -40,7 +40,13 @@ public class TestWordController2 {
         return "xiang/iframIn";
 
     }
+    @RequestMapping(value = "/xiang/ifram3", method = RequestMethod.GET)
+    public String showIfram3(HttpSession session){
 
+
+        return "xiang/ifram3";
+
+    }
 
 
 

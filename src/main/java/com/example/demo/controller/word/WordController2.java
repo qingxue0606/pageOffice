@@ -174,7 +174,7 @@ public class WordController2 {
         int dataRowCount = 5;//需要插入数据的行数
         int oldRowCount = 3;//表格中原有的行数
         // 扩充表格
-        for (int j = 0; j < dataRowCount - oldRowCount; j++) {
+       for (int j = 0; j < dataRowCount - oldRowCount; j++) {
             table1.insertRowAfter(table1.openCellRC(2, 5));  //在第2行的最后一个单元格下插入新行
         }
         // 填充数据
@@ -188,12 +188,18 @@ public class WordController2 {
         }
         table1.openColumn(1).setWidth(50.2f);
         table1.openColumn(2).setWidth(100.2f);
-        table1.openColumn(3).setWidth(150.2f);
-        table1.openColumn(4).setWidth(200.2f);
+        table1.openColumn(3).setWidth(50.2f);
+        table1.openColumn(4).setWidth(50.2f);
+        table1.openColumn(5).setWidth(50.2f);
+
+
+        //table1.openRow(2).setHeight(50.2f);
+        //table1.openRow(2).setHeight(100,WdRowHeightRule.wdRowHeightExactly);
         poCtrl.setWriter(doc);
+        //table1.openCellRC(2,3).getParagraphFormat().setLineSpacingRule(111.3,Wdl);
 
 
-        poCtrl.webOpen(dir + "test30.doc", OpenModeType.docNormalEdit, "张三");
+        poCtrl.webOpen(dir + "test30.doc", OpenModeType.docReadOnly, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word30");
@@ -413,6 +419,7 @@ public class WordController2 {
 
         //添加自定义按钮
         poCtrl.addCustomToolButton("保存", "Save", 1);
+        poCtrl.addCustomToolButton("test5", "test5", 1);
         poCtrl.addCustomToolButton("全屏/还原", "IsFullScreen", 4);
 
         //设置保存页

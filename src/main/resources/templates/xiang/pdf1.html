@@ -32,24 +32,43 @@
 </script>
 <!--**************   卓正 PageOffice 客户端代码开始    ************************-->
 <script language="javascript" type="text/javascript">
+    function Save() {
+        document.getElementById("PDFCtrl1").WebSave();
+    }
+    function InsertSeal() {
+        try {
+            //document.getElementById("PageOfficeCtrl1").ZoomSeal.AddSealByName("测试公章", null, null);
+
+            document.getElementById("PDFCtrl1").ZoomSeal.AddSeal();//如果使用ZoomSeal中的USBKEY方式盖章，第一个参数不能为盖章用户登录名，只能为null或者空字符串
+        } catch(e) {}
+    }
     function AfterDocumentOpened() {
-        alert(document.getElementById("PDFCtrl1").Caption);
+        //alert(document.getElementById("PDFCtrl1").Caption);
+
+        //document.getElementById("PDFCtrl1").EnableFileCommand(4,false);
+
     }
     function SetBookmarks() {
         document.getElementById("PDFCtrl1").BookmarksVisible = !document.getElementById("PDFCtrl1").BookmarksVisible;
     }
     function test() {
+        document.getElementById("PDFCtrl1").Close();
+        document.getElementById("PDFCtrl1").WebOpen("/1.doc","docNormalEdit","张三")
+
+        //document.getElementById("PDFCtrl1").PrintOut("",1)
         //document.getElementById("PDFCtrl1").PrintOut(false,"Microsoft Print To PDF",1);
-        document.getElementById("PDFCtrl1").ShowDialog(3);
+        //document.getElementById("PDFCtrl1").ShowDialog(3);
+        //document.getElementById("PDFCtrl1").Titlebar=false;
+        //document.getElementById("PDFCtrl1").Menubar=false;
 
-
+       // document.getElementById("PDFCtrl1").ShowHtmlModalDialog("HTMLPage.htm", 11, "left=" + 11 + "px;top=" + 11 + "px;width=400px;height=300px;frame=no;");
         //var strRet = document.getElementById("PDFCtrl1").ShowHtmlModalDialog("HTMLPage.htm", 11, "left=" + 11 + "px;top=" + 11 + "px;width=400px;height=300px;frame=no;");
     }
 
     function PrintFile() {
-
+        document.getElementById("PDFCtrl1").PrintOut("",1)
         //document.getElementById("PDFCtrl1").PrintOut(false,"Microsoft Print To PDF",1);
-        document.getElementById("PDFCtrl1").ShowDialog(4);
+        //document.getElementById("PDFCtrl1").ShowDialog(4);
     }
     function SwitchFullScreen() {
         document.getElementById("PDFCtrl1").FullScreen = !document.getElementById("PDFCtrl1").FullScreen;

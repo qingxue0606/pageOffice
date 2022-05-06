@@ -3,26 +3,56 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Index</title>
-    <script type="text/javascript" src="jquery.min.js"></script>
-    <script type="text/javascript" src="pageoffice.js" id="po_js_main"></script>
+
+    <script type="text/javascript" src="/pageoffice.js" ></script>
 
 </head>
-`
+
 <body>
 <h1 th:inline="text">PageOffice 集成效果演示</h1>
-
-
 
 <div style="width: 49%;float: left ">
 
 
+    <div>打开文件word1 a标签的方式</div>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/word?id=1&name=xiang','');">打开文件word </a><br>
 
 
 
+    <div>打开文件js方式1</div>
+    <a href="javascript:"  onclick="openWord()">打开文件word </a><br>
+    <script>
+        function openWord() {
+            var strValue=["number","name"];
+            console.log('1');
+            var url='xiang/word';
+
+            POBrowser.headerToken = "mytoken:55555"
+                POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;',"");
+
+
+        }
+        function updateCount(value) {
+            alert(decodeURI(value));
+            //alert(decodeURIComponent(value));
+        }
+        // var 的情况
+        console.log(foo); // 输出undefined
+        var foo = 2;
+        let bar = 2;
+        // let 的情况
+        console.log(bar); // 报错ReferenceError
+
+
+
+
+    </script>
+
+    <div>index3</div>
+    <a href="/index3">index3 </a><br>
+    <br>
 
     <h3>word</h3>
-
-
     <div>百度</div>
     <a href="javascript:POBrowser.openWindowModeless('http://www.baidu.com','fullscreen=yes;');">打开百度 </a><br>
     <br>
@@ -34,17 +64,22 @@
     <br>
 
 
+    <div>在线word转pdf</div>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/word9','fullscreen=yes;');">打开文件pdf1 </a><br>
+    <br>
 
-
+    <h3>pdf</h3>
     <div>pdf演示使用POPDF组件在线打开PDF文件的效果，标题栏、菜单栏、工具栏和自定义工具条都可以分别隐藏，同时自定义工具条上的按钮的数量和功能均可编程控制</div>
     <a href="javascript:POBrowser.openWindowModeless('xiang/pdf','fullscreen=yes;');">打开文件pdf1 </a><br>
     <br>
-
+    <div>pdf国产</div>
+    <a href="javascript:POBrowser.openPDFWindow('xiang/pdf','fullscreen=yes;');">打开文件pdf1 </a><br>
+    <br>
 
     <div>IFram测试</div>
     <a href="/xiang/iframOut">IFram测试 </a><br>
 
-
+    <a href="/xiang/ifram3">IFram3</a><br>
 
     <div>VBA测试</div>
     <a href="javascript:POBrowser.openWindowModeless('xiang/word6','fullscreen=yes;','');">打开文件word6 </a><br>
@@ -63,44 +98,7 @@
     <div>后台保存</div>
     <a href="javascript:POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;');">打开文件word2 </a><br>
 
-    <div>打开文件word1 a标签的方式</div>
-    <a href="javascript:POBrowser.openWindowModeless('xiang/word?id=11&name=xiang','fullscreen=yes;');">打开文件word </a><br>
 
-
-
-
-
-
-
-
-    <div>打开文件js方式1</div>
-    <a href="javascript:"  onclick="openWord()">打开文件word </a><br>
-    <script>
-        function openWord() {
-            var strValue=["number","name"];
-            console.log('1');
-            var url='xiang/word';
-            POBrowser.openWindowModeless(url,'fullscreen=no;',encodeURI('张三'));
-
-
-            /*setTimeout(function () {
-
-                POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;',"");
-
-                console.log('2');
-            },10000);*/
-
-
-        }
-
-        function updateCount(value) {
-            alert(decodeURI(value));
-            alert(decodeURIComponent(value));
-        }
-
-
-
-    </script>
 
 
 
@@ -111,7 +109,7 @@
 
     <h3>excel</h3>
     <div>excel</div>
-    <a href="javascript:POBrowser.openWindowModeless('xiang/excel','fullscreen=yes;','');">数据文档同时保存文件 /excel </a><br>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/excel','fullscreen=yes;','');">数据文档同时保存文件 /excel1 </a><br>
     <a href="javascript:POBrowser.openWindowModeless('xiang/excel2','fullscreen=yes;','');">文档保存文件 /excel2</a><br>
 
 </div>

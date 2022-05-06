@@ -243,7 +243,7 @@ public class WordController3 {
 
 
         //poCtrl.wordCompare(dir + "test47//aaa1.doc", dir + "test47//aaa2.doc", OpenModeType.docReadOnly, "张三");
-        poCtrl.wordCompare(dir + "test47//1210 (2).docx", dir + "test47//1210 (1).docx", OpenModeType.docReadOnly, "张三");
+        poCtrl.wordCompare(dir + "test47\\1.doc", dir + "test47\\2.doc", OpenModeType.docReadOnly, "张三");
 
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
@@ -311,13 +311,23 @@ public class WordController3 {
         PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
         WordDocument wordDoc = new WordDocument();
         //打开数据区域，openDataRegion方法的参数代表Word文档中的书签名称
-        DataRegion dataRegion1 = wordDoc.openDataRegion("PO_test1");
+        /*DataRegion dataRegion1 = wordDoc.openDataRegion("PO_test1");
         dataRegion1.setSubmitAsFile(true);
         DataRegion dataRegion2 = wordDoc.openDataRegion("PO_test2");
         dataRegion2.setSubmitAsFile(true);
         dataRegion2.setEditing(true);
         DataRegion dataRegion3 = wordDoc.openDataRegion("PO_test3");
-        dataRegion3.setSubmitAsFile(true);
+        dataRegion3.setSubmitAsFile(true);*/
+
+
+        for(int i=1;i<201;i++){
+
+            DataRegion mydr2 = wordDoc.createDataRegion("PO_test"+i, DataRegionInsertType.Before, "[end]");
+            mydr2.setValue("[word]" + dir + "test50\\test1.doc"  + "[/word]");
+            mydr2.setSubmitAsFile(true);
+        }
+
+
 
         poCtrl.setWriter(wordDoc);
         poCtrl.addCustomToolButton("保存", "Save()", 1);
@@ -326,7 +336,7 @@ public class WordController3 {
         poCtrl.setSaveDataPage("/save/doc/data21");
 
         //打开Word文件
-        poCtrl.webOpen(dir + "test50.doc", OpenModeType.docSubmitForm, "zhangsan");
+        poCtrl.webOpen(dir + "test50\\test50.doc", OpenModeType.docSubmitForm, "zhangsan");
 
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
@@ -343,21 +353,12 @@ public class WordController3 {
         poCtrl.setOfficeToolbars(true);//隐藏Office工具
         poCtrl.addCustomToolButton("保存", "Save()", 1);
         poCtrl.addCustomToolButton("新建批注", "InsertComment()", 3);
+        poCtrl.addCustomToolButton("test", "Test", 3);
         poCtrl.setSaveFilePage("/save/common");
-
-        WordDocument doc = new WordDocument();
-        //打开数据区域
-        DataRegion dataRegion1 = doc.openDataRegion("PO_xiang");
-
-        //dataRegion1.setValue("1111");
-        dataRegion1.setEditing(true);
-
-
-        poCtrl.setWriter(doc);
 
 
         //打开Word文件
-        poCtrl.webOpen(dir + "test51.doc", OpenModeType.docSubmitForm, "zhangsan");
+        poCtrl.webOpen(dir + "test51.doc", OpenModeType.docRevisionOnly, "zhangsan");
 
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
@@ -377,7 +378,7 @@ public class WordController3 {
         poCtrl.setSaveFilePage("/save/common");
 
         //打开Word文件
-        poCtrl.webOpen(dir + "test52.doc", OpenModeType.docRevisionOnly, "zhangsan");
+        poCtrl.webOpen(dir + "8001_112479533.docx", OpenModeType.docAdmin, "zhangsan");
 
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
@@ -416,17 +417,18 @@ public class WordController3 {
         poCtrl.setCustomToolbar(false);//隐藏用户自定义工具栏
         WordDocument doc = new WordDocument();
         //在word中指定的"PO_table1"的数据区域内动态创建一个3行5列的表格
-        Table table1 = doc.openDataRegion("PO_table14").createTable(20, 7, WdAutoFitBehavior.wdAutoFitWindow);
+        Table table1 = doc.openDataRegion("PO_table14").createTable(20, 11, WdAutoFitBehavior.wdAutoFitWindow);
         //合并(1,1)到(3,1)的单元格并赋值
-        //table1.openCellRC(1, 1).mergeTo(3, 1);
+        table1.openCellRC(4, 9).mergeTo(5, 9);
+        table1.openCellRC(4, 10).mergeTo(5, 10);
         //table1.openCellRC(1, 1).setValue("合并后的单元格");
         //给表格table1中剩余的单元格赋值
-        for (int i = 1; i < 5; i++) {
+        /*for (int i = 1; i < 5; i++) {
             table1.openCellRC(i, 2).setValue("一一一一" + String.valueOf(i));
             table1.openCellRC(i, 3).setValue("BBBB" + String.valueOf(i));
             table1.openCellRC(i, 4).setValue("CCCC" + String.valueOf(i));
             table1.openCellRC(i, 5).setValue("DDDD" + String.valueOf(i));
-        }
+        }*/
 
         //在"PO_table1"后面动态创建一个新的数据区域"PO_table2",用于创建新的一个5行5列的表格table2
         /*DataRegion drTable2 = doc.createDataRegion("PO_table2", DataRegionInsertType.After, "PO_table1");

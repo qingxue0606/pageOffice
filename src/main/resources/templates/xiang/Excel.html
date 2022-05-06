@@ -90,33 +90,50 @@
         //document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(4, false); // 禁止另存
         //document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(5, false); //禁止打印
        // document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(6, false); // 禁止页面设置
-        document.getElementById("PageOfficeCtrl1").document.Application.Sheets(1).Select();
+        //document.getElementById("PageOfficeCtrl1").document.Application.Sheets(1).Select();
 
-
+        document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(3, false); // 禁止保存
+        document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(4, false); // 禁止另存
+        document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(5, false); //禁止打印
+        document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(6, false); // 禁止页面设置
 
     }
 
 
 
-    function test() {
-        //document.getElementById("PageOfficeCtrl1").Document.ActiveSheet.cells(4,4)=2;
-        //插入注释
-        //document.getElementById("PageOfficeCtrl1").Document.Application.Sheets("Sheet1").Range("A1").AddComment("测试批注");
+    function Test() {
+        alert("excel")
+        var sMac = "function myfunc()" + "\r\n"
+            + "Application.Sheets(\"" + "Sheet1" + "\").Range(\"" +  "C4" + "\").Value = \"" + 100 + "\" \r\n"
+            + "End function";
 
-        document.getElementById("PageOfficeCtrl1").Alert(getCellValue());
-
-        //document.getElementById("PageOfficeCtrl1").Document.ActiveSheet.cells(4,4).Insert;
+        return document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", sMac);
 
     }
 
 
     function test2() {
+        document.getElementById("PageOfficeCtrl1").WebSaveAsHTML();
 
-        //document.getElementById("PageOfficeCtrl1").Document.Application.Sheets("Sheet1").Range("A1").AddComment("测试批注");
 
-        //alert(getCellValue())
 
-        document.getElementById("PageOfficeCtrl1").document.Application.Sheets(1).Select();
+    }
+    function test3() {
+        //document.getElementById("PageOfficeCtrl1").WebSaveAsHTML();
+
+        document.getElementById("PageOfficeCtrl1").FullScreen =true;
+        document.getElementById("PageOfficeCtrl1").OfficeToolbars = false;
+
+    }
+    function test4() {
+        //document.getElementById("PageOfficeCtrl1").WebSaveAsHTML();
+
+        document.getElementById("PageOfficeCtrl1").FullScreen =true;
+        document.getElementById("PageOfficeCtrl1").OfficeToolbars = false;
+
+    }
+    function test5() {
+        document.getElementById("PageOfficeCtrl1").Document.Application.Dialogs(222).Show();//好用
 
     }
 

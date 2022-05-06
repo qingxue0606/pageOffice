@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import com.zhuozhengsoft.pageoffice.*;
-import com.zhuozhengsoft.pageoffice.excelwriter.Cell;
-import com.zhuozhengsoft.pageoffice.excelwriter.Sheet;
-import com.zhuozhengsoft.pageoffice.excelwriter.Workbook;
+import com.zhuozhengsoft.pageoffice.excelwriter.*;
 import com.zhuozhengsoft.pageoffice.wordwriter.DataRegion;
 import com.zhuozhengsoft.pageoffice.wordwriter.DataTag;
 import com.zhuozhengsoft.pageoffice.wordwriter.WordDocument;
@@ -18,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -37,18 +37,21 @@ public class TestExcelController {
         poCtrl.addCustomToolButton("导入文件", "importData()", 16);
         poCtrl.addCustomToolButton("提交数据", "submitData()", 1);
         poCtrl.addCustomToolButton("盖章", "AddSeal", 2); //添加自定义盖章按钮
-        poCtrl.addCustomToolButton("test", "test()", 1);
+        poCtrl.addCustomToolButton("Test", "Test()", 1);
         poCtrl.addCustomToolButton("test2", "test2()", 1);
+        poCtrl.addCustomToolButton("test3", "test3()", 1);
+        poCtrl.addCustomToolButton("test4", "test4()", 1);
+        poCtrl.addCustomToolButton("test5", "test5()", 1);
         poCtrl.addCustomToolButton("盖章到印章位置", "AddSealByPos()", 2);
         poCtrl.addCustomToolButton("添加印章位置", "InsertSealPos()", 2);
-        poCtrl.setJsFunction_AfterDocumentOpened( "AfterDocumentOpened()");
+        //poCtrl.setJsFunction_AfterDocumentOpened( "AfterDocumentOpened()");
 
         //poCtrl.setAllowCopy(false);
 
 
         poCtrl.setSaveFilePage("/test/save/ex1");
 
-        //poCtrl.setSaveDataPage("/test/save/ex2");
+        poCtrl.setSaveDataPage("/test/save/ex2");
 
         //poCtrl.setJsFunction_OnExcelCellClick("OnCellClick()");
         //定义Workbook对象
@@ -56,7 +59,7 @@ public class TestExcelController {
         //定义Sheet对象，"Sheet1"是打开的Excel表单的名称
 
 
-        //Sheet sheet2 = workBook.openSheet("Sheet2");
+
         //定义table对象，设置table对象的设置范围
         //com.zhuozhengsoft.pageoffice.excelwriter.Table table = sheet.openTable("B4:F13");
         //设置table对象的提交名称，以便保存页面获取提交的数据
@@ -78,15 +81,17 @@ public class TestExcelController {
         //cell2.setValue("eeeee");
         //cell2.setSubmitName("eeeee2");
 
-        Sheet sheet = workBook.openSheet("比表面积2");
-/*        com.zhuozhengsoft.pageoffice.excelwriter.Cell cell= sheet.openCell("C5") ;
-        cell.setValue("卓正软件"); // 此单元格不会提交
-        cell.setReadOnly(false);
-        sheet.openCellByDefinedName("xiang").setValue("openCellByDefinedName");
+        Sheet sheet = workBook.openSheet("Sheet1");
+        //sheet.setReadOnly(false);
 
-        Sheet sheet2 = workBook.openSheet("Sheet2");
-        com.zhuozhengsoft.pageoffice.excelwriter.Cell cell2= sheet2.openCell("C5") ;
-        cell2.setReadOnly(false);*/
+        //workBook.createSheet("ixang", SheetInsertType.After,"Sheet1");
+        //sheet.openCellByDefinedName("层数6666").setValue("5555");
+
+        //cell.setValue("[image]D:\\logo.jpg[/image]"); // 此单元格不会提交
+        //cell.setValue("[image]"+dir+"xiang\\logo.jpg[/image]"); // 此单元格不会提交
+        //cell.setValue("[image]/images/logo.jpg[/image]");
+        //cell.setReadOnly(false);
+
 
 
 
@@ -113,7 +118,8 @@ public class TestExcelController {
         //poCtrl.setDisableCopyOnly(true);
 
 
-        poCtrl.webOpen(dir+"xiang\\"+"0115.xls",OpenModeType.xlsSubmitForm,"张佚名");
+        poCtrl.webOpen(dir+"xiang\\"+"0421.xlsx",OpenModeType.xlsSubmitForm,"张佚名");
+        //poCtrl.webOpen("/.xlsx",OpenModeType.xlsNormalEdit,"张佚名");
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
@@ -194,7 +200,7 @@ public class TestExcelController {
         table.close();*/
 
 
-        //poCtrl.setWriter(workBook);
+        poCtrl.setWriter(workBook);
 
 
         poCtrl.webOpen(dir+"xiang\\"+"原始记录单宏示例.xls",OpenModeType.xlsSubmitForm,"张佚名");
@@ -220,6 +226,8 @@ public class TestExcelController {
     public void saveEx1(HttpServletRequest request, HttpServletResponse response) {
         FileSaver fs = new FileSaver(request, response);
         fs.saveToFile(dir + "xiang\\" + fs.getFileName());
+        //System.out.println(fs.getDocumentText());
+        System.out.println(1);
         fs.close();
 
 
@@ -229,20 +237,26 @@ public class TestExcelController {
     public void saveEx2(HttpServletRequest request, HttpServletResponse response) {
 
         com.zhuozhengsoft.pageoffice.excelreader.Workbook workBook = new com.zhuozhengsoft.pageoffice.excelreader.Workbook(request, response);
-        com.zhuozhengsoft.pageoffice.excelreader.Sheet sheet = workBook.openSheet("Sheet1");
 
 
-        String c5=sheet.openCell("C5").getValue();
-        System.out.println("C5.getValue:"+c5);
 
-        String c52=sheet.openCell("C5").getText();
-        System.out.println("C5.getText:"+c52);
 
+        //com.zhuozhengsoft.pageoffice.excelreader.Sheet sheet = workBook.openSheet("Sheet1");
+
+
+
+
+       //String c5=sheet.openCell("C5").getValue();
+        //System.out.println("C5.getValue:"+c5);
+
+        //String c52=sheet.openCell("C5").getText();
+        //System.out.println("C5.getText:"+c52);
+/*
         String c1=sheet.openCell("C1").getValue();
         System.out.println("C1.getValue:"+c1);
 
         String C12=sheet.openCell("C1").getText();
-        System.out.println("C1.getText:"+C12);
+        System.out.println("C1.getText:"+C12);*/
 
 
 

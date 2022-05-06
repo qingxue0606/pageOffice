@@ -16,26 +16,6 @@
     }
 
 
-    function refreshList() {
-        var sMac = "Function getComments() " + "\r\n"
-            + "Dim cmts As String " + "\r\n"
-            + "For i=1 To ActiveDocument.Comments.Count "+ "\r\n"
-            + "    cmts = cmts +ActiveDocument.Comments.Item(i).Author & \":\" & ActiveDocument.Comments.Item(i).Range.Text + \"||\" " + "\r\n"
-            + "Next" + "\r\n"
-            + "getComments = cmts" + "\r\n"
-            + "End Function ";
-
-        var sComments = document.getElementById("PageOfficeCtrl1").RunMacro("getComments", sMac);
-
-        var arr = sComments.split("||");
-
-        document.getElementById("ul_Comments").innerHTML = "";
-        for (var i = 0; i < arr.length-1 ; i++) {
-            document.getElementById("ul_Comments").innerHTML += "<li><a href='#' onclick='goToComment("+(i+1)+")'>"+arr[i]+"</a></li>"
-        }
-
-    }
-
     function getComment(index){
         var sMac = "Function getCmtTxt() " + "\r\n"
             + "getCmtTxt = ActiveDocument.Comments.Item(" + index + ").Range.Text " + "\r\n"
@@ -46,23 +26,15 @@
 
     function goToComment(index)
     {
-        //refreshList();
-        var sMac = "Sub myfunc() " + "\r\n"
-            + "ActiveDocument.Comments.Item("+index+").Edit " + "\r\n"
-            + "End Sub ";
-
-        document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", sMac);
-
+        var docObj = poapplication.ActiveDocument;;
+        docObj .Comments.Item(index).Edit();
     }
 
     function addComment(txt) {
-        var sMac = "Sub myfunc() " + "\r\n"
-            + "Selection.Comments.Add Range:=Selection.Range " + "\r\n"
-            + "Selection.TypeText Text:=\"" + txt + "\" " + "\r\n"
-            + "On Error Resume Next " + "\r\n"
-            + "ActiveWindow.ActivePane.Close " + "\r\n"
-            + "End Sub ";
-        document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", sMac);
+
+        poapplication.ActiveDocument.Selection.Comments.Add(poapplication.ActiveDocument.Selection.Range,txt);
+
+
     }
     function Button1_onclick() {
         addComment(document.getElementById("Text1").value);
@@ -74,13 +46,23 @@
         refreshList();
     }
 
+    function refreshList() {
+        var docObj = poapplication.ActiveDocument;
+        var arr=new Array();
+        var Comments="";
+
+        for(var i=1; i < docObj.Comments.Count+1; i++){
+            Comments=docObj.Comments.Item(i).Author +":" + docObj.Comments.Item(i).Range.Text;
+            arr.push(Comments)
+        }
+        document.getElementById("ul_Comments").innerHTML = "";
+        for (var i = 0; i < arr.length ; i++) {
+            document.getElementById("ul_Comments").innerHTML += "<li><a href='#' onclick='goToComment(" + (i + 1) + ")'>" + arr[i] + "</a></li>"
+        }
+    }
+
     function InsertComment() {
-        document.getElementById("PageOfficeCtrl1").WordInsertComment();
-        var sMac = "Sub myfunc() " + "\r\n"
-            + "On Error Resume Next " + "\r\n"
-            + "ActiveWindow.ActivePane.Close " + "\r\n"
-            + "End Sub ";
-        document.getElementById("PageOfficeCtrl1").RunMacro("myfunc", sMac);
+        addComment("");
     }
 
 </script>
@@ -102,8 +84,6 @@
         </div>
     </div>
 </form>
-
-
 
 
 

@@ -35,7 +35,7 @@ public class PdfController {
         poCtrl1.addCustomToolButton("下一页", "NextPage()", 10);
         poCtrl1.addCustomToolButton("尾页", "LastPage()", 11);
         poCtrl1.addCustomToolButton("-", "", 0);
-        poCtrl1.setJsFunction_AfterDocumentOpened("AfterDocumentOpened()");
+        //poCtrl1.setJsFunction_AfterDocumentOpened("AfterDocumentOpened()");
 
 
 
@@ -90,7 +90,8 @@ public class PdfController {
         poCtrl1.addCustomToolButton("缩小", "ZoomOut()", 15);
         poCtrl1.addCustomToolButton("-", "", 0);
         poCtrl1.addCustomToolButton("全屏", "SwitchFullScreen()", 4);
-        poCtrl1.webOpen(dir + "test3.jpg");
+        //poCtrl1.webOpen(dir + "test3.jpg");
+        poCtrl1.webOpen("/images/ban5.png?id=2");
 
 
         map.put("pageoffice", poCtrl1.getHtmlCode("PageOfficeCtrl1"));

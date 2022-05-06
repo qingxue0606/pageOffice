@@ -36,7 +36,7 @@ public class WordController {
         //打开数据区域
         DataRegion dataRegion1 = doc.openDataRegion("PO_userName");
         //给数据区域赋值
-        dataRegion1.setValue("");
+        dataRegion1.setValue("☑");
 
         DataRegion dataRegion2 = doc.openDataRegion("PO_deptName");
         dataRegion2.setValue("销售部");
@@ -214,7 +214,7 @@ public class WordController {
         poCtrl.setTimeSlice(20);
 
 
-        poCtrl.webOpen(dir + "test6.doc", OpenModeType.docRevisionOnly, userName);
+        poCtrl.webOpen(dir + "test6.doc", OpenModeType.docSubmitForm, userName);
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word6");
@@ -236,7 +236,7 @@ public class WordController {
         poCtrl.setTimeSlice(20);
 
 
-        poCtrl.webOpen(dir + "test7.doc", OpenModeType.docNormalEdit, "张三");
+        poCtrl.webOpen(dir + "test7.doc", OpenModeType.docSubmitForm, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("/word/Word7");
@@ -340,7 +340,7 @@ public class WordController {
         poCtrl.setSaveDataPage("/save/doc/data");
 
 
-        poCtrl.webOpen(dir + "test11.doc", OpenModeType.docRevisionOnly, "张三");
+        poCtrl.webOpen(dir + "test11.doc", OpenModeType.docSubmitForm, "张三");
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
 
         //--- PageOffice的调用代码 结束 -----

@@ -37,7 +37,7 @@ public class ExcelController2 {
         Sheet sheet = workBook.openSheet("Sheet1");
 
         //定义Table对象，参数“report”就是Excel模板中定义的单元格区域的名称
-        Table table = sheet.openTableByDefinedName("report", 10, 5, true);
+        Table table = sheet.openTableByDefinedName("report11", 10, 5, true);
         //给区域中的单元格赋值
         table.getDataFields().get(0).setValue("轮胎");
         table.getDataFields().get(1).setValue("100");
@@ -277,7 +277,8 @@ public class ExcelController2 {
 
         Workbook workBook = new Workbook();
         Sheet sheet1 = workBook.openSheet("Sheet1");
-        sheet1.openCell("A1").setValue("[image]images/logo.jpg[/image]");
+        //sheet1.openCell("A1").setValue("[image]images/logo.jpg[/image]");
+        sheet1.openCell("A1").setValue("[image]" + dir + "xiang" + "\\111.jpg[/image]");
         poCtrl.setWriter(workBook);//此行必须
 
 

@@ -1,14 +1,10 @@
 package com.example.demo.controller;
 
 import com.zhuozhengsoft.pageoffice.*;
-import com.zhuozhengsoft.pageoffice.excelreader.Table;
 import com.zhuozhengsoft.pageoffice.excelwriter.Cell;
 import com.zhuozhengsoft.pageoffice.excelwriter.Sheet;
 import com.zhuozhengsoft.pageoffice.excelwriter.Workbook;
-import com.zhuozhengsoft.pageoffice.wordwriter.DataRegion;
-import com.zhuozhengsoft.pageoffice.wordwriter.DataRegionInsertType;
-import com.zhuozhengsoft.pageoffice.wordwriter.DataTag;
-import com.zhuozhengsoft.pageoffice.wordwriter.WordDocument;
+import com.zhuozhengsoft.pageoffice.wordwriter.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -55,7 +53,9 @@ public class TestWordController {
         PDFCtrl poCtrl1 = new PDFCtrl(request);
         poCtrl1.setServerPage("/poserver.zz"); //此行必须
         // Create custom toolbar
-        poCtrl1.addCustomToolButton("打印", "Print()", 6);
+        poCtrl1.addCustomToolButton("保存", "Save()", 1);
+        poCtrl1.addCustomToolButton("加盖印章", "InsertSeal()", 2);
+        poCtrl1.addCustomToolButton("打印", "PrintFile()", 6);
         poCtrl1.addCustomToolButton("隐藏/显示书签", "SetBookmarks()", 0);
         poCtrl1.addCustomToolButton("-", "", 0);
         poCtrl1.addCustomToolButton("实际大小", "SetPageReal()", 16);
@@ -68,10 +68,14 @@ public class TestWordController {
         poCtrl1.addCustomToolButton("尾页", "LastPage()", 11);
         poCtrl1.addCustomToolButton("test", "test()", 11);
         poCtrl1.addCustomToolButton("-", "", 0);
-        poCtrl1.setJsFunction_AfterDocumentOpened("AfterDocumentOpened()");
-        poCtrl1.setAllowCopy(false);
+        poCtrl1.addCustomToolButton("向左旋转90度", "RotateRight()", 12);
+        poCtrl1.addCustomToolButton("向右旋转90度", "RotateRight()", 13);
+        //poCtrl1.setJsFunction_AfterDocumentOpened("AfterDocumentOpened()");
 
-        poCtrl1.webOpen(dir +"xiang\\"+ "11土方路基现场质量检验报告单.pdf");
+        //poCtrl1.setMenubar(false);
+        poCtrl1.setSaveFilePage("/test/save/pdf1");
+        poCtrl1.webOpen(dir +"xiang\\"+ "0420.pdf");
+        
 
         map.put("pageoffice", poCtrl1.getHtmlCode("PDFCtrl1"));
         //--- PageOffice的调用代码 结束 -----
@@ -81,9 +85,10 @@ public class TestWordController {
     }
 
     @RequestMapping(value = "/xiang/ppt", method = RequestMethod.GET)
-    public ModelAndView showPpt(HttpSession session, HttpServletRequest request, Map<String, Object> map) {
+    public ModelAndView showPpt(HttpSession session, HttpServletRequest request, Map<String, Object> map) throws Exception {
 
         PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
+        System.out.println(request.getClass().getName());
 //设置服务器页面
         poCtrl.setServerPage(request.getContextPath()+"/poserver.zz");
 //添加自定义按钮
@@ -91,11 +96,20 @@ public class TestWordController {
         poCtrl.addCustomToolButton("关闭","Close",21);
         poCtrl.addCustomToolButton("另存HTML", "saveAsHTML", 21);
         poCtrl.addCustomToolButton("另存为PDF文件", "SaveAsPDF()", 1);
+        //poCtrl.setAllowCopy(false);//禁止拷贝
+        //poCtrl.setMenubar(false);//隐藏菜单栏
+        //poCtrl.setOfficeToolbars(false);//隐藏Office工具条
+        //poCtrl.setCustomToolbar(false);//隐藏自定义工具栏
+
+        //poCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened");
+        poCtrl.setAllowCopy(false);
+
+
 //设置保存页面
         poCtrl.setSaveFilePage("/test/save/ppt1");
         poCtrl.setAllowCopy(false);
 
-        poCtrl.webOpen(dir +"xiang\\"+ "test.pptx",OpenModeType.pptReadOnly,"张佚名");
+        poCtrl.webOpen(dir +"xiang\\"+ "0210.ppt",OpenModeType.pptNormalEdit,"张佚名");
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
@@ -108,121 +122,91 @@ public class TestWordController {
 
     @RequestMapping(value = "/xiang/word", method = RequestMethod.GET)
     public ModelAndView showWord(HttpSession session, HttpServletRequest request, Map<String, Object> map) {
-        Object a=request.getParameter("id");
+        Object id=request.getParameter("id");
 
-        System.out.println(a);
-        Object b=request.getParameter("name");
-        System.out.println(b);
+        System.out.println("id:"+id);
+        Object name=request.getParameter("name");
+        System.out.println("name:"+name);
 
         Object user=session.getAttribute("user");
-        System.out.println("user:"+user);
-        //--- PageOffice的调用代码 开始 -----
-        PageOfficeCtrl poCtrl = initPageOfficeCtrl(request);
+        //System.out.println("user:"+user);
+
+
+        PageOfficeCtrl poCtrl=new PageOfficeCtrl(request);
+        System.out.println(request.getClass().getName());
+//设置服务器页面
+        poCtrl.setServerPage(request.getContextPath()+"/poserver.zz");
+
 
         poCtrl.addCustomToolButton("保存", "Save", 1); //添加自定义按钮
         poCtrl.setSaveFilePage("/test/save/doc1");//设置保存的action
+        //poCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened");
+        poCtrl.setJsFunction_BeforeDocumentSaved("BeforeDocumentSaved()");
         //poCtrl.setSaveDataPage("/test/save/doc1-2");
-        poCtrl.setCaption("AAAA&&#38;BBB");
         //poCtrl.setCustomToolbar(false);
 
 
         poCtrl.addCustomToolButton("盖章", "AddSeal", 2); //添加自定义盖章按钮
-        poCtrl.addCustomToolButton("自定义1", "Test1.show()", 3); //添加自定义盖章按钮
+        poCtrl.addCustomToolButton("自定义1", "Test1", 3); //添加自定义盖章按钮
         poCtrl.addCustomToolButton("test", "Test", 5); //添加自定义盖章按钮
         poCtrl.addCustomToolButton("自定义2", "Test2", 4); //添加自定义盖章按钮
         poCtrl.addCustomToolButton("自定义3", "Test3", 6); //添加自定义盖章按钮
         poCtrl.addCustomToolButton("自定义4", "Test4", 7); //添加自定义盖章按钮
         poCtrl.addCustomToolButton("自定义5", "Test5", 8); //添加自定义盖章按钮
         poCtrl.addCustomToolButton("另存HTML", "saveAsHTML", 21);
-        poCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened()");
-
-
-
-
-        //poCtrl.setTheme(ThemeType.CustomStyle);
-        //poCtrl.setAllowCopy(false);
-
-        poCtrl.setCaption("11111");
-        poCtrl.setFileTitle("1");
-        //poCtrl.setAllowCopy(false);
-
-        poCtrl.setJsFunction_AfterDocumentSaved("AfterDocumentSaved()");
-
-
-
-
-
-        //poCtrl.setCaption("项");
-        //poCtrl.setTitlebar(false); //隐藏标题栏
-        //poCtrl.setMenubar(false); //隐藏菜单栏
-        //poCtrl.setOfficeToolbars(false);//隐藏Office工具条
-        //poCtrl.setCustomToolbar(false);//隐藏自定义工具栏
-
+        //poCtrl.setAllowCopy(false);//禁止拷贝
 
 
 
 
         WordDocument doc = new WordDocument();
-        //打开数据区域
-        DataRegion dataRegion1 = doc.openDataRegion("PO_xiang");
-
-        dataRegion1.setValue("1111");
-        dataRegion1.setEditing(true);
-
-        DataRegion mydr1 = doc.createDataRegion("PO_first", DataRegionInsertType.After, "PO_xiang");
-        DataRegion mydr2 = doc.createDataRegion("PO_second", DataRegionInsertType.After, "PO_first");
-        mydr1.setValue("\n\r");
-        mydr2.setValue("");
-
-        mydr2.selectEnd();
-        doc.insertPageBreak();//插入分页符
-
-
-
-
-
-
-
-
-        DataRegion dataRegion2 = doc.openDataRegion("PO_xiang2");
-
-        //dataRegion2.setValue("[image]/images/img_1.jpg[/image]");
+        DataRegion dataRegion=doc.openDataRegion("PO_table");
+        /*Table table1 = dataRegion.
+                createTable(5, 6, WdAutoFitBehavior.wdAutoFitWindow);
+        int i = 1;
+        //table1.setPreferredWidth(300.0f);
+        while (i <= 5) {
+            table1.openCellRC(i, 2).setValue("A" + String.valueOf(i));
+            table1.openCellRC(i, 3).setValue("B" + String.valueOf(i));
+            table1.openCellRC(i, 4).setValue("C" + String.valueOf(i));
+            table1.openCellRC(i, 5).setValue("D" + String.valueOf(i));
+            i++;
+        }
+        table1.openCellRC(1,1).getShading().setBackgroundPatternColor(Color.red);*/
+        dataRegion.setEditing(true);
+        /*table1.openColumn(1).setWidth(50.2f);
+        table1.openColumn(2).setWidth(50.2f,WdRulerStyle.wdAdjustSameWidth);
+        table1.openColumn(3).setWidth(50.2f);
+        table1.openColumn(4).setWidth(50.2f);
+        table1.openColumn(5).setWidth(50.2f);
+        table1.openColumn(6).setWidth(50.2f);*/
+        //table1.setPreferredWidthType(WdPreferredWidthType.wdPreferredWidthPoints);
 
 
-        dataRegion2.setEditing(true);
-        DataRegion dataRegion3 = doc.openDataRegion("PO_xiang3");
+/*
+        DataRegion dataRegion=doc.openDataRegion("PO_Content");
+        dataRegion.setValue("2022");
+        DataRegion dataRegion2=doc.openDataRegion("PO_xiang2");
+        dataRegion2.openTable(1).openCellRC(1,1).getBorder().setBorderType(WdBorderType.wdDiagonalUp);
 
-        dataRegion3.setValue("");
-
-
-        dataRegion3.setEditing(true);
-        //DataRegion dataRegion2 = doc.openDataRegion("PO_xiang");
-        //dataRegion2.setValue("台风力气吗测试\r\n\r\n1\r\n\r\n1\n");
-
-        //dataRegion2.setEditing(true);
-
-        //DataTag deptTag = doc.openDataTag("{Tag}");
-        //给DataTag对象赋值
-        //deptTag.setValue("B部门");
-        //doc.getWaterMark().setText("xiang");
-
-
-        //dataRegion2.setValue("市场");
-        //dataRegion2.getFont().setColor(Color.orange);
-
-
-
-
+*/
 
         //poCtrl.setWriter(doc);
+        //poCtrl.setJsFunction_OnWordDataRegionClick("OnWordDataRegionClick()");
 
 
 
-        //poCtrl.setOfficeVendor(OfficeVendorType.WPSOffice);
+        //poCtrl.setAllowCopy(false);
 
-        poCtrl.webOpen(dir+"xiang\\"+"zw_20200109.doc", OpenModeType.docNormalEdit,"张三");
-        //poCtrl.webOpen("/sasf/dfa", OpenModeType.docSubmitForm,"张三");
-        //poCtrl.webOpen("/0709.doc", OpenModeType.docSubmitForm, "张三");
+
+        //poCtrl.setProtectPassword("000000");
+        //poCtrl.setEnableUserProtection(true);
+        //poCtrl.setZoomSealServer("http://10.61.0.42:8080/ZoomSealEnt/enserver.zz");
+
+        poCtrl.webOpen(dir+"xiang\\"+"0425.doc", OpenModeType.docNormalEdit,"1381818181818");
+        //poCtrl.webOpen(dir+"xiang\\"+"444.docx", OpenModeType.docNormalEdit,"张三");
+        //poCtrl.webOpen("/sa00sf/dfa", OpenModeType.docNormalEdit,"张三");
+        //poCtrl.webOpen("/word/xiang1.docx", OpenModeType.docNormalEdit, "张三");
         map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("xiang/Word");
@@ -260,22 +244,23 @@ public class TestWordController {
         fmCtrl.setSaveFilePage("/test/save/doc2");
         WordDocument wordDocument=new WordDocument();
 
-        wordDocument.getWaterMark().setText("xiang");
+        //wordDocument.getWaterMark().setText("xiang");
 
 
         //打开数据区域
-        DataRegion dataRegion = wordDocument.openDataRegion("PO_regTable");
-        dataRegion.setValue("xiang");
+        //DataRegion dataRegion = wordDocument.openDataRegion("PO_TPCS1");
+        //dataRegion.setValue("[image]" + dir + "xiang\\" + "0520.jpg[/image]");
 
 
         fmCtrl.setWriter(wordDocument);
         fmCtrl.setJsFunction_OnProgressComplete("OnProgressComplete()");
+        
 
 
         //fmCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened()");
 
         fmCtrl.setFileTitle("newfilename.doc");
-        fmCtrl.fillDocument(dir+"xiang\\"+"test4.doc", DocumentOpenType.Word);
+        fmCtrl.fillDocument(dir+"xiang\\"+"444.docm", DocumentOpenType.Word);
 
 
 
@@ -313,7 +298,7 @@ public class TestWordController {
         }
 
 
-        poCtrl.webOpen(dir+"xiang\\test4\\"+filePath, OpenModeType.docNormalEdit,"张三");
+        poCtrl.webOpen(dir+"xiang\\test4\\"+filePath, OpenModeType.docAdmin,"张三");
         map.put("pageoffice",poCtrl.getHtmlCode("PageOfficeCtrl1"));
         //--- PageOffice的调用代码 结束 -----
         ModelAndView mv = new ModelAndView("xiang/Word4");
@@ -355,6 +340,40 @@ public class TestWordController {
         return mv;
     }
 
+    @RequestMapping(value = "/xiang/word9", method = RequestMethod.GET)
+    public ModelAndView showWord9(HttpServletRequest request, Map<String, Object> map) {
+
+        ModelAndView mv = new ModelAndView("/xiang/Word9");
+        return mv;
+    }
+
+
+
+    @RequestMapping(value = "/xiang/word10", method = RequestMethod.GET)
+    public ModelAndView showWord10(HttpServletRequest request, Map<String, Object> map) {
+        FileMakerCtrl fmCtrl = new FileMakerCtrl(request);
+        fmCtrl.setServerPage("/poserver.zz");
+        WordDocument doc = new WordDocument();
+        //禁用右击事件
+        doc.setDisableWindowRightClick(true);
+        //给数据区域赋值，即把数据填充到模板中相应的位置
+        doc.openDataRegion("PO_company").setValue("北京卓正志远软件有限公司  ");
+        //fmCtrl.setSaveFilePage("/save/doc/data20");
+        fmCtrl.setSaveFilePage("/test/save/doc4");//设置保存的action.setSaveFilePage("/test/save/doc1");//设置保存的action
+        //fmCtrl.setWriter(doc);
+
+        fmCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened()");
+        fmCtrl.setJsFunction_OnProgressComplete("OnProgressComplete()");
+        fmCtrl.fillDocumentAsPDF(dir+"xiang\\"+"0416.doc", DocumentOpenType.Word, "a.pdf");
+
+
+        map.put("pageoffice", fmCtrl.getHtmlCode("PageOfficeCtrl1"));
+        //--- PageOffice的调用代码 结束 -----
+        ModelAndView mv = new ModelAndView("/xiang/Word10");
+        return mv;
+    }
+
+
 
 
 
@@ -370,20 +389,27 @@ public class TestWordController {
 
 
     @RequestMapping("/test/save/doc1")
-    public void   saveDoc1(HttpServletRequest request, HttpServletResponse response) {
-
-        request.getParameter("id");
-        System.out.println(request.getParameter("id"));
+    @ResponseBody
+    public void   saveDoc1(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 
         FileSaver fs = new FileSaver(request, response);
-        System.out.println(fs.getDocumentText());
+        //System.out.println(fs.getDocumentText());
         System.out.println("fs.getFileSize()-->"+fs.getFileSize());
+
+
         fs.saveToFile(dir + "xiang\\" + fs.getFileName());
-        System.out.println(fs.getFileName());
-        fs.setCustomSaveResult("setCustomSaveResult");
+        fs.getFileExtName();
+
+
+
+
+
+        //System.out.println("222:"+fs.getDocumentText().length());
+        fs.setCustomSaveResult(URLEncoder.encode( "项", "UTF-8" ));
 
         fs.close();
+
 
     }
     @RequestMapping("/test/save/doc1-2")
@@ -391,15 +417,11 @@ public class TestWordController {
         com.zhuozhengsoft.pageoffice.wordreader.WordDocument doc = new com.zhuozhengsoft.pageoffice.wordreader.WordDocument(request, response);
 
         //获取提交的数值
-        com.zhuozhengsoft.pageoffice.wordreader.DataRegion Name1 = doc.openDataRegion("PO_year1");
-        com.zhuozhengsoft.pageoffice.wordreader.DataRegion Name2 = doc.openDataRegion("PO_result11");
-        com.zhuozhengsoft.pageoffice.wordreader.DataRegion Name3 = doc.openDataRegion("PO_public1");
+        //com.zhuozhengsoft.pageoffice.wordreader.DataRegion Name1 = doc.openDataRegion("PO_year1");
 
-        System.out.println(Name1.getValue());
-        System.out.println(Name2.getValue());
-        System.out.println(Name3.getValue());
-
+        doc.setCustomSaveResult("ok");
         doc.close();
+
 
     }
 
@@ -423,8 +445,35 @@ public class TestWordController {
     public void saveDoc3(HttpServletRequest request, HttpServletResponse response) {
         FileSaver fs = new FileSaver(request, response);
         fs.saveToFile(dir + "xiang\\test4\\" + fs.getFileName());
+
         fs.setCustomSaveResult("ok");
         fs.close();
+    }
+
+    @RequestMapping("/test/save/doc4")
+    public void saveDoc4(HttpServletRequest request, HttpServletResponse response) {
+        FileSaver fs = new FileSaver(request, response);
+
+
+        fs.saveToFile(dir + "xiang\\" + fs.getFileName());
+        fs.setCustomSaveResult("ok");
+
+        fs.close();
+
+
+
+    }
+    @RequestMapping("/test/save/pdf1")
+    public void savePdf1(HttpServletRequest request, HttpServletResponse response) {
+        FileSaver fs = new FileSaver(request, response);
+
+
+        fs.saveToFile(dir + "xiang\\" + fs.getFileName());
+        fs.setCustomSaveResult("ok");
+        fs.close();
+
+
+
     }
 
 

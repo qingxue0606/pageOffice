@@ -243,7 +243,7 @@ public class WordController5 {
         //设置段落的行间距、对齐方式、首行缩进
         bodyPara.setLineSpacingRule(WdLineSpacing.wdLineSpaceAtLeast);
         bodyPara.setAlignment(WdParagraphAlignment.wdAlignParagraphLeft);
-        bodyPara.setFirstLineIndent(21);
+        bodyPara.setFirstLineIndent(0);
 
         //第二段
         DataRegion body2 = doc.createDataRegion("PO_body2",

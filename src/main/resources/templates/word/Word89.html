@@ -22,7 +22,7 @@
             window.external.close();
         }
         function increaseCount(value) {
-            var sResult = window.external.CallParentFunc("updateCount("+value+");");
+            var sResult = window.epxternal.CallParentFunc("updateCount("+value+");");
             if(sResult=='poerror:parentlost'){
                 alert('父页面关闭或跳转刷新了，导致父页面函数没有调用成功！');
                 return false;

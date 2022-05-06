@@ -44,6 +44,8 @@ public class WordController4 {
         Table table1 = doc.openDataRegion("PO_table").openTable(1);
         Cell cell = table1.openCellRC(2, 1);
         //删除坐标为(2,1)的单元格所在行
+
+        cell.setVerticalAlignment(WdCellVerticalAlignment.wdCellAlignVerticalCenter);
         table1.removeRowAt(cell);
         poCtrl.setCustomToolbar(false);
         poCtrl.setWriter(doc);
@@ -138,19 +140,20 @@ public class WordController4 {
         table.openCellRC(4, 2).setValue("销售部");
         table.openCellRC(4, 3).setValue("张三");
 
+        Border border2 =table.openCellRC(4, 3).getBorder();
         //设置表格行的高度
         table.setRowsHeight(30.5f);
 
         //设置表格的边框
         Border border = table.getBorder();
         // 设置边框的类型
-        border.setBorderType(WdBorderType.wdFullGrid);//包含内边框
+        border2.setBorderType(WdBorderType.wdBottomEdge);//包含内边框
         //设置边框的颜色
-        border.setLineColor(Color.red);
+        border2.setLineColor(Color.red);
         //设置边框的线条样式
-        border.setLineStyle(WdLineStyle.wdLineStyleDot);
+        border2.setLineStyle(WdLineStyle.wdLineStyleNone);
         //设置边框的粗细
-        border.setLineWidth(WdLineWidth.wdLineWidth150pt);
+        border2.setLineWidth(WdLineWidth.wdLineWidth150pt);
 
         //设置表格内字体样式
         com.zhuozhengsoft.pageoffice.wordwriter.Font font = dataRegion.getFont();
