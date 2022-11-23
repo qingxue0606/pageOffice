@@ -327,20 +327,24 @@ public class WordSaveController {
 
     @RequestMapping("/save/doc/data19")
     public void saveDocData19(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+        System.out.println(111);
         WordDocument doc = new WordDocument(request, response);
         byte[] bytes = null;
         String filePath = "";
         if (request.getParameter("userName") != null && request.getParameter("userName").trim().equalsIgnoreCase("zhangsan")) {
+            System.out.println("zhangsan1:");
+            System.out.println("zhangsan2:"+doc.openDataRegion("PO_com1").getValue());
             bytes = doc.openDataRegion("PO_com1").getFileBytes();
             filePath = "content1.doc";
         } else {
             bytes = doc.openDataRegion("PO_com2").getFileBytes();
             filePath = "content2.doc";
+            System.out.println("zhangsan3:"+doc.openDataRegion("PO_com1").getValue());
         }
         doc.close();
 
         Resource resource = new ClassPathResource("static/word/" + filePath);
+
         File file = resource.getFile();
 
         //filePath = request.getSession().getServletContext().getRealPath("SetDrByUserWord2/doc/") + "/" + filePath;

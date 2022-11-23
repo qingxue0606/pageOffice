@@ -6,6 +6,9 @@ import com.zhuozhengsoft.pageoffice.excelwriter.Sheet;
 import com.zhuozhengsoft.pageoffice.excelwriter.Workbook;
 import com.zhuozhengsoft.pageoffice.wordwriter.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletInputStream;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -74,8 +78,8 @@ public class TestWordController {
 
         //poCtrl1.setMenubar(false);
         poCtrl1.setSaveFilePage("/test/save/pdf1");
-        poCtrl1.webOpen(dir +"xiang\\"+ "0420.pdf");
-        
+        poCtrl1.webOpen(dir +"xiang\\"+ "1103.pdf");
+
 
         map.put("pageoffice", poCtrl1.getHtmlCode("PDFCtrl1"));
         //--- PageOffice的调用代码 结束 -----
@@ -101,13 +105,12 @@ public class TestWordController {
         //poCtrl.setOfficeToolbars(false);//隐藏Office工具条
         //poCtrl.setCustomToolbar(false);//隐藏自定义工具栏
 
-        //poCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened");
-        poCtrl.setAllowCopy(false);
+        poCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened");
+        //poCtrl.setAllowCopy(false);
 
 
 //设置保存页面
         poCtrl.setSaveFilePage("/test/save/ppt1");
-        poCtrl.setAllowCopy(false);
 
         poCtrl.webOpen(dir +"xiang\\"+ "0210.ppt",OpenModeType.pptNormalEdit,"张佚名");
 
@@ -140,9 +143,11 @@ public class TestWordController {
 
         poCtrl.addCustomToolButton("保存", "Save", 1); //添加自定义按钮
         poCtrl.setSaveFilePage("/test/save/doc1");//设置保存的action
-        //poCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened");
-        poCtrl.setJsFunction_BeforeDocumentSaved("BeforeDocumentSaved()");
+        poCtrl.setJsFunction_AfterDocumentOpened("AfterDocumentOpened");
+        //poCtrl.setTimeSlice(10);
+        //poCtrl.setJsFunction_BeforeDocumentSaved("BeforeDocumentSaved()");
         //poCtrl.setSaveDataPage("/test/save/doc1-2");
+        //poCtrl.setSaveFilePage("/test/save/doc1");
         //poCtrl.setCustomToolbar(false);
 
 
@@ -158,9 +163,22 @@ public class TestWordController {
 
 
 
-
         WordDocument doc = new WordDocument();
-        DataRegion dataRegion=doc.openDataRegion("PO_table");
+        //doc.setEnableAllDataRegionsEditing(true);
+        doc.openDataRegion("PO_chapter11").setValue("[word]" + dir + "xiang\\" +"1013-2.docx"  + "[/word]");
+
+
+        //dataRegion.setValue("[image width=70 height=22]/images/logo.jpg[/image]");
+        //dataRegion.setValue("[image ]/images/logo.jpg[/image]");
+
+
+
+
+
+
+        //dataRegion.setSubmitAsFile(true);
+       //dataRegion.setValue("[word]" + dir + "xiang\\" +"0613.doc"  + "[/word]");
+
         /*Table table1 = dataRegion.
                 createTable(5, 6, WdAutoFitBehavior.wdAutoFitWindow);
         int i = 1;
@@ -173,7 +191,7 @@ public class TestWordController {
             i++;
         }
         table1.openCellRC(1,1).getShading().setBackgroundPatternColor(Color.red);*/
-        dataRegion.setEditing(true);
+        //dataRegion.setEditing(true);
         /*table1.openColumn(1).setWidth(50.2f);
         table1.openColumn(2).setWidth(50.2f,WdRulerStyle.wdAdjustSameWidth);
         table1.openColumn(3).setWidth(50.2f);
@@ -202,8 +220,9 @@ public class TestWordController {
         //poCtrl.setProtectPassword("000000");
         //poCtrl.setEnableUserProtection(true);
         //poCtrl.setZoomSealServer("http://10.61.0.42:8080/ZoomSealEnt/enserver.zz");
+ 
 
-        poCtrl.webOpen(dir+"xiang\\"+"0425.doc", OpenModeType.docNormalEdit,"1381818181818");
+        poCtrl.webOpen(dir+"xiang\\"+"1117.docx", OpenModeType.docNormalEdit,"1381818181818");
         //poCtrl.webOpen(dir+"xiang\\"+"444.docx", OpenModeType.docNormalEdit,"张三");
         //poCtrl.webOpen("/sa00sf/dfa", OpenModeType.docNormalEdit,"张三");
         //poCtrl.webOpen("/word/xiang1.docx", OpenModeType.docNormalEdit, "张三");
@@ -313,6 +332,16 @@ public class TestWordController {
         return mv;
     }
 
+
+
+    @RequestMapping(value = "/xiang/word11", method = RequestMethod.GET)
+    public ModelAndView showWord11(HttpSession session, HttpServletRequest request, Map<String, Object> map) {
+
+        ModelAndView mv = new ModelAndView("xiang/Word11");
+        return mv;
+    }
+
+
     @RequestMapping(value = "/xiang/word6", method = RequestMethod.GET)
     public ModelAndView showWord6(HttpSession session, HttpServletRequest request, Map<String, Object> map) {
 
@@ -380,6 +409,7 @@ public class TestWordController {
     @RequestMapping("/test/save/ppt1")
     public void savePpt1(HttpServletRequest request, HttpServletResponse response) {
         FileSaver fs = new FileSaver(request, response);
+
         fs.saveToFile(dir + "xiang\\" + fs.getFileName());
         fs.close();
 
@@ -389,38 +419,47 @@ public class TestWordController {
 
 
     @RequestMapping("/test/save/doc1")
-    @ResponseBody
     public void   saveDoc1(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 
+
         FileSaver fs = new FileSaver(request, response);
+        fs.getFileStream();
+        request.getRequestURL();
         //System.out.println(fs.getDocumentText());
         System.out.println("fs.getFileSize()-->"+fs.getFileSize());
 
 
         fs.saveToFile(dir + "xiang\\" + fs.getFileName());
-        fs.getFileExtName();
+        //fs.getFileExtName();
 
 
 
 
 
         //System.out.println("222:"+fs.getDocumentText().length());
-        fs.setCustomSaveResult(URLEncoder.encode( "项", "UTF-8" ));
+        //fs.setCustomSaveResult(URLEncoder.encode( "项", "UTF-8" ));
 
         fs.close();
 
 
     }
     @RequestMapping("/test/save/doc1-2")
-    public void saveDoc1_2(HttpServletRequest request, HttpServletResponse response) {
+    public void saveDoc1_2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         com.zhuozhengsoft.pageoffice.wordreader.WordDocument doc = new com.zhuozhengsoft.pageoffice.wordreader.WordDocument(request, response);
+        byte[] bytes = null;
 
-        //获取提交的数值
-        //com.zhuozhengsoft.pageoffice.wordreader.DataRegion Name1 = doc.openDataRegion("PO_year1");
+        bytes = doc.openDataRegion("PO_fund_performance_mode").getFileBytes();
 
-        doc.setCustomSaveResult("ok");
         doc.close();
+        //Resource resource = new ClassPathResource("static/word/" + filePath+"D:\\project\\pageOffice\\test\\xiang");
+        Resource resource = new ClassPathResource("D:\\xiang.doc");
+        File file = new File("D:\\xiang.doc");
+        //filePath = request.getSession().getServletContext().getRealPath("SetDrByUserWord2/doc/") + "/" + filePath;
+        FileOutputStream outputStream = new FileOutputStream(file);
+        outputStream.write(bytes);
+        outputStream.flush();
+        outputStream.close();
 
 
     }
@@ -444,6 +483,7 @@ public class TestWordController {
     @RequestMapping("/test/save/doc3")
     public void saveDoc3(HttpServletRequest request, HttpServletResponse response) {
         FileSaver fs = new FileSaver(request, response);
+
         fs.saveToFile(dir + "xiang\\test4\\" + fs.getFileName());
 
         fs.setCustomSaveResult("ok");

@@ -52,8 +52,20 @@
         document.getElementById("PDFCtrl1").BookmarksVisible = !document.getElementById("PDFCtrl1").BookmarksVisible;
     }
     function test() {
-        document.getElementById("PDFCtrl1").Close();
-        document.getElementById("PDFCtrl1").WebOpen("/1.doc","docNormalEdit","张三")
+        var iCount = document.getElementById("PDFCtrl1").ZoomSeal.Count;//获取加盖的印章数量
+        if (iCount > 0) {
+            for (var i = iCount - 1; i >= 0; i--) {
+                strTempSealName = document.getElementById("PDFCtrl1").ZoomSeal.Item(i).SealName;//获取加盖的印章名称
+                document.getElementById("PDFCtrl1").ZoomSeal.Item(i).DeleteSeal();//删除印章
+            }
+        } else {
+            alert("请先在文档中加盖印章后，再执行当前操作。");
+        }
+
+
+
+        //document.getElementById("PDFCtrl1").Close();
+        //document.getElementById("PDFCtrl1").WebOpen("/1.doc","docNormalEdit","张三")
 
         //document.getElementById("PDFCtrl1").PrintOut("",1)
         //document.getElementById("PDFCtrl1").PrintOut(false,"Microsoft Print To PDF",1);

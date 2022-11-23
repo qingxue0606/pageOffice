@@ -44,7 +44,7 @@ public class TestExcelController {
         poCtrl.addCustomToolButton("test5", "test5()", 1);
         poCtrl.addCustomToolButton("盖章到印章位置", "AddSealByPos()", 2);
         poCtrl.addCustomToolButton("添加印章位置", "InsertSealPos()", 2);
-        //poCtrl.setJsFunction_AfterDocumentOpened( "AfterDocumentOpened()");
+        poCtrl.setJsFunction_AfterDocumentOpened( "AfterDocumentOpened()");
 
         //poCtrl.setAllowCopy(false);
 
@@ -114,11 +114,11 @@ public class TestExcelController {
         }
         table.close();*/
 
-        poCtrl.setWriter(workBook);
+        //poCtrl.setWriter(workBook);
         //poCtrl.setDisableCopyOnly(true);
 
 
-        poCtrl.webOpen(dir+"xiang\\"+"0421.xlsx",OpenModeType.xlsSubmitForm,"张佚名");
+        poCtrl.webOpen(dir+"xiang\\"+"朱炜.xlsx",OpenModeType.xlsNormalEdit,"张佚名");
         //poCtrl.webOpen("/.xlsx",OpenModeType.xlsNormalEdit,"张佚名");
 
         map.put("pageoffice", poCtrl.getHtmlCode("PageOfficeCtrl1"));

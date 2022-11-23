@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Hello World!</title>
+
+    <script type="text/javascript">
+        function myFunction(index)
+        {
+            document.getElementById('iframe0').src="/xiang/word4?id="+index;
+        }
+    </script>
+
+</head>
+<body>
+
+<button onclick="myFunction(1)">打开1文档</button>
+<button onclick="myFunction(2)">打开2文档</button>
+
+<!-- HTML页面布局 -->
+<div >
+
+    <div id="firstPage" class="page show">
+        <iframe id="iframe0"  style="width:1000px;height:700px;" name="iframe1" src="/xiang/word4?id=1"></iframe>
+    </div>
+
+
+</div>
+
+
+
+</body>
+</html>

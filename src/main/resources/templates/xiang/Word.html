@@ -37,6 +37,7 @@
             }
         }
         function  BeforeDocumentSaved(){
+            alert();
             return true;
         }
 
@@ -91,8 +92,10 @@
         }
 
         function Test() {
+            document.getElementById("PageOfficeCtrl1").ShowDialog(1);
 
 
+            //document.getElementById("PageOfficeCtrl1").SetWordWaterMarkImage("/word/logo2.jpg",20,false);
 
             //document.getElementById("PageOfficeCtrl1").Document.Tables(1).Cell(1, 1).Tables(1).Cell(1, 1).Range.Text = "ddd"
             /*var VBAdoc = document.getElementById("PageOfficeCtrl1");
@@ -187,10 +190,13 @@
 
         }
         function Test5() {
-            var docObj = poapplication.ActiveDocument;
+
+            document.getElementById("PageOfficeCtrl1").AcceptAllRevisions();
+            document.getElementById("PageOfficeCtrl1").Document.Revisions.AcceptAll();
+            /*var docObj = poapplication.ActiveDocument;
             for(var i=1; i < docObj.Comments.Count+1; i++){
                 Comments=docObj.Comments.Item(i).Delete();
-            }
+            }*/
             //document.getElementById("PageOfficeCtrl1").Document.RejectAllRevisions();;
 
             //alert(document.getElementById("PageOfficeCtrl1").SaveFilePage);
@@ -230,7 +236,7 @@
 
             //document.getElementById("PageOfficeCtrl1").OpenImageDialog();
 
-           // setInterval("WebSave2()",1000*10);//假设每分钟保存一次
+            //setInterval("WebSave2()",1000*10);//假设每分钟保存一次
 
             //var userName=window.external.UserParams;
             //document.getElementById("userName").value=decodeURI(userName);
@@ -241,6 +247,7 @@
         }
         function WebSave2() {
             document.getElementById("PageOfficeCtrl1").AutoWebSave();
+            document.getElementById('PageOfficeCtrl1').Activate()
         }
 
         function BeforeBrowserClosed() {
@@ -265,7 +272,8 @@
 
             //接受全部
             //document.getElementById("PageOfficeCtrl1").AcceptAllRevisions();
-            //document.getElementById("PageOfficeCtrl1").AcceptAllRevisions();
+
+
         }
 
 

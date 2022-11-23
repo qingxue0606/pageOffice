@@ -70,6 +70,7 @@ public class WordController3 {
         table.openCellRC(1, 1).getFont().setColor(Color.red);
         table.openCellRC(1, 1).getFont().setSize(24);
         table.openCellRC(1, 1).getFont().setName("楷体");
+        table.openCellRC(1, 1).getShading().setBackgroundPatternColor(Color.GREEN);
         table.openCellRC(1, 1).getParagraphFormat().setAlignment(
                 WdParagraphAlignment.wdAlignParagraphCenter);
 

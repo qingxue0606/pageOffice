@@ -66,6 +66,7 @@ public class WordController {
         DataRegion dataRegion1 = wordDoc.openDataRegion("PO_userName");
         //设置DataRegion的可编辑性
         dataRegion1.setEditing(true);
+
         //为DataRegion赋值,此处的值可在页面中打开Word文档后自己进行修改
         dataRegion1.setValue("");
 

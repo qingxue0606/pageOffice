@@ -49,6 +49,7 @@ public class WordController4 {
         table1.removeRowAt(cell);
         poCtrl.setCustomToolbar(false);
         poCtrl.setWriter(doc);
+        poCtrl.setOfficeVendor(OfficeVendorType.WPSOffice);
 
 
         poCtrl.webOpen(dir + "test57.doc", OpenModeType.docNormalEdit, "zhangsan");

@@ -22,13 +22,27 @@
     <div>打开文件js方式1</div>
     <a href="javascript:"  onclick="openWord()">打开文件word </a><br>
     <script>
+
+
+        function openWord() {
+            POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;',"");
+
+
+        }
+
         function openWord() {
             var strValue=["number","name"];
             console.log('1');
             var url='xiang/word';
 
             POBrowser.headerToken = "mytoken:55555"
-                POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;',"");
+            POBrowser.openWindowModeless('xiang/word2','fullscreen=yes;',"");
+
+
+        }
+        function openWord2(a) {
+
+            window.open("/index2", "newW","scrollbars=yes,resizable=yes,width=1200,height=900,top=100,left=400")
 
 
         }
@@ -37,13 +51,6 @@
             //alert(decodeURIComponent(value));
         }
         // var 的情况
-        console.log(foo); // 输出undefined
-        var foo = 2;
-        let bar = 2;
-        // let 的情况
-        console.log(bar); // 报错ReferenceError
-
-
 
 
     </script>
@@ -55,6 +62,8 @@
     <h3>word</h3>
     <div>百度</div>
     <a href="javascript:POBrowser.openWindowModeless('http://www.baidu.com','fullscreen=yes;');">打开百度 </a><br>
+    <br>
+    <a href="javascript:"  onclick="openWord2()">window.open index2 </a><br>
     <br>
 
 
@@ -73,7 +82,7 @@
     <a href="javascript:POBrowser.openWindowModeless('xiang/pdf','fullscreen=yes;');">打开文件pdf1 </a><br>
     <br>
     <div>pdf国产</div>
-    <a href="javascript:POBrowser.openPDFWindow('xiang/pdf','fullscreen=yes;');">打开文件pdf1 </a><br>
+    <a href="javascript:POBrowse r.openPDFWindow('xiang/pdf','fullscreen=yes;');">打开文件pdf1 </a><br>
     <br>
 
     <div>IFram测试</div>
@@ -86,11 +95,11 @@
 
 
     <div>三个标签页</div>
-    <a href="javascript:POBrowser.openWindowModeless('xiang/word5','fullscreen=yes;','');">打开文件word5 </a><br>
+    <a href="javascript:POBrowser.openWindowModeless('xiang/word11','fullscreen=yes;','');">打开文件word11 </a><br>
 
 
     <div>baidu</div>
-    <a href="javascript:POBrowser.openWindowModeless('http://www.baidu.com/','fullscreen=yes;httpbasic=yes;','');">打开百度 </a><br>
+    <a href="javascript:POBrowser.openWindowModeless('http://www.baidu.com/','fullscreen=yes;','');">打开百度 </a><br>
 
 
 
